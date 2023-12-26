@@ -30,7 +30,7 @@ const navigate = useNavigate()
   const handleSubmit = async(e)=>{
     e.preventDefault();
 
-    axios.post('http://localhost:8083/addtocart',sendData)
+    axios.post('https://fashion-server-mu.vercel.app/addtocart',sendData)
     .then(res=>
       {
         console.log(res);

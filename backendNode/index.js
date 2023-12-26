@@ -134,7 +134,7 @@ app.post("/product",(req,res)=>{
 
 // add to cart post
 
-app.post("https://fashion-server-mu.vercel.app/addtocart", (req, res) => {
+app.post("/addtocart", (req, res) => {
     const sql = "INSERT INTO productscart(`idProduct`,`img`,`title`,`number`,`discount`,`price`) VALUES (?)";
     const values = [
         req.body.id,
@@ -195,7 +195,7 @@ app.delete("/remove/:id",(req,res)=>{
 //add to cart get
 
 
-app.get('https://fashion-server-mu.vercel.app/addtocart',(req,res)=>{
+app.get('/addtocart',(req,res)=>{
     const sql = "SELECT *  FROM productscart";
     db.query(sql,(err,data)=>{
         if(err) return res.json(err);
