@@ -22,7 +22,7 @@ function Signin() {
   axios.defaults.withCredentials =true;
   
   useEffect(()=>{
-    axios.get("http://localhost:8083/home")
+    axios.get("https://fashion-server-mu.vercel.app/home")
     .then((res)=>{
       if(res.data.valid){
         navigate("/home");
@@ -35,7 +35,7 @@ function Signin() {
   const handleSubmit = async (e)=>{
     e.preventDefault();
 
-    axios.post('http://localhost:8083/login',formData)
+    axios.post('https://fashion-server-mu.vercel.app/login',formData)
     .then(res=>{
       if(res.data.Login){
         alert("Data is correct")

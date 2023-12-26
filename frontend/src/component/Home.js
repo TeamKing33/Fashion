@@ -15,7 +15,7 @@ function Home() {
 
   axios.defaults.withCredentials =true;
   useEffect(()=>{
-    axios.get("http://localhost:8083/home")
+    axios.get("https://fashion-server-mu.vercel.app/home")
     .then((res)=>{
       if(res.data.valid){
         setName(res.data.username)

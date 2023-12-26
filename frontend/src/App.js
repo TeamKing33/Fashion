@@ -27,23 +27,14 @@ const App = ()=>{
   const [warning , setWarning] = useState(false);
 
   const [data , setData] =useState([]);
-  
-  useEffect(() => {
+
+  useEffect(()=>{
     fetch('https://fashion-server-mu.vercel.app/addtocart')
-      .then(res => {
-        if (!res.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const contentType = res.headers.get('content-type');
-        if (!contentType || !contentType.includes('application/json')) {
-          throw new Error('Invalid content type');
-        }
-        return res.json();
-      })
-      .then(data => setData(data))
-      .catch(err => console.log(err));
-  }, []);
-  
+    .then(res => res.json())
+    .then(data => setData(data))
+    .catch(err => console.log(err));
+  })
+
   
   const handleClick = () => {
     axios.post('https://fashion-server-mu.vercel.app/addtocart')
