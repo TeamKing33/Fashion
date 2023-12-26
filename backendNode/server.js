@@ -17,12 +17,13 @@ app.use(cors({
     credentials:true
 }));
 app.options('*', cors());
+
+
+const port = 8083 || process.env.PORT;
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.json());
-
-const port = 3306 || process.env.PORT;
-
 app.use(session({
     secret: 'secret',
     resave: false,
@@ -33,14 +34,11 @@ app.use(session({
     }
 }))
 const db = mysql.createPool({
-    host:process.env.DB_HOST,
-    user:process.env.DB_USERNAME,
-    password:process.env.DB_PASSWORD,
-    database:process.env.DB_DBNAME,
-    waitForConnections:true,
-    connectionLimit:10,
-    queueLimit0
-});
+    host:"localhost",
+    user:"root",
+    password:"",
+    database:"projectking"
+})
 
 app.get('/',(re,res)=> {
     return res.json("From BAckend Side");
@@ -219,8 +217,6 @@ app.post("/login",(req,res)=>{
         }
     })
 })
-
-// 8083
 
 app.listen(port,()=>{
     console.log("Server is running on port 8083");
