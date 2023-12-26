@@ -43,7 +43,7 @@
     "eject": "react-scripts eject",
     "frontend":"cd frontend && npm start",
     "backend":"cd backendNode && npm start",
-    "dev": "concurrently \"npm run frontend\" \"npm run backend\""
+    "vercel-build": "concurrently \"npm run frontend\" \"npm run backend\""
   },
   "eslintConfig": {
     "extends": [

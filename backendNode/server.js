@@ -8,7 +8,7 @@ const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const bodyParser= require('body-parser');
 
-
+const port = 8083||process.env.PORT;
 
 const app = express();
 app.use(cors({
@@ -215,6 +215,6 @@ app.post("/login",(req,res)=>{
     })
 })
 
-app.listen(8083,()=>{
+app.listen(port,()=>{
     console.log("Server is running on port 8083");
 })
