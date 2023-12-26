@@ -30,12 +30,15 @@ app.use(session({
         maxAge:1000 * 60 * 60 * 24
     }
 }))
-const db = mysql.createConnection({
-    host:"localhost",
-    user:"root",
-    password:"",
-    database:"projectking"
-})
+const db = mysql.createPool({
+    host:process.env.DB_HOST,
+    user:process.env.DB_USERNAME,
+    password:process.env.DB_PASSWORD,
+    database:process.env.DB_DBNAME,
+    waitForConnections:true,
+    connectionLimit:10,
+    queueLimit0
+});
 
 app.get('/',(re,res)=> {
     return res.json("From BAckend Side");
