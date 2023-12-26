@@ -17,10 +17,12 @@ app.use(cors({
     credentials:true
 }));
 app.options('*', cors());
-
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.json());
+
+const port = 3306 || process.env.PORT;
+
 app.use(session({
     secret: 'secret',
     resave: false,
@@ -218,6 +220,8 @@ app.post("/login",(req,res)=>{
     })
 })
 
-app.listen(8083,()=>{
+// 8083
+
+app.listen(port,()=>{
     console.log("Server is running on port 8083");
 })
