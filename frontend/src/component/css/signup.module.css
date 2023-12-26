@@ -1,0 +1,196 @@
+*{
+  margin: 0;
+  box-sizing: border-box;
+   
+ }
+ body{
+  background: #181818;
+  /* 282c34 */
+ }
+ .signinBody{
+   background:rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 1);
+  height: 100vh;
+  display: flex;
+ align-items: center;
+ justify-content: center;
+ }
+ .container{
+   width: 400px;
+   height: 610px;
+   border: 1px solid #4B53A6;
+   border-radius: 10px;
+   box-shadow: 0 0 20px #4B53A6;
+ }
+
+ .iconimage{
+   width: 100%;
+   display: flex;
+   justify-content: center;
+ }
+ .iconimage img{
+  width: 80px;
+ margin-top: 5px;
+ box-shadow: 0 0 10px #4B53A6;
+ border-radius: 50%;
+ }
+ 
+ .container .signbox{
+   display: flex;
+   flex-direction: column;
+   width: 100%;
+ 
+ }
+ .container .signbox h1{
+   display: flex;
+   text-align: center;
+   justify-content: center;
+   font-size: 30px;
+   color: #4B53A6;
+   padding: 10px;
+ }
+ .container .signbox .inp{
+   margin: 1px 0;
+  flex-direction: column;
+  align-items: center;
+   display: flex;
+   justify-content: center;
+   
+ }
+ .container .signbox .inp input{
+   background: none;
+   border: 1px solid#4B53A6 ;
+   outline: none;
+   border-bottom: 5px solid #8F909B;
+   padding: 10px;
+   margin: 10px 0;
+   width: 90%;
+   color: #fff;
+   border-radius: 20px;
+   transition: 0.3s;
+   cursor: pointer;
+ }
+ .container .signbox .inp input:hover{
+ 
+ box-shadow: 0 0 10px #4B53A6;
+ }
+ 
+  .container .signbox .inp input::placeholder{
+    
+   color:#4B53A6; 
+    opacity: 0.7;
+  }
+ 
+ 
+ 
+ 
+ 
+  /*------country-------*/
+ .option .selectbox select{
+    background: none;
+    outline: none;
+    border: none;
+    font-size: 22px;
+  color: #4B53A6; 
+    opacity: 0.7;
+    transition: 0.3s;
+    cursor: pointer;
+  }
+ .option .selectbox select:hover{
+   color: #4B53A6;
+ }
+  
+  .selectbox{
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+   display: flex;
+  margin: 10px 0;
+   
+  }
+  
+ /*-----------btn----------*/
+ 
+ 
+ 
+   .container .signbox .btn{
+  display: flex;
+   align-items: center;
+   justify-content: center;
+   padding: 5px;
+   }
+   .container .signbox .btn button{
+   width: 90%;
+   height: 30px;
+   border-radius: 10px;
+   border: none;
+   color: white;
+ background:linear-gradient(to left,#272E73,#4B53A6);
+ cursor: pointer;
+   font-size: 14px;
+    transition: 0.3s;
+   }
+   
+  .container .signbox.btn button:hover {
+ transform: scale(1.1);
+ width: 88%;
+   }
+   .container .signbox .texts {
+   display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+  }
+  .container .signbox .texts span{
+  color: #FFF;
+   margin: 10px 0;
+  opacity: 0.9;
+  
+   }
+   .container .signbox .texts strong{
+    color: #fff; }
+   .container .signbox .texts strong a{
+     color: #4B53A6;
+     text-decoration: none; 
+   }
+   /* sign in */
+   .container2{
+     height: 450px;
+   }
+   .btnemp{
+    float: left;
+    margin-top: 161px;
+    margin-left: 3px;
+    background: #4B53A6;
+    color: #FFF;
+    list-style: none;
+    border-radius: 4px;
+    border: none;
+   }
+     @media(max-width:601px){
+       .container{
+         width:350px;
+         border: none;
+        
+         box-shadow:none;
+        
+         
+       }
+       .container .signbox.inp input{
+         width: 100% ;
+       }
+       
+     }
+     @media(max-width:349px){
+       .container{
+         width:80%;
+         
+        
+         
+       }
+       .option .select-box select{
+         width: 100%;
+         
+       }
+     }
+     
