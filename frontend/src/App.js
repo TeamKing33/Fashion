@@ -29,7 +29,7 @@ const App = ()=>{
   const [data , setData] =useState([]);
 
   useEffect(()=>{
-    fetch('http://localhost:8083/addtocart')
+    fetch('https://fashion-server-mu.vercel.app/addtocart')
     .then(res => res.json())
     .then(data => setData(data))
     .catch(err => console.log(err));
