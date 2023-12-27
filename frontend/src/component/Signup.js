@@ -22,7 +22,7 @@ function Signup() {
   };
   const handleSubmit = async (e) =>{
     e.preventDefault();
-      axios.post('http://localhost:8083/signup',formData)
+      axios.post('http://fashion-server-mu.vercel.app/signup',formData)
       .then(res=>
         {
           console.log(res);
