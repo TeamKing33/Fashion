@@ -11,8 +11,12 @@ const bodyParser= require('body-parser');
 
 
 const app = express();
-app.use(cors());
-// app.options('*', cors());
+app.use(cors({
+    origin: 'https://fashion-six-swart.vercel.app',
+    credentials: true,
+  }));
+
+app.options('*', cors());
 
 
 const port = 8083 || process.env.PORT;
