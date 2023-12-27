@@ -41,7 +41,7 @@ function Signin() {
         alert("Data is correct")
       navigate("/home")
       }else{
-        alert("user already exists");
+        alert("wrong password or email");
       }
       console.log(res);
     })
