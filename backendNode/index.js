@@ -219,20 +219,17 @@ app.get('/addtocart',(req,res)=>{
 
 // login
 
-app.post("/login",(req,res)=>{
-    const sql = "SELECT * FROM signup WHERE `email` = ? and password = ?"
-    db.query(sql,[req.body.email,req.body.password],(err,result)=>{
-        if(err) return res.json({Message:"error inside server"})
-        if(result.length > 0){
-            return res.json("wrong password or email")
-            // console.log(req.session.username);
-            return res.json({Login:true});
-        }else{
-            return res.json({Message:"Logged is successfully"})
-
+app.post("/login", (req, res) => {
+    const sql = "SELECT * FROM signup WHERE `email` = ? and password = ?";
+    db.query(sql, [req.body.email, req.body.password], (err, result) => {
+        if (err) return res.json({ Message: "error inside server" });
+        if (result.length > 0) {
+            return res.json("wrong password or email");
+        } else {
+            return res.json({ Message: "Logged is successfully" });
         }
-    })
-})
+    });
+});
 
 app.listen(port,()=>{
     console.log("Server is running on port 8083");
