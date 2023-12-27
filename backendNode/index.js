@@ -28,7 +28,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     cookie:{
-        secret:false,
+        secure:false,
         maxAge:1000 * 60 * 60 * 24
     }
 }))
@@ -222,19 +222,28 @@ app.get('/addtocart',(req,res)=>{
 
 // login
 
-app.post("/login",(req,res)=>{
+app.post("/login", (req, res) => {
     const sql = "SELECT * FROM signup WHERE `email` = ? and password = ?"
-    db.query(sql,[req.body.email,req.body.password],(err,result)=>{
-        if(err) return res.json({Message:"error inside server"})
-        if(result.length > 0){
+    db.query(sql, [req.body.email, req.body.password], (err, result) => {
+        if (err) return res.json({ Message: "error inside server" })
+
+        if (result.length > 0) {
             req.session.username = result[0].username;
             // console.log(req.session.username);
-            return res.json({Login:true});
-        }else{
-            return res.json({Login:false})
+            req.session.save((err) => {
+                if (err) {
+                    console.error(err);
+                    return res.json({ Message: "Error saving session" });
+                }
+
+                return res.json({ Login: true });
+            });
+        } else {
+            return res.json({ Login: false })
         }
-    })
-})
+    });
+});
+
 
 app.listen(port,()=>{
     console.log("Server is running on port 8083");
