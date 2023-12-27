@@ -21,17 +21,17 @@ function Signin() {
   };
   axios.defaults.withCredentials =true;
   
-  useEffect(()=>{
-    axios.get("https://fashion-server-mu.vercel.app/home")
-    .then((res)=>{
-      if(res.data.valid){
-        navigate("/home");
-      }else{
-        navigate("/Signin")
-      }
-    })
-    .catch(err => console.log(err))
-  },[])
+  // useEffect(()=>{
+  //   axios.get("https://fashion-server-mu.vercel.app/home")
+  //   .then((res)=>{
+  //     if(res.data.valid){
+  //       navigate("/home");
+  //     }else{
+  //       navigate("/Signin")
+  //     }
+  //   })
+  //   .catch(err => console.log(err))
+  // },[])
   const handleSubmit = async (e)=>{
     e.preventDefault();
 

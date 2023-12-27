@@ -37,7 +37,7 @@ const App = ()=>{
 
   
   const handleClick = () => {
-    axios.post('https://fashion-server-mu.vercel.app/addtocart')
+    axios.post('http://localhost:8083/addtocart')
     let isPresnt =false;
     data.forEach((product)=>{
       if(data.id == product.id)
