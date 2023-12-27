@@ -51,7 +51,7 @@ const CartItem = ({data,setData}) => {
     }
     const handleRemove = async(id) => {
         try{
-            await axios.delete(`http://localhost:8083/remove/${id}`)
+            await axios.delete(`https://fashion-server-mu.vercel.app/remove/${id}`)
             window.location.reload()
            }catch(err){
             console.log(err);
