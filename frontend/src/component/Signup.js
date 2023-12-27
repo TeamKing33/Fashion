@@ -20,15 +20,24 @@ function Signup() {
     setData(prev=>({...prev,[e.target.name]:[e.target.value]}))
   
   };
+
+ 
+
   const handleSubmit = async (e) =>{
     e.preventDefault();
       axios.post('https://fashion-server-mu.vercel.app/signup',formData)
       .then(res=>
         {
-          console.log(res);
-          navigate('/home')
+          console.log(res.data);
+          if (res.data && res.data.Message === "user already exists") {
+            alert("user already exists");
+        }else{
+          navigate('/Signin')
+          alert("Data Insertd  Successfully");
+        }
         })
       .catch(err => console.log(err))
+  
 
   };
  useEffect(()=>{

@@ -11,7 +11,10 @@ const bodyParser= require('body-parser');
 
 
 const app = express();
-app.use(cors());
+app.use(cors({
+    origin:["http://localhost:3000"],
+    credentials:true
+}));
 app.options('*', cors());
 
 
@@ -79,20 +82,36 @@ app.get("/home",(req,res)=>{
 })
 
 // signup
-app.post('/signup',(req,res)=>{
-    const sql = "INSERT INTO signup (`username`,`email`,`password`,`number`,`country`) VALUES (?)";
-    const values =[
-        req.body.name,
-        req.body.email,
-        req.body.password,
-        req.body.number,
-        req.body.country,
-    ]
-    db.query(sql,[values],(err,result)=>{
-        if(err) return res.json({Message :"error in Node"})
-        return res.json(result);
-    })
-})
+app.post('/signup', (req, res) => {
+    const checkIfExistsQuery = "SELECT * FROM signup WHERE email = ?";
+    
+    db.query(checkIfExistsQuery, [req.body.email], (err, result) => {
+        if (err) {
+            return res.json({ Message: "Error in Node" });
+        }
+
+        if (result.length > 0) {
+            return res.json({ Message: "user already exists" });
+        } else {
+            const sql = "INSERT INTO signup (`username`,`email`,`password`,`number`,`country`) VALUES (?)";
+            const values = [
+                req.body.name,
+                req.body.email,
+                req.body.password,
+                req.body.number,
+                req.body.country,
+            ];
+
+            db.query(sql, [values], (err, result) => {
+                if (err) {
+                    return res.json({ Message: "Error in Node" });
+                }
+                return res.json(result);
+            });
+        }
+    });
+});
+
 
 // send products 
 
