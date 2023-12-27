@@ -12,7 +12,7 @@ const bodyParser= require('body-parser');
 
 const app = express();
 app.use(cors());
-app.options('*', cors());
+// app.options('*', cors());
 
 
 const port = 8083 || process.env.PORT;
