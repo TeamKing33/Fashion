@@ -11,11 +11,8 @@ const bodyParser= require('body-parser');
 
 
 const app = express();
-app.use(cors({
-    origin: 'https://fashion-six-swart.vercel.app',
-    credentials: true,
-  }));
-app.options('/signup', cors());
+app.use(cors());
+app.options('*', cors());
 
 
 const port = 8083 || process.env.PORT;
@@ -28,7 +25,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     cookie:{
-        secure:false,
+        secret:false,
         maxAge:1000 * 60 * 60 * 24
     }
 }))
@@ -221,29 +218,23 @@ app.get('/addtocart',(req,res)=>{
 
 
 // login
-
 app.post("/login", (req, res) => {
-    const sql = "SELECT * FROM signup WHERE `email` = ? and password = ?"
+    const sql = "SELECT * FROM signup WHERE `email` = ? and password = ?";
+
     db.query(sql, [req.body.email, req.body.password], (err, result) => {
-        if (err) return res.json({ Message: "error inside server" })
+        if (err) {
+            return res.json({ Message: "error inside server" });
+        }
 
         if (result.length > 0) {
-            req.session.username = result[0].username;
-            // console.log(req.session.username);
-            req.session.save((err) => {
-                if (err) {
-                    console.error(err);
-                    return res.json({ Message: "Error saving session" });
-                }
-
-                return res.json({ Login: true });
-            });
+           
+            return res.json({ Login: true, Message: "Logged in successfully" });
         } else {
-            return res.json({ Login: false })
+           
+            return res.json({ Login: false, Message: "Incorrect email or password" });
         }
     });
 });
-
 
 app.listen(port,()=>{
     console.log("Server is running on port 8083");

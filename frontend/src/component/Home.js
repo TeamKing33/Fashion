@@ -13,18 +13,18 @@ function Home() {
   const navigate = useNavigate();
   const [name ,setName] = useState('');
 
-  axios.defaults.withCredentials =true;
-  useEffect(()=>{
-    axios.get("https://fashion-server-mu.vercel.app/home")
-    .then((res)=>{
-      if(res.data.valid){
-        setName(res.data.username)
-      }else{
-        navigate("/Signin")
-      }
-    })
-    .catch(err => console.log(err))
-  },[])
+  // axios.defaults.withCredentials =true;
+  // useEffect(()=>{
+  //   axios.get("https://fashion-server-mu.vercel.app/home")
+  //   .then((res)=>{
+  //     if(res.data.valid){
+  //       setName(res.data.username)
+  //     }else{
+  //       navigate("/Signin")
+  //     }
+  //   })
+  //   .catch(err => console.log(err))
+  // },[])
   return (
     
     <div className={styless.bodyy}>

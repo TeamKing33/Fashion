@@ -21,33 +21,33 @@ function Signin() {
   };
   axios.defaults.withCredentials =true;
   
-  useEffect(()=>{
-    axios.get("https://fashion-server-mu.vercel.app/home")
-    .then((res)=>{
-      if(res.data.valid){
-        navigate("/home");
-      }else{
-        navigate("/Signin")
-      }
-    })
-    .catch(err => console.log(err))
-  },[])
-  const handleSubmit = async (e)=>{
+  // useEffect(()=>{
+  //   axios.get("https://fashion-server-mu.vercel.app/home")
+  //   .then((res)=>{
+  //     if(res.data.valid){
+  //       navigate("/home");
+  //     }else{
+  //       navigate("/Signin")
+  //     }
+  //   })
+  //   .catch(err => console.log(err))
+  // },[])
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    axios.post('https://fashion-server-mu.vercel.app/login',formData)
-    .then(res=>{
-      if(res.data.Login){
-        alert("Data is correct")
-      navigate("/home")
-      }else{
-        alert("Email or Password is incorrect");
-      }
-      console.log(res);
-    })
-    .catch(err => console.log(err))
-    
-  };
+    axios.post('https://fashion-server-mu.vercel.app/login', formData)
+        .then(res => {
+            if (res.data && res.data.Login) {
+                alert("Data is correct");
+                navigate("/home");
+            } else {
+                alert("Incorrect email or password");
+            }
+            console.log(res);
+        })
+        .catch(err => console.log(err));
+      };
+
   useEffect(() => {
     
     document.body.classList.add(styles.signinBody);
