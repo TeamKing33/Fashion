@@ -14,17 +14,18 @@ function Home() {
   const [name ,setName] = useState('');
 
   axios.defaults.withCredentials =true;
-  useEffect(()=>{
-    axios.get("https://fashion-server-mu.vercel.app/home")
-    .then((res)=>{
-      if(res.data.valid){
-        setName(res.data.username)
-      }else{
-        navigate("/Signin")
-      }
-    })
-    .catch(err => console.log(err))
-  },[])
+  useEffect(() => {
+    axios.get("https://fashion-server-mu.vercel.app/home", { withCredentials: true })
+      .then((res) => {
+        if (res.data.valid) {
+          setName(res.data.username);
+        } else {
+          navigate("/Signin");
+        }
+      })
+      .catch(err => console.log(err));
+  }, []);
+  
   return (
     
     <div className={styless.bodyy}>
