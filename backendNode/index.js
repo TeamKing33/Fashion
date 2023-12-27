@@ -11,7 +11,10 @@ const bodyParser= require('body-parser');
 
 
 const app = express();
-app.use(cors());
+app.use(cors({
+    origin:["fashion-six-swart.vercel.app"],
+    credentials:true
+}));
 app.options('*', cors());
 
 
