@@ -40,7 +40,7 @@ const data =[
             title:"Wave Classic Polo Neck",
             price:"$45",
             discount:30,
-            description:`Short Sleeve Pike Men's T-shirt`,
+            description:`Crew Neck Short Sleeve Combed Cotton Men's T-shirt`,
             button:(
                 <NavLink to="/T-shirt3" className="NavLink"><div className="btncard"><Btn/></div></NavLink>
             ),

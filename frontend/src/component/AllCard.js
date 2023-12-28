@@ -14,7 +14,7 @@ const AllCard = ({handleClick}) => {
         <section className="py-4 container ">
           <div className="row justify-content-center">
           {data && data.map((item) => (
-  <div className="col-12 col-md-6 col-lg-3 mx-0 mb-4" key={item.id}>
+  <div className="col-6 col-md-6 col-lg-3 mx-0 mb-4" key={item.id}>
     <div className="card p-0 overflow-hidden shadow cards">
       <Cards item={item} key={item.id} handleClick={handleClick} />
    

@@ -1,11 +1,11 @@
-import React,{useState,useEffect} from 'react';
+import React,{useState,useEffect, lazy, Suspense} from 'react';
 
 import Navbars from './component/Navbars';
 import { Routes,Route,BrowserRouter} from "react-router-dom";
 import Cards from './component/Cards';
 import AllCard from './component/AllCard.js';
 import Tshirt from './component/Tshitr/Tshirt';
-import Home from './component/Home';
+// import Home from './component/Home';
 import Footer from './component/footer';
 import Tshirt2 from './component/Tshitr/Tshirt2';
 import Tshirt3 from './component/Tshitr/Tshirt3';
@@ -17,8 +17,12 @@ import SigninEmp from './component/employee/SigninEmp';
 import Employyee from './component/employee/Employee.js'
 import CartItem from './component/CartItem.js';
 import Micro from './component/Micro.js';
-import './App.css';
 import axios from 'axios';
+import Loading from './component/Loading.js';
+import './App.css';
+const Home = lazy(()=> import('./component/Home.js'))
+
+
 const App = ()=>{
   // const [show, setShow] =useState(true);
 
@@ -74,7 +78,8 @@ const App = ()=>{
       
    
         <Routes>
-        
+        {/* <Suspense fallback={<Loading/>}> */}
+
         <Route path="/" element={<Signup/>}/>
         <Route path="/Signin" element={<Signin/>}/>
         <Route path="/signinEmp" element={<SigninEmp/>}/>
@@ -90,16 +95,18 @@ const App = ()=>{
 
           {/* Home */}
           <Route path="/home" element={
+            <React.Suspense fallback={<Loading/>}>
             <div>
           <Navbars size={data.length}  />
           {/* <Home/> */}
           <Micro/>
-
+          
            < Home />
           
           
           <Footer/>
           </div>
+          </React.Suspense>
         }/>
 
         {/* Support */}
@@ -128,6 +135,7 @@ const App = ()=>{
           <Footer/>
           </div>
           } />
+
         </Routes>
         
     </div>
