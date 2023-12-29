@@ -62,8 +62,6 @@ const navigate = useNavigate()
               </div>
               <div className="btnaddtocart">
               <button onClick={()=>handleClick(item)} className="CartBtn">
-              <span className="IconContainer"> 
-             </span>
              <p className="textaddtocart">Add to Cart</p>
           </button>
              <div className="btnbuy"></div>
