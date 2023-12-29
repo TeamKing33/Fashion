@@ -13,7 +13,7 @@ function Loading() {
     </div>
   </div>
   <div className="content">
-    <div className="text">Loading...</div>
+    <div className="textloading">Loading...</div>
   </div>
 </div>
 </div>
