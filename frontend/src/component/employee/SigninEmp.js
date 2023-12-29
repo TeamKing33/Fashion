@@ -22,7 +22,7 @@ function SigninEmp() {
   const handleSubmit = async (e)=>{
     e.preventDefault();
 
-    axios.post('http://localhost:8083/loginemp',fordata)
+    axios.post('https://fashion-server-mu.vercel.app/loginemp',fordata)
     .then(res=>{
       if(res.data.Login){
         alert("Data is correct")
