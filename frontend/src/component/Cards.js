@@ -1,11 +1,11 @@
 import React,{useState} from "react";
 // import { NavLink} from "react-router-dom";
 import { NavLink, useNavigate } from 'react-router-dom'
-
-import data from "./Data";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import data from "./Data";
 // import { Button} from "react-bootstrap";
-import Navbars from './Navbars'
-import Footer from './footer'
+// import Navbars from './Navbars'
+// import Footer from './footer'
 import "./css/Cards.css"
 import axios from "axios";
 
@@ -50,7 +50,6 @@ const navigate = useNavigate()
     <div className="bodycar">
 
       <form onSubmit={handleSubmit}>
-
               <span>{discountCard}</span>
               <img src={img} className="card-img-top" onChange={handleChange}/>
               <div className="card-body">
@@ -64,7 +63,6 @@ const navigate = useNavigate()
               <div className="btnaddtocart">
               <button onClick={()=>handleClick(item)} className="CartBtn">
               <span className="IconContainer"> 
-              <i class="fa-solid fa-cart-shopping"></i>
              </span>
              <p className="textaddtocart">Add to Cart</p>
           </button>
