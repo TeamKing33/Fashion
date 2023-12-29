@@ -34,7 +34,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 3px;
+    /* margin: 3px; */
 }
 .CartBtn {
     width: 140px;
@@ -77,7 +77,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 10px;
+    margin-top: 15px;
     color: rgb(17, 17, 17);
     z-index: 1;
     transition-duration: .5s;
@@ -124,4 +124,10 @@
         font-size: 8px;
         height: 30px;
     }
+    .btnaddtocart{
+        width: 100%;
+    }
+    .IconContainer{
+        left: -55px;
+    } 
 }

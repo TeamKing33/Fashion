@@ -28,7 +28,7 @@ function Home() {
   return (
     
     <div className={styless.bodyy}>
-       <h1 className={styless.tex}>welcom {name}</h1>
+       {/* <h1 className={styless.tex}>welcom {name}</h1> */}
       {/* <Navbars/> */}
       <div className={styless.bodybac}>
       

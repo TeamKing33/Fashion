@@ -1,26 +1,31 @@
 import React,{useState,useEffect, lazy, Suspense} from 'react';
 
-import Navbars from './component/Navbars';
 import { Routes,Route,BrowserRouter} from "react-router-dom";
+import axios from 'axios';
+
 import Cards from './component/Cards';
-import AllCard from './component/AllCard.js';
-import Tshirt from './component/Tshitr/Tshirt';
 // import Home from './component/Home';
+//  import AllCard from './component/AllCard.js';
+// import Support from './component/Support';
+
+import Navbars from './component/Navbars';
 import Footer from './component/footer';
+
+import Tshirt from './component/Tshitr/Tshirt';
 import Tshirt2 from './component/Tshitr/Tshirt2';
 import Tshirt3 from './component/Tshitr/Tshirt3';
 import Tshirt4 from './component/Tshitr/Tshirt4';
 import Signup from './component/Signup';
 import Signin from './component/Signin'
-import Support from './component/Support';
 import SigninEmp from './component/employee/SigninEmp';
 import Employyee from './component/employee/Employee.js'
 import CartItem from './component/CartItem.js';
 import Micro from './component/Micro.js';
-import axios from 'axios';
 import Loading from './component/Loading.js';
 import './App.css';
 const Home = lazy(()=> import('./component/Home.js'))
+const Support = lazy(()=> import('./component/Support'))
+const AllCard = lazy(()=> import('./component/AllCard.js'))
 
 
 const App = ()=>{
@@ -111,6 +116,7 @@ const App = ()=>{
 
         {/* Support */}
         <Route path="/support" element={
+          <React.Suspense fallback={<Loading/>}>
         <div>
          <Navbars size={data.length}  />
          {/* <Micro/> */}
@@ -118,12 +124,15 @@ const App = ()=>{
       
         <Footer/>
         </div>
+        </React.Suspense>
         } />
 
        
 
         {/* Product */}
           <Route path="/product" element={
+          <React.Suspense fallback={<Loading/>}>
+
           <div>
              <Navbars size={data.length}  />
               <Micro/>
@@ -134,6 +143,7 @@ const App = ()=>{
               } */}
           <Footer/>
           </div>
+          </React.Suspense>
           } />
 
         </Routes>

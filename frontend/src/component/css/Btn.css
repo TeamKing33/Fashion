@@ -1,14 +1,13 @@
 .btncard{
-    width: 100%;
-    margin-bottom: 10px;
-    font-size: 20px;
+    margin-bottom: 4px;
+    font-size: 15px;
 }
 .button {
-    width: 100%;
+    width: 100px;
     height: 40px;
     background-image: linear-gradient(rgb(214, 202, 254), rgb(158, 129, 254));
     border: none;
-    border-radius: 50px;
+    border-radius: 12px;
     color: rgb(255, 255, 255);
     font-weight: 600;
     display: flex;
@@ -37,11 +36,15 @@
   }
   @media(max-width:601px){
     .btncard{
-      width: 60px;
-      margin-bottom: 10px;
+      width: 70px;
+      margin-bottom: 0;
       font-size: 8px;
   }
+  .cartIcon {
+    width: 10px;
+  }
   .button{
-    height: 30px;
+    width: 70px;
+    height:26px;
   }
   }
