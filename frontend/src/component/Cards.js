@@ -1,7 +1,6 @@
 import React,{useState} from "react";
 // import { NavLink} from "react-router-dom";
 import { NavLink, useNavigate } from 'react-router-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import data from "./Data";
 // import { Button} from "react-bootstrap";
 // import Navbars from './Navbars'
