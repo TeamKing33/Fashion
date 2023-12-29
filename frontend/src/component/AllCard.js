@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import data from './Data';
 import Cards from './Cards';
-import styleallc from "./css/AllCards.module.css";
+import "./css/AllCards.css";
 import "./css/Cards.css"
 import CartItem from './CartItem';
 
@@ -9,8 +9,8 @@ const AllCard = ({handleClick}) => {
 
 
   return (
-    <div className={styleallc.bodycar}>
-      <div className={styleallc.cards}>
+    <div className="bodycar">
+      <div className="cards">
         <section className="py-4 container ">
           <div className="row justify-content-center">
           {data && data.map((item) => (

@@ -22,6 +22,7 @@ import Employyee from './component/employee/Employee.js'
 import CartItem from './component/CartItem.js';
 import Micro from './component/Micro.js';
 import Loading from './component/Loading.js';
+import './component/css/Cards.css'
 import './App.css';
 const Home = lazy(()=> import('./component/Home.js'))
 const Support = lazy(()=> import('./component/Support'))

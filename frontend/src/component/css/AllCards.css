@@ -1,0 +1,10 @@
+@media(max-width:601px){
+    .card{
+        background: none;
+    }
+    .card-body{
+        color: #fff;
+    }
+   
+    
+}
