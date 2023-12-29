@@ -60,9 +60,7 @@ const navigate = useNavigate()
                 <span className="card-text">{description}</span>
               </div>
               <div className="btnaddtocart">
-              <button onClick={()=>handleClick(item)} className="CartBtn">
-             <p className="textaddtocart">Add to Cart</p>
-          </button>
+              <button onClick={()=>handleClick(item)} className="CartBtn">Add to Cart</button>
              <div className="btnbuy"></div>
               {button}
           </div>
