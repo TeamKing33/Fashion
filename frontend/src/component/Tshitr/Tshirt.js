@@ -36,7 +36,7 @@ function Tshirt() {
   const handleSubmit = async (e) =>{
     e.preventDefault();
     console.log(formData);
-      axios.post('http://localhost:8083/product',formData)
+      axios.post('https://fashion-server-mu.vercel.app/product',formData)
       .then(res=>
         {
           console.log(res);

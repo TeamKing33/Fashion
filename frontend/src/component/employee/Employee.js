@@ -3,7 +3,7 @@ import styleess from './cssemp/employee.module.css'
 function Employee() {
   const [data , setData] =useState([]);
   useEffect(()=>{
-    fetch('http://localhost:8083/clothes')
+    fetch('https://fashion-server-mu.vercel.app/clothes')
     .then(res => res.json())
     .then(data => setData(data))
     .catch(err => console.log(err));

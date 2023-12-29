@@ -1,4 +1,6 @@
 import React,{useEffect, useState} from 'react'
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import Img1 from '../image/imagests3/1.png';
 import Img2 from '../image/imagests3/2.png';
 import Img3 from '../image/imagests3/3.png';
@@ -13,6 +15,37 @@ function Tshirt3() {
     $('#number').mask('000 0000 0000');
   }, []);
   
+
+  
+  const [formData,setData] = useState({
+    name:"",
+    image: white1,
+    result:"",
+    quantity:"",
+    number:"",
+  });
+
+
+  const navigate = useNavigate();
+
+  const handleChange =(e)=>{
+    setData(prev=>({...prev,[e.target.name]:e.target.value}))
+  
+  };
+  const handleSubmit = async (e) =>{
+    e.preventDefault();
+    console.log(formData);
+      axios.post('https://fashion-server-mu.vercel.app/product',formData)
+      .then(res=>
+        {
+          console.log(res);
+          // navigate('/home')
+        })
+      .catch(err => console.log(err))
+
+  };
+
+
    const [conimg ,setimg]= useState(Img1)
    const [result,setresult] =useState()
    const [inputvalue,setinputvalue] =useState()
@@ -47,14 +80,19 @@ function Tshirt3() {
 
     <div className="price">
           
-    <form action="http://localhost/php_pro/project5king/project1/php/product.php" method="post" autoComplete="off">
-    <input type="hidden" name="image" value={white1} />
+    <form onSubmit={handleSubmit}>
+    
     <input type="hidden" name="result" value={result} />
     <div className="result">
         <span>{result} LE</span>
-        <input type="text" name="name" placeholder="Enter your Name" spellCheck="false" required/>
-        <input type="text" name="quantity" placeholder='Enter Quantity' value={inputvalue} onChange={change} required/>
-        <input type="text" name="number" id="number" placeholder='Enter your Number' required/>
+        <input type="text" name="name" placeholder="Enter your Name" spellCheck="false" required onChange={handleChange}/>
+        <input type="text" name="quantity" placeholder='Enter Quantity' value={inputvalue}
+         onChange={(e) => {
+         handleChange(e);
+         change(e);
+}}
+required/>
+        <input type="text" name="number" id="number" placeholder='Enter your Number' required onChange={handleChange}/>
         <button className='btn-price' type="submit" name="submit">Buy Now</button>
     </div>
 </form>
