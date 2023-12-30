@@ -48,15 +48,17 @@ function Tshirt3() {
 
 
    const [conimg ,setimg]= useState(Img1)
-   const [result,setresult] =useState()
-   const [inputvalue,setinputvalue] =useState()
+   const [result,setresult] =useState('')
+   const [inputvalue,setinputvalue] =useState('')
    const opnedd =(small)=>{
     setimg(small);
    }
-   const change = (event)=>{
-    const value = parseInt(event.target.value ,10) || "";
+   const change = (event) => {
+    const value = parseInt(event.target.value, 10) || "";
     setinputvalue(value);
-    setresult(value*30);
+    const calculatedResult = value * 30;
+    setresult(calculatedResult);
+    setData((prev) => ({ ...prev, result: calculatedResult }));
    }
     return (
       <div>
