@@ -39,6 +39,7 @@ function Tshirt3() {
       .then(res=>
         {
           console.log(res);
+          alert("Data Insertd  Successfully")
           // navigate('/home')
         })
       .catch(err => console.log(err))

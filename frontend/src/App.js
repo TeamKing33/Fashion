@@ -120,7 +120,7 @@ const App = ()=>{
           <React.Suspense fallback={<Loading/>}>
         <div>
          <Navbars size={data.length}  />
-         {/* <Micro/> */}
+         <Micro/>
         <Support />
       
         <Footer/>

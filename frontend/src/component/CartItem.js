@@ -88,11 +88,11 @@ const CartItem = ({data,setData}) => {
             <span className="texttotal">Total price of your cart</span>
             <span className="totalre">Rs - ${price}</span>
         </div>
-        <button className="btn-31">
+        {/* <button className="btn-31">
        <span className="text-container">
        <span className="textbtnn">send</span>
        </span>
-       </button>
+       </button> */}
 
        </article>
        {/* </form> */}
