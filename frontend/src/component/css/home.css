@@ -202,10 +202,10 @@
     font-size:15px ;
   }
   .card__figure{
-    font-size:25px;
+    font-size:17px;
   }
   .card__ocupation{
-    font-size:7px;
+    font-size:5px;
   }
 } 
 @media(max-width:1200px){
