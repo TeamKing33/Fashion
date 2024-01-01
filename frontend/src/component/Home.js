@@ -49,7 +49,7 @@ function Home() {
       {/* <Footer/> */}
     </div>
 
-    <Row xs={2}  md={2} lg={2} className="cardhome">
+    <Row xs={2}  md={2} lg={2} className="cardhome g-2">
           {DataHome && DataHome.map((item) => (
  
     <Col key={item.id}>
