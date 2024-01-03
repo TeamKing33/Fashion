@@ -23,6 +23,33 @@
     position: relative;
     top: 100px;
 }
+/* image home  */
+.imageName{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+}
+.imageHome{
+    cursor: pointer;
+    transition: 0.3s;
+}
+.imageHome img{
+    width:100px;
+    height: 100px;
+    border-radius: 50%;
+   
+    
+}
+.imageHome:hover{
+    transform: scale(1.2);
+}
+.textimg{
+    color: #fff;
+}
+.NavLink{
+  text-decoration: none;
+}
 @media(max-width:836px){
     .bodybac{
         background-position: center;

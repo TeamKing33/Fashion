@@ -27,6 +27,7 @@ import './App.css';
 const Home = lazy(()=> import('./component/Home.js'))
 const Support = lazy(()=> import('./component/Support'))
 const AllCard = lazy(()=> import('./component/AllCard.js'))
+const AllMen = lazy(()=> import('./component/Men/AllMen'))
 
 
 const App = ()=>{
@@ -146,6 +147,25 @@ const App = ()=>{
           </div>
           </React.Suspense>
           } />
+
+
+          {/* ProductMen */}
+          <Route path="/productMen" element={
+          <React.Suspense fallback={<Loading/>}>
+
+          <div>
+             <Navbars size={data.length}  />
+              <Micro/>
+             < AllMen handleClick={handleClick}/> 
+             
+              {/* {
+                warning && <div className="warning">Item is already added to cart</div>
+              } */}
+          <Footer/>
+          </div>
+          </React.Suspense>
+          } />
+
 
         </Routes>
         

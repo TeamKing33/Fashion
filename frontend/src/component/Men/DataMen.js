@@ -1,12 +1,12 @@
-import img1  from "./image/1.png"
-import img2 from "./image/2.png"
-import img3 from "./image/3.png"
-import img4 from "./image/4.png"
+import img1  from "../image/1.png"
+import img2 from "../image/2.png"
+import img3 from "../image/3.png"
+import img4 from "../image/4.png"
 import { NavLink} from "react-router-dom";
 // import { Button} from "react-bootstrap";
-import Btn from "./Btn";
-import "./css/Cards.css"
-import DicountCard from "./design/DicountCard";
+import Btn from "../Btn";
+import "../css/Cards.css"
+import DicountCard from "../design/DicountCard";
 const data =[
     // cardData:[
         {

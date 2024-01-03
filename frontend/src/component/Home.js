@@ -3,13 +3,16 @@ import Discount from './design/Discount'
 // import Imagehome from "./image/imagets/home.jpg" 
 // import Navbars from './Navbars'
 // import Footer from './footer'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate ,NavLink} from 'react-router-dom'
 import img from './image/icon.png'
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import CardGroup from 'react-bootstrap/CardGroup';
 import DataHome from './DataHome';
+import imgmen from './image/imageHome/1.png'
+import imgwomen from './image/imageHome/2.png'
+import imgchild from './image/imageHome/3.png'
 import "./css/home.css"
 import styless from "./css/Home.module.css"
 import axios from 'axios';
@@ -48,7 +51,26 @@ function Home() {
       </div>
       {/* <Footer/> */}
     </div>
-
+    <div className={styless.imageName}>
+      {/* men */}
+      <div className={styless.imageHome}>
+        <NavLink className={styless.NavLink} to='/productMen'>
+        <img src={imgmen}/>
+        <h3 className={styless.textimg}>Men</h3>
+        </NavLink>
+      </div>
+      
+      {/* women */}
+      <div className={styless.imageHome}>
+        <img src={imgwomen}/>
+        <h3 className={styless.textimg}>Women</h3>
+      </div>
+      {/* kids & baby */}
+      <div className={styless.imageHome}>
+        <img src={imgchild}/>
+        <h3 className={styless.textimg}>Kids</h3>
+      </div>
+    </div>
     <Row xs={2}  md={2} lg={2} className="cardhome g-2">
           {DataHome && DataHome.map((item) => (
  
