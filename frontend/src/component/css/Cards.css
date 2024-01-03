@@ -6,7 +6,9 @@
 /* .NavLink{
     background: none;
 } */
-
+.imagecard{
+    height:300px;
+}
 .flex{
     display: flex;
     justify-content: center;

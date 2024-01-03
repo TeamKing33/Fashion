@@ -1,17 +1,16 @@
 import React,{useEffect, useState} from 'react'
-import Img1 from '../image/imagets/1.png';
-import Img2 from '../image/imagets/2.png';
-import Img3 from '../image/imagets/3.png';
-import Img4 from '../image/imagets/4.png';
+import Img1 from '../../image/imageHome/imageWomen2/1.png'
+import Img2 from '../../image/imageHome/imageWomen2/2.png';
+import Img3 from '../../image/imageHome/imageWomen2/3.png';
+import Img4 from '../../image/imageHome/imageWomen2/4.png';
 // import Navbars from '../Navbars';
-import FooterTs from './FooterTs';
+import FooterTs from '../FooterTs';
 // import Footer from '../footer';
-import Employee from '../employee/Employee';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import '../css/Tshirt.css'
+import '../../css/Tshirt.css'
 
-let white1 = "Tshirt1";
+let white1 = "WomenClothes2";
 function Tshirt() {
 
   useEffect(() => {
@@ -58,14 +57,14 @@ function Tshirt() {
    const change = (event) => {
     const value = parseInt(event.target.value, 10) || "";
     setinputvalue(value);
-    const calculatedResult = value * 25;
+    const calculatedResult = value * 145;
     setresult(calculatedResult);
     setData((prev) => ({ ...prev, result: calculatedResult }));
   };
   
     return (
       <div>
-       
+        {/* <Navbars/> */}
      
       <div className="container">
         
@@ -81,10 +80,11 @@ function Tshirt() {
           </div>
         </div>
         <div className="text">
-        Essence of Our T-Shirts Introduction: Explore the world of our T-shirts, where premium cotton meets precision stitching for enduring comfort and style. Key Points: Fabric of Comfort: Luxurious, breathable cotton for a soft feel against the skin. Stitching Perfection: Impeccable craftsmanship for lasting durability. Designs that Transcend: Express your individuality with timeless, expressive designs. Durability Beyond Fashion: Enduring quality
-         for a T-shirt that stand .
-
-
+        The brown-red dress is a standout piece, combining chic style 
+with sophistication. The flared skirt and waist belt not only 
+enhance its sleek look but also add a touch of modern elegance.
+ With its rich color and versatile design, this dress is perfect for a variety 
+of occasions, promising a fashionable and polished appearance.
     <div className="price">
           
     <form onSubmit={handleSubmit}>

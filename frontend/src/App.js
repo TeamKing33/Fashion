@@ -11,10 +11,10 @@ import Cards from './component/Cards';
 import Navbars from './component/Navbars';
 import Footer from './component/footer';
 
-import Tshirt from './component/Tshitr/Tshirt';
-import Tshirt2 from './component/Tshitr/Tshirt2';
-import Tshirt3 from './component/Tshitr/Tshirt3';
-import Tshirt4 from './component/Tshitr/Tshirt4';
+// import Tshirt from './component/Tshitr/Tshirt';
+// import Tshirt2 from './component/Tshitr/Tshirt2';
+// import Tshirt3 from './component/Tshitr/Tshirt3';
+// import Tshirt4 from './component/Tshitr/Tshirt4';
 import Signup from './component/Signup';
 import Signin from './component/Signin'
 import SigninEmp from './component/employee/SigninEmp';
@@ -24,10 +24,29 @@ import Micro from './component/Micro.js';
 import Loading from './component/Loading.js';
 import './component/css/Cards.css'
 import './App.css';
+
+// lazy
+
 const Home = lazy(()=> import('./component/Home.js'))
 const Support = lazy(()=> import('./component/Support'))
 const AllCard = lazy(()=> import('./component/AllCard.js'))
 const AllMen = lazy(()=> import('./component/Men/AllMen'))
+const Allwomen = lazy(()=> import('./component/Women/AllWomen'))
+
+// lazy clothes women
+
+const WomenCl = lazy(()=> import('./component/Tshitr/WomenClothes/WomenCl.js'))
+const WomenCl2 = lazy(()=> import('./component/Tshitr/WomenClothes/WomenCl2.js'))
+const WomenCl3 = lazy(()=> import('./component/Tshitr/WomenClothes/WomenCl3.js'))
+
+// lazy clothes men
+
+const Tshirt = lazy(()=> import('./component/Tshitr/Tshirt'))
+const Tshirt2 = lazy(()=> import('./component/Tshitr/Tshirt2'))
+const Tshirt3 = lazy(()=> import('./component/Tshitr/Tshirt3'))
+const Tshirt4 = lazy(()=> import('./component/Tshitr/Tshirt4'))
+
+
 
 
 const App = ()=>{
@@ -94,11 +113,98 @@ const App = ()=>{
          
           
           <Route path="/cartitem" element={<CartItem data={data} setData={setData}  />} />
+          
+          {/*  lazy clothes*/}
 
-          <Route path="/T-shirt" element={<Tshirt/>}/>
-          <Route path="/T-shirt2" element={<Tshirt2/>}/>
-          <Route path="/T-shirt3" element={<Tshirt3/>}/>
-          <Route path="/T-shirt4" element={<Tshirt4/>}/>
+          <Route path="/T-shirt" element={
+           <React.Suspense fallback={<Loading/>}>
+          <div>
+          <Navbars size={data.length}  />
+              <Micro/>
+          <Tshirt/>
+          </div>
+          </React.Suspense>
+          }/>
+
+     <Route path="/T-shirt2" element={
+           <React.Suspense fallback={<Loading/>}>
+          <div>
+          <Navbars size={data.length}  />
+              <Micro/>
+          <Tshirt2/>
+          </div>
+          </React.Suspense>
+          }/>
+          
+          
+          <Route path="/T-shirt3" element={
+           <React.Suspense fallback={<Loading/>}>
+          <div>
+          <Navbars size={data.length}  />
+              <Micro/>
+          <Tshirt3/>
+          </div>
+          </React.Suspense>
+          }/>
+        
+        <Route path="/T-shirt4" element={
+           <React.Suspense fallback={<Loading/>}>
+          <div>
+          <Navbars size={data.length}  />
+              <Micro/>
+          <Tshirt4/>
+          </div>
+          </React.Suspense>
+          }/>
+        
+
+          <Route path="/WomenClothes" element={
+          <React.Suspense fallback={<Loading/>}>
+
+          <div>
+             <Navbars size={data.length}  />
+              <Micro/>
+             < WomenCl/> 
+             
+              {/* {
+                warning && <div className="warning">Item is already added to cart</div>
+              } */}
+          </div>
+          </React.Suspense>
+          } />
+
+
+  <Route path="/WomenClothes2" element={
+          <React.Suspense fallback={<Loading/>}>
+
+          <div>
+             <Navbars size={data.length}  />
+              <Micro/>
+             < WomenCl2/> 
+             
+              {/* {
+                warning && <div className="warning">Item is already added to cart</div>
+              } */}
+          </div>
+          </React.Suspense>
+          } />
+
+
+
+   <Route path="/WomenClothes3" element={
+          <React.Suspense fallback={<Loading/>}>
+
+          <div>
+             <Navbars size={data.length}  />
+              <Micro/>
+             < WomenCl3/> 
+           </div>
+           </React.Suspense>
+            } />
+
+
+             {/*  lazy clothes end*/}
+
 
           {/* Home */}
           <Route path="/home" element={
@@ -157,6 +263,24 @@ const App = ()=>{
              <Navbars size={data.length}  />
               <Micro/>
              < AllMen handleClick={handleClick}/> 
+             
+              {/* {
+                warning && <div className="warning">Item is already added to cart</div>
+              } */}
+          <Footer/>
+          </div>
+          </React.Suspense>
+          } />  
+
+
+          {/* ProductWomen */}
+          <Route path="/productWomen" element={
+          <React.Suspense fallback={<Loading/>}>
+
+          <div>
+             <Navbars size={data.length}  />
+              <Micro/>
+             < Allwomen handleClick={handleClick}/> 
              
               {/* {
                 warning && <div className="warning">Item is already added to cart</div>

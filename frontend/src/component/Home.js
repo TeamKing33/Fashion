@@ -62,8 +62,10 @@ function Home() {
       
       {/* women */}
       <div className={styless.imageHome}>
+      <NavLink className={styless.NavLink} to='/productWomen'>
         <img src={imgwomen}/>
         <h3 className={styless.textimg}>Women</h3>
+        </NavLink>
       </div>
       {/* kids & baby */}
       <div className={styless.imageHome}>

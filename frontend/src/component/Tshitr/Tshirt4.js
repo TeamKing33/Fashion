@@ -5,7 +5,7 @@ import Img1 from '../image/imagests4/1.png';
 import Img2 from '../image/imagests4/2.png';
 import Img3 from '../image/imagests4/3.png';
 import Img4 from '../image/imagests4/4.png';
-import Navbars from '../Navbars';
+// import Navbars from '../Navbars';
 import FooterTs from './FooterTs';
 import '../css/Tshirt.css'
 
@@ -61,7 +61,7 @@ function Tshirt4() {
    }
     return (
       <div>
-        <Navbars />
+        
       
       <div className="container">
         <div className="image">

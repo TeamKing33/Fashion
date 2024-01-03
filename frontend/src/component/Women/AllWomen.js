@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import data from './DataMen';
-import Men from './Men';
+import data from './DataWomen';
+import Women from './Women'
 import "../css/AllCards.css";
 import "../css/Cards.css"
 
 
-const AllMen = ({handleClick}) => {
+const AllWomen = ({handleClick}) => {
 
 
   return (
@@ -16,7 +16,7 @@ const AllMen = ({handleClick}) => {
           {data && data.map((item) => (
   <div className="col-6 col-md-6 col-lg-3 mx-0 mb-4" key={item.id}>
     <div className="card p-0 overflow-hidden shadow cards">
-      <Men item={item} key={item.id} handleClick={handleClick} />
+      <Women item={item} key={item.id} handleClick={handleClick} />
    
 
     </div>
@@ -31,4 +31,4 @@ const AllMen = ({handleClick}) => {
   );
 };
 
-export default AllMen;
+export default AllWomen;

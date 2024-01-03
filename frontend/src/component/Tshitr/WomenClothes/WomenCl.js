@@ -1,17 +1,16 @@
 import React,{useEffect, useState} from 'react'
-import Img1 from '../image/imagets/1.png';
-import Img2 from '../image/imagets/2.png';
-import Img3 from '../image/imagets/3.png';
-import Img4 from '../image/imagets/4.png';
+import Img1 from '../../image/imageHome/imageWomen/1.png'
+import Img2 from '../../image/imageHome/imageWomen/2.png';
+import Img3 from '../../image/imageHome/imageWomen/3.png';
+import Img4 from '../../image/imageHome/imageWomen/4.png';
 // import Navbars from '../Navbars';
-import FooterTs from './FooterTs';
+import FooterTs from '../FooterTs';
 // import Footer from '../footer';
-import Employee from '../employee/Employee';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import '../css/Tshirt.css'
+import '../../css/Tshirt.css'
 
-let white1 = "Tshirt1";
+let white1 = "WomenClothes";
 function Tshirt() {
 
   useEffect(() => {
@@ -58,14 +57,14 @@ function Tshirt() {
    const change = (event) => {
     const value = parseInt(event.target.value, 10) || "";
     setinputvalue(value);
-    const calculatedResult = value * 25;
+    const calculatedResult = value * 100;
     setresult(calculatedResult);
     setData((prev) => ({ ...prev, result: calculatedResult }));
   };
   
     return (
       <div>
-       
+        {/* <Navbars/> */}
      
       <div className="container">
         
@@ -81,10 +80,18 @@ function Tshirt() {
           </div>
         </div>
         <div className="text">
-        Essence of Our T-Shirts Introduction: Explore the world of our T-shirts, where premium cotton meets precision stitching for enduring comfort and style. Key Points: Fabric of Comfort: Luxurious, breathable cotton for a soft feel against the skin. Stitching Perfection: Impeccable craftsmanship for lasting durability. Designs that Transcend: Express your individuality with timeless, expressive designs. Durability Beyond Fashion: Enduring quality
-         for a T-shirt that stand .
-
-
+        A navy checkered dress combines traditional
+         elegance with a modern allure. The classic 
+         stripe pattern takes on a contemporary twist 
+         when paired with the deep and sophisticated
+          navy color. The dress is versatile and 
+          suitable for various occasions due to its 
+          simplicity and the ease of accessorizing. 
+          Its design and color make it a stylish piece
+           that effortlessly transitions between formal 
+           and casual settings. The navy checkered dress, 
+           with its timeless charm and modern sophistication, exemplifies
+         the enduring beauty of classic patterns in the ever-evolving world of fashion.
     <div className="price">
           
     <form onSubmit={handleSubmit}>
