@@ -52,12 +52,12 @@ const navigate = useNavigate()
               <span>{discountCard}</span>
               <img src={img} className="card-img-top imagecard" onChange={handleChange}/>
               <div className="card-body">
-                <h5 className="card-title" onChange={handleChange}>{title}</h5>
+                <h5 className="card-title title" onChange={handleChange}>{title}</h5>
                 <div className="flex">
                 <p className="card-textt" onChange={handleChange}>${discount}</p>
                 <p className="card-textt colorsdis" onChange={handleChange}><s>{price}</s></p>
                 </div>
-                <span className="card-text">{description}</span>
+                <span className="card-text description">{description}</span>
               </div>
               <div className="btnaddtocart">
               <button onClick={()=>handleClick(item)} className="CartBtn">Add to Cart</button>

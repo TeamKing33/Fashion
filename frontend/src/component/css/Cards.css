@@ -126,4 +126,11 @@
     .IconContainer{
         left: -55px;
     } 
+    .title{
+        font-size: 10px;
+    }
+    .description{
+        font-size: 7px;
+       
+    }
 }
