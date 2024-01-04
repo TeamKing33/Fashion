@@ -1,10 +1,45 @@
-import React from 'react';
+import React,{useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, NavDropdown, Container, Nav, Form, Button } from 'react-bootstrap';
-import {NavLink} from "react-router-dom";
+import {NavLink,useNavigate } from "react-router-dom";
 import './css/Navbars.css';
 import Img from './image/icon.png'
 const  Navbars = ({size}) => {
+
+  const [filter ,setFilter] = useState('');
+  const navigator = useNavigate ()
+  const change = (event) =>{
+    setFilter(event.target.value);
+  } 
+
+  const handleClick = (e) =>{
+    e.preventDefault();
+    const lowercase = filter.toLowerCase();
+    if(lowercase  === "product"){
+      navigator("/product");
+    }
+    else if(lowercase  === "home"){
+      navigator("/home");
+    }
+    else if(lowercase  === "support"){
+      navigator("/support");
+    }
+    else if(lowercase  === "add to cart"){
+      navigator("/cartitem");
+    }
+    else if(lowercase  === "men"){
+      navigator("/productMen");
+    }
+    else if(lowercase  === "women"){
+      navigator("/productWomen");
+    }
+    else if(lowercase  === "kids"){
+      navigator("/productKids");
+    }
+    
+  }
+
+
   return (
     
     <Navbar expand="lg" className=" navbar navbar-dark ">
@@ -31,14 +66,15 @@ const  Navbars = ({size}) => {
             <NavLink to="/signin" className="NavLink">Log out</NavLink>
             <NavLink to="/cartitem"className="NavLink" ><i class="fa-solid fa-cart-shopping"></i> <span className="numbercart">{size}</span></NavLink>
           </Nav>
-          <Form className="d-flex">
+          <Form className="d-flex" onSubmit={handleClick}>
             <Form.Control
               type="search"
               placeholder="Search"
               className="me-2 search"
               aria-label="Search"
+              onChange={change}
             />
-            <Button variant="outline-light">Search</Button>
+            <Button variant="outline-light" type='submit'>Search</Button>
           </Form>
         </Navbar.Collapse>
       </Container>

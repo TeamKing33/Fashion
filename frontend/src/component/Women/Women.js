@@ -43,7 +43,7 @@ const Men = ({item,handleClick}) => {
     
           <form onSubmit={handleSubmit}>
                   <span>{discountCard}</span>
-                  <img src={img} className="card-img-top" onChange={handleChange}/>
+                  <img src={img} className="card-img-top imagecard" onChange={handleChange}/>
                   <div className="card-body">
                     <h5 className="card-title title" onChange={handleChange}>{title}</h5>
                     <div className="flex">

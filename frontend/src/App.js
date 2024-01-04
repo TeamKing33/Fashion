@@ -32,6 +32,7 @@ const Support = lazy(()=> import('./component/Support'))
 const AllCard = lazy(()=> import('./component/AllCard.js'))
 const AllMen = lazy(()=> import('./component/Men/AllMen'))
 const Allwomen = lazy(()=> import('./component/Women/AllWomen'))
+const AllKids = lazy(()=> import('./component/Kids/AllKids'))
 
 // lazy clothes women
 
@@ -45,6 +46,14 @@ const Tshirt = lazy(()=> import('./component/Tshitr/Tshirt'))
 const Tshirt2 = lazy(()=> import('./component/Tshitr/Tshirt2'))
 const Tshirt3 = lazy(()=> import('./component/Tshitr/Tshirt3'))
 const Tshirt4 = lazy(()=> import('./component/Tshitr/Tshirt4'))
+
+
+// lazy clothes kids
+
+const KidsCl = lazy(()=> import('./component/Tshitr/KidsClothes/KidsCl.js'))
+const  KidsCl2 = lazy(()=> import('./component/Tshitr/KidsClothes/KidsCl2.js'))
+const  KidsCl3 = lazy(()=> import('./component/Tshitr/KidsClothes/KidsCl3.js'))
+const  KidsCl4 = lazy(()=> import('./component/Tshitr/KidsClothes/KidsCl4.js'))
 
 
 
@@ -115,7 +124,8 @@ const App = ()=>{
           <Route path="/cartitem" element={<CartItem data={data} setData={setData}  />} />
           
           {/*  lazy clothes*/}
-
+          
+          {/* Men */}
           <Route path="/T-shirt" element={
            <React.Suspense fallback={<Loading/>}>
           <div>
@@ -156,8 +166,9 @@ const App = ()=>{
           </div>
           </React.Suspense>
           }/>
-        
+          {/* end Men */}
 
+          {/* WomenClothes */}
           <Route path="/WomenClothes" element={
           <React.Suspense fallback={<Loading/>}>
 
@@ -166,9 +177,7 @@ const App = ()=>{
               <Micro/>
              < WomenCl/> 
              
-              {/* {
-                warning && <div className="warning">Item is already added to cart</div>
-              } */}
+           
           </div>
           </React.Suspense>
           } />
@@ -182,9 +191,7 @@ const App = ()=>{
               <Micro/>
              < WomenCl2/> 
              
-              {/* {
-                warning && <div className="warning">Item is already added to cart</div>
-              } */}
+              
           </div>
           </React.Suspense>
           } />
@@ -201,6 +208,63 @@ const App = ()=>{
            </div>
            </React.Suspense>
             } />
+
+              {/* end WomenClothes */}
+
+
+
+               {/* KidsClothes */}
+          <Route path="/KidsClothes" element={
+          <React.Suspense fallback={<Loading/>}>
+
+          <div>
+             <Navbars size={data.length}  />
+              <Micro/>
+             < KidsCl/> 
+          </div>
+          </React.Suspense>
+          } />
+
+
+  <Route path="/KidsClothes2" element={
+          <React.Suspense fallback={<Loading/>}>
+
+          <div>
+             <Navbars size={data.length}  />
+              <Micro/>
+             < KidsCl2/> 
+             
+             
+          </div>
+          </React.Suspense>
+          } />
+
+
+
+   <Route path="/KidsClothes3" element={
+          <React.Suspense fallback={<Loading/>}>
+
+          <div>
+             <Navbars size={data.length}  />
+              <Micro/>
+             < KidsCl3/> 
+           </div>
+           </React.Suspense>
+            } />
+
+            <Route path="/KidsClothes4" element={
+          <React.Suspense fallback={<Loading/>}>
+
+          <div>
+             <Navbars size={data.length}  />
+              <Micro/>
+             < KidsCl4/> 
+           </div>
+           </React.Suspense>
+            } />
+
+
+              {/* end Kids */}
 
 
              {/*  lazy clothes end*/}
@@ -290,6 +354,20 @@ const App = ()=>{
           </React.Suspense>
           } />
 
+
+   <Route path="/productKids" element={
+          <React.Suspense fallback={<Loading/>}>
+
+          <div>
+             <Navbars size={data.length}  />
+              <Micro/>
+             < AllKids handleClick={handleClick}/> 
+             
+             
+          <Footer/>
+          </div>
+          </React.Suspense>
+          } />
 
         </Routes>
         

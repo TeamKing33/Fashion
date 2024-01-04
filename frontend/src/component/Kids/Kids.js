@@ -1,8 +1,9 @@
 import React,{useState} from "react";
 import { NavLink, useNavigate } from 'react-router-dom'
-import "../css/Cards.css"
+import ".././css/Cards.css"
 import axios from "axios";
-const Men = ({item,handleClick}) => {
+
+const Kids = ({item,handleClick}) => {
     const [sendData,setsendData ] = useState({
         id:item.id,
         img: item.img,
@@ -62,4 +63,4 @@ const Men = ({item,handleClick}) => {
                 </div>
       );
 }
-export default Men;
+export default Kids;
