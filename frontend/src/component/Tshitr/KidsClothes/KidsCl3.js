@@ -22,8 +22,15 @@ function KidsCl3() {
     image: white1,
     result:"",
     quantity:"",
+    size:"",
     number:"",
   });
+
+  const handleSizeChange = (selectedSize) => {
+    setData((prev) => ({ ...prev, size: selectedSize }));
+    
+  };
+
 
 
   const navigate = useNavigate();
@@ -81,10 +88,31 @@ function KidsCl3() {
         </div>
         <div className="text">
         The "Block-Color Hoodie" is a stylish and casual garment featuring solid color blocks, adding a modern and eye-catching element to the traditional hoodie design. Crafted for both fashion and comfort, this versatile piece is suitable for various occasions and can be effortlessly paired with different bottoms. Whether you're aiming for a laid-back look or making a bold fashion statement, the Block-Color Hoodie combines style and functionality, making it a must-have in your casual wardrobe.
-    <div className="price">
           
     <form onSubmit={handleSubmit}>
-    
+    <div className="box_size">
+          <div className={`size ${formData.size === "1-2" ? 'selected' : ''}`}
+               name="size"
+              onClick={() => handleSizeChange("1-2")}>
+            1-2
+          </div>
+          <div className={`size ${formData.size === "3-4"? 'selected' : ''}`}
+           name="size"
+           onClick={() => handleSizeChange("3-4")}>
+            3-4
+          </div>
+          <div className={`size ${formData.size === "5-6" ? 'selected' : ''}`}
+           name="size" 
+           onClick={() => handleSizeChange("5-6")}>
+            5-6
+          </div>
+          <div className={`size ${formData.size === "7-8" ? 'selected' : ''}`}
+           name="size" 
+           onClick={() => handleSizeChange("7-8")}>
+            7-8
+          </div>
+         </div>
+    <div className="price">
     <input type="hidden" name="result" value={result} />
     <div className="result">
         <span>{result} LE</span>
@@ -98,9 +126,9 @@ required/>
         <input type="text" name="number" id="number" placeholder='Enter your Number' required onChange={handleChange}/>
         <button className='btn-price' type="submit" name="submit">Buy Now</button>
     </div>
+    </div>
 </form>
 
-          </div>
         </div>
   
       </div>

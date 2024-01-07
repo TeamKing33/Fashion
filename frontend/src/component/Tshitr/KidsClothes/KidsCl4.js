@@ -22,8 +22,14 @@ function KidsCl4() {
     image: white1,
     result:"",
     quantity:"",
+    size:"",
     number:"",
   });
+
+  const handleSizeChange = (selectedSize) => {
+    setData((prev) => ({ ...prev, size: selectedSize }));
+    
+  };
 
 
   const navigate = useNavigate();
@@ -82,10 +88,31 @@ function KidsCl4() {
         <div className="text">
         
 The "Dark Blue/Dinosaurs Hoodie" is a stylish and versatile casual garment that combines the classic appeal of dark blue with a playful dinosaur-themed design. Dark blue, known for its sophistication and versatility, serves as a neutral base, providing a timeless and elegant look. The addition of dinosaur graphics or patterns adds a touch of playfulness and nostalgia, allowing wearers to express their personality and interests. This hoodie not only offers warmth and comfort but also serves as a fashion statement, making it a unique and eye-catching piece for those seeking a blend of classic and whimsical style.
-    <div className="price">
           
     <form onSubmit={handleSubmit}>
-    
+    <div className="box_size">
+          <div className={`size ${formData.size === "1-2" ? 'selected' : ''}`}
+               name="size"
+              onClick={() => handleSizeChange("1-2")}>
+            1-2
+          </div>
+          <div className={`size ${formData.size === "3-4"? 'selected' : ''}`}
+           name="size"
+           onClick={() => handleSizeChange("3-4")}>
+            3-4
+          </div>
+          <div className={`size ${formData.size === "5-6" ? 'selected' : ''}`}
+           name="size" 
+           onClick={() => handleSizeChange("5-6")}>
+            5-6
+          </div>
+          <div className={`size ${formData.size === "7-8" ? 'selected' : ''}`}
+           name="size" 
+           onClick={() => handleSizeChange("7-8")}>
+            7-8
+          </div>
+         </div>
+    <div className="price">
     <input type="hidden" name="result" value={result} />
     <div className="result">
         <span>{result} LE</span>
@@ -99,9 +126,9 @@ required/>
         <input type="text" name="number" id="number" placeholder='Enter your Number' required onChange={handleChange}/>
         <button className='btn-price' type="submit" name="submit">Buy Now</button>
     </div>
+    </div>
 </form>
 
-          </div>
         </div>
   
       </div>

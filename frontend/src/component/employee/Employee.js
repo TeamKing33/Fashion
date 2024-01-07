@@ -22,6 +22,7 @@ function Employee() {
             <th>image</th>
             <th>price</th>
             <th>quantity</th>
+            <th>size</th>
             <th>number</th>
           </tr>
         </thead>
@@ -33,6 +34,7 @@ function Employee() {
               <td>{d.image}</td>
               <td>{d.result} LE</td>
               <td>{d.quantity}</td>
+              <td>{d.size}</td>
               <td>{d.number}</td>
             </tr>
           ))}

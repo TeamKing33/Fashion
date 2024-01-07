@@ -3,6 +3,7 @@ import Img1 from '../../image/imageHome/imagekids2/1.png'
 import Img2 from '../../image/imageHome/imagekids2/2.png';
 import Img3 from '../../image/imageHome/imagekids2/3.png';
 import Img4 from '../../image/imageHome/imagekids2/4.png';
+import SizeKi from './SizeKi';
 // import Navbars from '../Navbars';
 import FooterTs from '../FooterTs';
 // import Footer from '../footer';
@@ -22,9 +23,14 @@ function KidsCl2() {
     image: white1,
     result:"",
     quantity:"",
+    size:"",
     number:"",
   });
 
+  const handleSizeChange = (selectedSize) => {
+    setData((prev) => ({ ...prev, size: selectedSize }));
+    
+  };
 
   const navigate = useNavigate();
 
@@ -81,13 +87,39 @@ function KidsCl2() {
         </div>
         <div className="text">
         Discover our charming Baby Girl Outfits, a perfect blend of comfort and style for the fall and winter seasons. This set includes a cozy cotton long-sleeve romper paired with matching pants, ensuring warmth and cuteness. The high-quality materials and thoughtful design make these outfits ideal for any occasion. Dress your little one in this adorable ensemble for a perfect combination of fashion and functionality.
-    <div className="price">
           
     <form onSubmit={handleSubmit}>
+
+    <div className="box_size">
+          <div className={`size ${formData.size === "1-2" ? 'selected' : ''}`}
+               name="size"
+              onClick={() => handleSizeChange("1-2")}>
+            1-2
+          </div>
+          <div className={`size ${formData.size === "3-4"? 'selected' : ''}`}
+           name="size"
+           onClick={() => handleSizeChange("3-4")}>
+            3-4
+          </div>
+          <div className={`size ${formData.size === "5-6" ? 'selected' : ''}`}
+           name="size" 
+           onClick={() => handleSizeChange("5-6")}>
+            5-6
+          </div>
+          <div className={`size ${formData.size === "7-8" ? 'selected' : ''}`}
+           name="size" 
+           onClick={() => handleSizeChange("7-8")}>
+            7-8
+          </div>
+         </div>
+         <div className="price">
     
     <input type="hidden" name="result" value={result} />
     <div className="result">
         <span>{result} LE</span>
+        <div className='flex2'>
+      {<SizeKi handleChange={handleChange}/>}
+        </div>  
         <input type="text" name="name" placeholder="Enter your Name" spellCheck="false" required onChange={handleChange}/>
         <input type="text" name="quantity" placeholder='Enter Quantity' value={inputvalue}
          onChange={(e) => {
@@ -98,9 +130,9 @@ required/>
         <input type="text" name="number" id="number" placeholder='Enter your Number' required onChange={handleChange}/>
         <button className='btn-price' type="submit" name="submit">Buy Now</button>
     </div>
+    </div>
 </form>
 
-          </div>
         </div>
   
       </div>
