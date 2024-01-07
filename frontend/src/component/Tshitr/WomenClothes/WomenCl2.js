@@ -16,14 +16,19 @@ function Tshirt() {
   useEffect(() => {
     $('#number').mask('000 0000 0000');
   }, []);
-
   const [formData,setData] = useState({
     name:"",
     image: white1,
     result:"",
     quantity:"",
+    size:"",
     number:"",
   });
+
+  const handleSizeChange = (selectedSize) => {
+    setData((prev) => ({ ...prev, size: selectedSize }));
+    
+  };
 
 
   const navigate = useNavigate();
@@ -85,10 +90,42 @@ with sophistication. The flared skirt and waist belt not only
 enhance its sleek look but also add a touch of modern elegance.
  With its rich color and versatile design, this dress is perfect for a variety 
 of occasions, promising a fashionable and polished appearance.
-    <div className="price">
           
     <form onSubmit={handleSubmit}>
-    
+    <h3 className='textSize'>Size</h3>
+    <div className="box_size">
+          <div className={`size ${formData.size === "38" ? 'selected' : ''}`}
+               name="size"
+              onClick={() => handleSizeChange("38")}>
+            38
+          </div>
+          <div className={`size ${formData.size === "40"? 'selected' : ''}`}
+           name="size"
+           onClick={() => handleSizeChange("40")}>
+            40
+          </div>
+          <div className={`size ${formData.size === "42" ? 'selected' : ''}`}
+           name="size" 
+           onClick={() => handleSizeChange("42")}>
+            42
+          </div>
+          <div className={`size ${formData.size === "44" ? 'selected' : ''}`}
+           name="size" 
+           onClick={() => handleSizeChange("44")}>
+            44
+          </div>
+          <div className={`size ${formData.size === "46" ? 'selected' : ''}`}
+           name="size" 
+           onClick={() => handleSizeChange("46")}>
+            46
+          </div>
+          <div className={`size ${formData.size === "48" ? 'selected' : ''}`}
+           name="size" 
+           onClick={() => handleSizeChange("48")}>
+            48
+          </div>
+         </div>
+    <div className="price">
     <input type="hidden" name="result" value={result} />
     <div className="result">
         <span>{result} LE</span>
@@ -102,9 +139,9 @@ required/>
         <input type="text" name="number" id="number" placeholder='Enter your Number' required onChange={handleChange}/>
         <button className='btn-price' type="submit" name="submit">Buy Now</button>
     </div>
+    </div>
 </form>
 
-          </div>
         </div>
   
       </div>

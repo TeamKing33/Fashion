@@ -90,6 +90,8 @@ function KidsCl4() {
 The "Dark Blue/Dinosaurs Hoodie" is a stylish and versatile casual garment that combines the classic appeal of dark blue with a playful dinosaur-themed design. Dark blue, known for its sophistication and versatility, serves as a neutral base, providing a timeless and elegant look. The addition of dinosaur graphics or patterns adds a touch of playfulness and nostalgia, allowing wearers to express their personality and interests. This hoodie not only offers warmth and comfort but also serves as a fashion statement, making it a unique and eye-catching piece for those seeking a blend of classic and whimsical style.
           
     <form onSubmit={handleSubmit}>
+    <h3 className='textSize'>Size</h3>
+    <p className='textSize'>(<span>&#128515;</span>عشان خاطر امنيه )</p>
     <div className="box_size">
           <div className={`size ${formData.size === "1-2" ? 'selected' : ''}`}
                name="size"

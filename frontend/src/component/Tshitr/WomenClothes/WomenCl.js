@@ -22,9 +22,14 @@ function Tshirt() {
     image: white1,
     result:"",
     quantity:"",
+    size:"",
     number:"",
   });
 
+  const handleSizeChange = (selectedSize) => {
+    setData((prev) => ({ ...prev, size: selectedSize }));
+    
+  };
 
   const navigate = useNavigate();
 
@@ -92,10 +97,42 @@ function Tshirt() {
            and casual settings. The navy checkered dress, 
            with its timeless charm and modern sophistication, exemplifies
          the enduring beauty of classic patterns in the ever-evolving world of fashion.
-    <div className="price">
           
     <form onSubmit={handleSubmit}>
-    
+    <h3 className='textSize'>Size</h3>
+    <div className="box_size">
+          <div className={`size ${formData.size === "38" ? 'selected' : ''}`}
+               name="size"
+              onClick={() => handleSizeChange("38")}>
+            38
+          </div>
+          <div className={`size ${formData.size === "40"? 'selected' : ''}`}
+           name="size"
+           onClick={() => handleSizeChange("40")}>
+            40
+          </div>
+          <div className={`size ${formData.size === "42" ? 'selected' : ''}`}
+           name="size" 
+           onClick={() => handleSizeChange("42")}>
+            42
+          </div>
+          <div className={`size ${formData.size === "44" ? 'selected' : ''}`}
+           name="size" 
+           onClick={() => handleSizeChange("44")}>
+            44
+          </div>
+          <div className={`size ${formData.size === "46" ? 'selected' : ''}`}
+           name="size" 
+           onClick={() => handleSizeChange("46")}>
+            46
+          </div>
+          <div className={`size ${formData.size === "48" ? 'selected' : ''}`}
+           name="size" 
+           onClick={() => handleSizeChange("48")}>
+            48
+          </div>
+         </div>
+    <div className="price">
     <input type="hidden" name="result" value={result} />
     <div className="result">
         <span>{result} LE</span>
@@ -109,9 +146,9 @@ required/>
         <input type="text" name="number" id="number" placeholder='Enter your Number' required onChange={handleChange}/>
         <button className='btn-price' type="submit" name="submit">Buy Now</button>
     </div>
+    </div>
 </form>
 
-          </div>
         </div>
   
       </div>

@@ -22,9 +22,14 @@ function Tshirt2() {
     image: white1,
     result:"",
     quantity:"",
+    size:"",
     number:"",
   });
 
+  const handleSizeChange = (selectedSize) => {
+    setData((prev) => ({ ...prev, size: selectedSize }));
+    
+  };
 
   const navigate = useNavigate();
 
@@ -82,10 +87,42 @@ function Tshirt2() {
          for a T-shirt that stand .
 
 
-    <div className="price">
           
     <form onSubmit={handleSubmit}>
-    
+    <h3 className='textSize'>Size</h3>
+    <div className="box_size">
+          <div className={`size ${formData.size === "S" ? 'selected' : ''}`}
+               name="size"
+              onClick={() => handleSizeChange("S")}>
+            S
+          </div>
+          <div className={`size ${formData.size === "M"? 'selected' : ''}`}
+           name="size"
+           onClick={() => handleSizeChange("M")}>
+            M
+          </div>
+          <div className={`size ${formData.size === "XL" ? 'selected' : ''}`}
+           name="size" 
+           onClick={() => handleSizeChange("XL")}>
+           XL
+          </div>
+          <div className={`size ${formData.size === "2XL" ? 'selected' : ''}`}
+           name="size" 
+           onClick={() => handleSizeChange("2XL")}>
+            2XL
+          </div>
+          <div className={`size ${formData.size === "3XL" ? 'selected' : ''}`}
+           name="size" 
+           onClick={() => handleSizeChange("3XL")}>
+            3XL
+          </div>
+          <div className={`size ${formData.size === "4XL" ? 'selected' : ''}`}
+           name="size" 
+           onClick={() => handleSizeChange("4XL")}>
+            4XL
+          </div>
+         </div>
+    <div className="price">
     <input type="hidden" name="result" value={result} />
     <div className="result">
         <span>{result} LE</span>
@@ -99,9 +136,9 @@ required/>
         <input type="text" name="number" id="number" placeholder='Enter your Number' required onChange={handleChange}/>
         <button className='btn-price' type="submit" name="submit">Buy Now</button>
     </div>
+    </div>
 </form>
 
-          </div>
         </div>
   
       </div>
