@@ -90,8 +90,6 @@ function KidsCl3() {
         The "Block-Color Hoodie" is a stylish and casual garment featuring solid color blocks, adding a modern and eye-catching element to the traditional hoodie design. Crafted for both fashion and comfort, this versatile piece is suitable for various occasions and can be effortlessly paired with different bottoms. Whether you're aiming for a laid-back look or making a bold fashion statement, the Block-Color Hoodie combines style and functionality, making it a must-have in your casual wardrobe.
           
     <form onSubmit={handleSubmit}>
-    <h3 className='textSize'>Size</h3>
-    <p className='textSize'>(<span>&#128515;</span>عشان خاطر امنيه )</p>
     <div className="box_size">
           <div className={`size ${formData.size === "1-2" ? 'selected' : ''}`}
                name="size"

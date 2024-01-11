@@ -95,8 +95,6 @@ function KidsCl() {
          ensuring the little one looks both stylish and adorable for any important event.
           
     <form onSubmit={handleSubmit}>
-    <h3 className='textSize'>Size</h3>
-    <p className='textSize'>(<span>&#128515;</span>عشان خاطر امنيه )</p>
     <div className="box_size">
       
           <div className={`size ${formData.size === "1-2" ? 'selected' : ''}`}

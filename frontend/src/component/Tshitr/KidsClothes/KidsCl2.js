@@ -89,8 +89,6 @@ function KidsCl2() {
         Discover our charming Baby Girl Outfits, a perfect blend of comfort and style for the fall and winter seasons. This set includes a cozy cotton long-sleeve romper paired with matching pants, ensuring warmth and cuteness. The high-quality materials and thoughtful design make these outfits ideal for any occasion. Dress your little one in this adorable ensemble for a perfect combination of fashion and functionality.
           
     <form onSubmit={handleSubmit}>
-    <h3 className='textSize'>Size</h3>
-    <p className='textSize'>(<span>&#128515;</span>عشان خاطر امنيه )</p>
     <div className="box_size">
           <div className={`size ${formData.size === "1-2" ? 'selected' : ''}`}
                name="size"
