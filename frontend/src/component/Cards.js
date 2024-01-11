@@ -54,7 +54,7 @@ const navigate = useNavigate()
               <div className="card-body">
                 <h5 className="card-title title" onChange={handleChange}>{title}</h5>
                 <div className="flex">
-                <p className="card-textt" onChange={handleChange}>${discount}</p>
+                <p className="card-textt" onChange={handleChange}>EGP{discount}</p>
                 <p className="card-textt colorsdis" onChange={handleChange}><s>{price}</s></p>
                 </div>
                 <span className="card-text description">{description}</span>

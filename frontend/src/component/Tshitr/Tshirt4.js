@@ -124,7 +124,7 @@ function Tshirt4() {
     <div className="price">
     <input type="hidden" name="result" value={result} />
     <div className="result">
-        <span>{result} LE</span>
+        <span>{result} EGP</span>
         <input type="text" name="name" placeholder="Enter your Name" spellCheck="false" required onChange={handleChange}/>
         <input type="text" name="quantity" placeholder='Enter Quantity' value={inputvalue}
          onChange={(e) => {

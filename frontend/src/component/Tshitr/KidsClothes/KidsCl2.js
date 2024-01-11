@@ -115,7 +115,7 @@ function KidsCl2() {
     
     <input type="hidden" name="result" value={result} />
     <div className="result">
-        <span>{result} LE</span>
+        <span>{result} EGP</span>
         <div className='flex2'>
       {<SizeKi handleChange={handleChange}/>}
         </div>  
