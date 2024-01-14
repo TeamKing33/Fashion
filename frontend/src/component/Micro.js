@@ -20,6 +20,13 @@ function HelloTest() {
     }
   }, [recognition]);
 
+  const list = [
+    '/T-shirt',
+    '/T-shirt2',
+    '/T-shirt3',
+    '/T-shirt4'
+  ];
+
   const handleStart = () => {
     if (!recognition.isRecording) {
       recognition.start();
@@ -68,6 +75,13 @@ function HelloTest() {
       speak("ok sir");
       setIsRecognizing(false);
       navigate("/productKids");
+    }
+    else if (newTranscript.includes("Choose me")) {
+      setIsRecognizing(false);
+      const randomIndex = Math.floor(Math.random() * list.length);
+      const randomProduct = list[randomIndex];
+      
+      navigate(randomProduct);
     }
      else {
       speak("sorry, I don't understand");
