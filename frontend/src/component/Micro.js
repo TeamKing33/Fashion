@@ -76,7 +76,7 @@ function HelloTest() {
       setIsRecognizing(false);
       navigate("/productKids");
     }
-    else if (newTranscript.includes("f w m")) {
+    else if (newTranscript.includes("fashion man")) {
       speak("ok sir");
       setIsRecognizing(false);
       const randomIndex = Math.floor(Math.random() * list.length);
