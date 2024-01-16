@@ -66,7 +66,7 @@ function HelloTest() {
       setIsRecognizing(false);
       navigate("/productWomen");
     }
-     else if (newTranscript.includes("open man")||newTranscript.includes("man clothes")||newTranscript.includes("product man")) {
+    //  else if (newTranscript.includes("open man")||newTranscript.includes("man")||newTranscript.includes("man clothes")||newTranscript.includes("product man")) {
       speak("ok sir");
       setIsRecognizing(false);
       navigate("/productMen");
