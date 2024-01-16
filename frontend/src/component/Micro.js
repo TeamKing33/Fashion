@@ -66,17 +66,17 @@ function HelloTest() {
       setIsRecognizing(false);
       navigate("/productWomen");
     }
-    //  else if (newTranscript.includes("open man")||newTranscript.includes("man")||newTranscript.includes("man clothes")||newTranscript.includes("product man")) {
-    //   speak("ok sir");
-    //   setIsRecognizing(false);
-    //   navigate("/productMen");
-    // }
+     else if (newTranscript.includes("open man")||newTranscript.includes("man")||newTranscript.includes("man clothes")||newTranscript.includes("product man")) {
+      speak("ok sir");
+      setIsRecognizing(false);
+      navigate("/productMen");
+    }
     else if (newTranscript.includes("open kids")||newTranscript.includes("kids")||newTranscript.includes("kids clothes")||newTranscript.includes("product kids")) {
       speak("ok sir");
       setIsRecognizing(false);
       navigate("/productKids");
     }
-    else if (newTranscript.includes("wave")) {
+    else if (newTranscript.includes("f w m")) {
       speak("ok sir");
       setIsRecognizing(false);
       const randomIndex = Math.floor(Math.random() * list.length);
