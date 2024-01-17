@@ -36,6 +36,9 @@ const  Navbars = ({size}) => {
     else if(lowercase  === "kids"){
       navigator("/productKids");
     }
+    else{
+      navigator('*')
+    }
     
   }
 
