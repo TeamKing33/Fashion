@@ -22,6 +22,7 @@ import Employyee from './component/employee/Employee.js'
 import CartItem from './component/CartItem.js';
 import Micro from './component/Micro.js';
 import Loading from './component/Loading.js';
+import NotFound from './component/NotFound.js'
 import './component/css/Cards.css'
 import './App.css';
 
@@ -119,7 +120,12 @@ const App = ()=>{
         <Route path="/Signin" element={<Signin/>}/>
         <Route path="/signinEmp" element={<SigninEmp/>}/>
         <Route path="/employyee" element={<Employyee/>}/>
-         
+         <Route path="/*" element={
+          <div>
+          <Navbars size={data.length}  />
+         <NotFound/>
+         </div>
+         }/>
           
           <Route path="/cartitem" element={<CartItem data={data} setData={setData}  />} />
           
