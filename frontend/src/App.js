@@ -120,7 +120,7 @@ const App = ()=>{
         <Route path="/Signin" element={<Signin/>}/>
         <Route path="/signinEmp" element={<SigninEmp/>}/>
         <Route path="/employyee" element={<Employyee/>}/>
-         <Route path="/*" element={
+         <Route path="*" element={
           <div>
           <Navbars size={data.length}  />
          <NotFound/>
