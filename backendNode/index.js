@@ -203,13 +203,13 @@ app.delete("/remove/:id",(req,res)=>{
 //add to cart get
 
 
-app.get('/addtocart',(req,res)=>{
-    const sql = "SELECT *  FROM productscart";
-    db.query(sql,(err,data)=>{
-        if(err) return res.json(err);
-        return res.json(data);
-    })
-})
+// app.get('/addtocart',(req,res)=>{
+//     const sql = "SELECT *  FROM productscart";
+//     db.query(sql,(err,data)=>{
+//         if(err) return res.json(err);
+//         return res.json(data);
+//     })
+// })
 
 
 
