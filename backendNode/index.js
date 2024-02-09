@@ -27,8 +27,6 @@ const db = mysql.createPool({
 })
 
 
-  db.connect();
-
 app.get('/',(re,res)=> {
     return res.json("From BAckend Side");
 });
