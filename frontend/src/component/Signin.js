@@ -3,23 +3,24 @@ import { useNavigate,NavLink } from 'react-router-dom';
 import Img from "./css/w.png"
 import axios from 'axios';
 import SigninEmp from './employee/SigninEmp';
+import Cookies from 'js-cookie';
 import styles from "./css/signup.module.css"
 
 function Signin() {
-  
+  const [login, setLogin] = useState(false);
     const [formData,setData] = useState({
         email:"",
         password:"",
     });
     const navigate = useNavigate();
 
-  const handleChange =(e)=>{
-    setData({
-      ...formData,
-      [e.target.name]:e.target.value,
-    });
-  };
-  axios.defaults.withCredentials =true;
+  // const handleChange =(e)=>{
+  //   setData({
+  //     ...formData,
+  //     [e.target.name]:e.target.value,
+  //   });
+  // };
+  // axios.defaults.withCredentials =true;
   
   // useEffect(()=>{
   //   axios.get("https://fashion-server-mu.vercel.app/home")
@@ -32,22 +33,58 @@ function Signin() {
   //   })
   //   .catch(err => console.log(err))
   // },[])
-  const handleSubmit = async (e)=>{
-    e.preventDefault();
+  // const handleSubmit = async (e)=>{
+  //   e.preventDefault();
 
-    axios.post('https://fashion-server-mu.vercel.app/login',formData)
-    .then(res=>{
-      if(res.data && res.data.Message === "Logged is successfully"){
-        alert("Data is correct")
-      navigate("/home")
-      }else{
-        alert("wrong password or email");
-      }
-      console.log(res);
-    })
-    .catch(err => console.log(err))
+  //   axios.post('https://fashion-server-mu.vercel.app/login',formData)
+  //   .then(res=>{
+  //     if(res.data && res.data.Message === "Logged is successfully"){
+  //       alert("Data is correct")
+  //     navigate("/home")
+  //     }else{
+  //       alert("wrong password or email");
+  //     }
+  //     console.log(res);
+  //   })
+  //   .catch(err => console.log(err))
     
+  // };
+
+
+
+
+  useEffect(() => {
+    const loggedIn = Cookies.get('login');
+    if (loggedIn === 'true') {
+      setLogin(true);
+    }
+  }, []);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('https://fashion-server-mu.vercel.app/loginUser', formData);
+      const responseData = response.data;
+  
+      if (responseData && responseData.Message === "Logged in successfully") {
+        alert("Data is correct");
+        setLogin(true);
+        Cookies.set('login', true, { expires: 1 / 24 });
+        navigate("/home");
+      } else {
+        alert("Wrong password or email");
+      }
+      console.log(response);
+    } catch (error) {
+      console.error('Error during login:', error);
+      alert('An error occurred during login');
+    }
   };
+  
+
+
+
+
+
   useEffect(() => {
     
     document.body.classList.add(styles.signinBody);
@@ -68,12 +105,16 @@ function Signin() {
     <img src={Img} alt="" />
     </span>
     <h1>Sign in </h1>
-    <form onSubmit={handleSubmit}   >
+    <div>
+    {login ? (
+      navigate("/home")
+    ):(
+      <>
    {/* <!-----inp--------------> */}
   
      <div className={styles.inp}>
-        <input type="Email" placeholder="Email"name="email" required onChange={handleChange}/>
-        <input type="password" placeholder="Password"name="password" required onChange={handleChange}/>
+        <input type="Email" placeholder="Email"name="email" required value={formData.email} onChange={(e) => setData({ ...formData, email: e.target.value })}/>
+        <input type="password" placeholder="Password"name="password" required value={formData.password} onChange={(e) => setData({ ...formData, password: e.target.value })}/>
       
       
      </div>
@@ -91,7 +132,7 @@ function Signin() {
   
   {/* <!-------------btn--------------> */}
   <div className={styles.btn} > 
- <button type="submit"name="submit">Register</button>
+ <button type="submit"name="submit" onClick={handleSubmit}>Register</button>
   </div>
   <div className={styles.texts}>
  <span> Already have an account? </span>
@@ -101,8 +142,10 @@ function Signin() {
 
   </div>
    
-  
-   </form>
+  </>
+   )}
+   </div>
+   
     </div>
     <NavLink to="/signinEmp"><button className={styles.btnemp}>employee</button></NavLink>
     </div>

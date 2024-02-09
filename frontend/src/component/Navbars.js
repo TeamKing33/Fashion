@@ -1,11 +1,12 @@
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, NavDropdown, Container, Nav, Form, Button } from 'react-bootstrap';
 import {NavLink,useNavigate } from "react-router-dom";
+import Cookies from 'js-cookie';
 import './css/Navbars.css';
 import Img from './image/icon.png'
 const  Navbars = ({size}) => {
-
+  const [login, setLogin] = useState(false);
   const [filter ,setFilter] = useState('');
   const navigator = useNavigate ()
   const change = (event) =>{
@@ -42,6 +43,12 @@ const  Navbars = ({size}) => {
     
   }
 
+  const handleRemove = () =>{
+    Cookies.remove("login");
+    setLogin(false);
+    navigator("/Signin")
+    window.location.reload()
+  }
 
   return (
     
@@ -66,7 +73,7 @@ const  Navbars = ({size}) => {
             <NavLink to="/support" className="NavLink">
               Support
             </NavLink>
-            <NavLink to="/signin" className="NavLink">Log out</NavLink>
+            <NavLink  className="NavLink" onClick={handleRemove}>Log out</NavLink>
             <NavLink to="/cartitem"className="NavLink" ><i class="fa-solid fa-cart-shopping"></i> <span className="numbercart">{size}</span></NavLink>
           </Nav>
           <Form className="d-flex" onSubmit={handleClick}>

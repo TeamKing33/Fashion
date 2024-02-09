@@ -13,6 +13,7 @@ import DataHome from './DataHome';
 import imgmen from './image/imageHome/1.png'
 import imgwomen from './image/imageHome/2.png'
 import imgchild from './image/imageHome/3.png'
+import Cookies from 'js-cookie';
 import "./css/home.css"
 import styless from "./css/Home.module.css"
 import axios from 'axios';
@@ -35,6 +36,15 @@ function Home() {
   //   })
   //   .catch(err => console.log(err))
   // },[])
+
+  useEffect(() => {
+  
+    const login = Cookies.get('login');
+    if (login !== 'true') {
+      
+      navigate('/signin');
+    }
+  }, [navigate]);
   return (
     <div>
     <div className={styless.bodyy}>

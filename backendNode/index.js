@@ -1,20 +1,11 @@
 const express = require('express');
-
 const mysql = require('mysql');
 const cors = require('cors');
-
-const session = require('express-session');
-
 const cookieParser = require('cookie-parser');
 const bodyParser= require('body-parser');
-
-
-
+const bcrypt = require('bcrypt');
 const app = express();
-app.use(cors({
-    origin: 'https://fashion-six-swart.vercel.app',
-    credentials: true,
-  }));
+app.use(cors());
 
 app.options('*', cors());
 
@@ -24,15 +15,7 @@ const port = 8083 || process.env.PORT;
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.json());
-app.use(session({
-    secret: 'secret',
-    resave: false, 
-    saveUninitialized: false,
-    cookie:{
-        secret:false,
-        maxAge:1000 * 60 * 60 * 24
-    }
-}))
+
 const db = mysql.createPool({
     host:process.env.DB_HOST,
     user:process.env.DB_USERNAME,
@@ -42,6 +25,9 @@ const db = mysql.createPool({
     connectionLimit:10,
     queueLimit:0
 })
+
+
+  db.connect();
 
 app.get('/',(re,res)=> {
     return res.json("From BAckend Side");
@@ -87,31 +73,38 @@ app.post('/signup', (req, res) => {
     const checkIfExistsQuery = "SELECT * FROM signup WHERE email = ?";
     
     db.query(checkIfExistsQuery, [req.body.email], (err, result) => {
-        if (err) {
-            return res.json({ Message: "Error in Node" });
-        }
-
-        if (result.length > 0) {
-            return res.json({ Message: "user already exists" });
-        } else {
-            const sql = "INSERT INTO signup (`username`,`email`,`password`,`number`,`country`) VALUES (?)";
-            const values = [
-                req.body.name,
-                req.body.email,
-                req.body.password,
-                req.body.number,
-                req.body.country,
-            ];
-
-            db.query(sql, [values], (err, result) => {
-                if (err) {
-                    return res.json({ Message: "Error in Node" });
-                }
-                return res.json(result);
-            });
-        }
+      if (err) {
+        return res.json({ Message: "Error in Node" });
+      }
+  
+      if (result.length > 0) {
+        return res.json({ Message: "User already exists" });
+      } else {
+        const password = req.body.password;
+        bcrypt.hash(password.toString(), 10, (hashErr, hash) => {
+          if (hashErr) {
+            return res.json({ Message: "Error hashing password" });
+          }
+  
+          const sql = "INSERT INTO signup (`username`,`email`,`password`,`number`,`country`) VALUES (?, ?, ?, ? , ?)";
+          const values = [
+            req.body.username,
+            req.body.email,
+            hash,
+            req.body.number,
+            req.body.country,
+          ];
+  
+          db.query(sql, values, (insertErr, result) => {
+            if (insertErr) {
+              return res.json({ Message: "Error in Node" });
+            }
+            return res.json(result);
+          });
+        });
+      }
     });
-});
+  });
 
 
 // send products 
@@ -223,19 +216,31 @@ app.get('/addtocart',(req,res)=>{
 
 
 // login
-
-app.post("/login", (req, res) => {
-    const sql = "SELECT * FROM signup WHERE `email` = ? and password = ?";
-    db.query(sql, [req.body.email, req.body.password], (err, result) => {
-        if (err) return res.json({ Message: "error inside server" });
-        if (sql) {
-            return res.json({ Message: "Logged is successfully" });
-            
-        } else {
-            return res.json("wrong password or email");
-        }
+app.post("/loginUser", (req, res) => {
+    const email =req.body.email;
+    const password = req.body.password;
+  
+    const sql = "SELECT * FROM signup WHERE `email` = ?";
+    db.query(sql, [email], (err, result) => {
+      if (err) return res.json({ Message: "Error inside server" });
+  
+      if (result.length > 0) {
+        bcrypt.compare(password, result[0].password, (err, response) => {
+          if (err) {
+            return res.json({ Message: "Error comparing passwords" });
+          }
+          if (response) {
+            return res.json({ Message: "Logged in successfully" });
+          } else {
+            return res.json({ Message: "Wrong password" });
+          }
+        });
+      } else {
+        return res.json({ Message: "User not found" });
+      }
     });
-});
+  });
+  
 
 app.listen(port,()=>{
     console.log("Server is running on port 8083");
