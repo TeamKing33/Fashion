@@ -142,32 +142,32 @@ app.post("/product",(req,res)=>{
 
 // add to cart post
 
-app.post("/addtocart", (req, res) => {
-    const sql = "INSERT INTO productscart(`idProduct`,`img`,`title`,`number`,`discount`,`price`) VALUES (?)";
-    const values = [
-        req.body.id,
-        req.body.img,
-        req.body.title,
-        req.body.number,
-        req.body.discount,
-        req.body.price,
-    ];
-    const checkIfExistsQuery = "SELECT * FROM productscart WHERE idProduct = ?";
-    db.query(checkIfExistsQuery, [req.body.id], (err, result) => {
-        if (err) {
-            return res.json({ Message: "Error in Node" });
-        }
-        if (result.length > 0) {
-            return res.json({ Message: "Item is already added to cart" });
-        }
-        db.query(sql, [values], (err, result) => {
-            if (err) {
-                return res.json({ Message: "Error in Node" });
-            }
-            return res.json(result);
-        });
-    });
-});
+// app.post("/addtocart", (req, res) => {
+//     const sql = "INSERT INTO productscart(`idProduct`,`img`,`title`,`number`,`discount`,`price`) VALUES (?)";
+//     const values = [
+//         req.body.id,
+//         req.body.img,
+//         req.body.title,
+//         req.body.number,
+//         req.body.discount,
+//         req.body.price,
+//     ];
+//     const checkIfExistsQuery = "SELECT * FROM productscart WHERE idProduct = ?";
+//     db.query(checkIfExistsQuery, [req.body.id], (err, result) => {
+//         if (err) {
+//             return res.json({ Message: "Error in Node" });
+//         }
+//         if (result.length > 0) {
+//             return res.json({ Message: "Item is already added to cart" });
+//         }
+//         db.query(sql, [values], (err, result) => {
+//             if (err) {
+//                 return res.json({ Message: "Error in Node" });
+//             }
+//             return res.json(result);
+//         });
+//     });
+// });
 
 
 // remove id 
