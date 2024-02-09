@@ -69,7 +69,7 @@ const App = ()=>{
   const [data , setData] =useState([]);
 
   useEffect(()=>{
-    fetch('https://addtocart-xi.vercel.app/addtocart')
+    fetch('https://fashion-server-mu.vercel.app/addtocart')
     .then(res => res.json())
     .then(data => setData(data))
     .catch(err => console.log(err));
@@ -77,7 +77,7 @@ const App = ()=>{
 
   
   const handleClick = () => {
-    axios.post('https://addtocart-xi.vercel.app/addtocart')
+    axios.post('https://fashion-server-mu.vercel.app/addtocart')
     let isPresnt =false;
     data.forEach((product)=>{
       if(data.id == product.id)

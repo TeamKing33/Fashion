@@ -57,28 +57,6 @@ app.post("/addtocart", (req, res) => {
     });
 });
 
-// select addtocart
-app.get('/addtocart',(req,res)=>{
-    const sql = "SELECT *  FROM productscart";
-    db.query(sql,(err,data)=>{
-        if(err) return res.json(err);
-        return res.json(data);
-    })
-})
-
-
-// remove id 
-
-app.delete("/remove/:id",(req,res)=>{
-    const id  = req.params.id;
-    const sql = "DELETE FROM productscart WHERE id = ?"
-   
-    db.query(sql,[id],(err,data)=>{
-        if(err) return res.json({Message :"error in Node"})
-        return res.json(data );
-    })
-})
-
 
 app.listen(port,()=>{
     console.log("Server is running on port 8083");
