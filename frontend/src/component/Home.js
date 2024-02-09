@@ -14,6 +14,8 @@ import imgmen from './image/imageHome/1.png'
 import imgwomen from './image/imageHome/2.png'
 import imgchild from './image/imageHome/3.png'
 import Cookies from 'js-cookie';
+import Aos from 'aos'
+import  "aos/dist/aos.css" 
 import "./css/home.css"
 import styless from "./css/Home.module.css"
 import axios from 'axios';
@@ -23,7 +25,9 @@ import axios from 'axios';
 function Home() {
   const navigate = useNavigate();
   const [name ,setName] = useState('');
-
+  useEffect(()=>{
+    Aos.init({duration:2000})
+  },[])
   // axios.defaults.withCredentials =true;
   // useEffect(()=>{
   //   axios.get("https://fashion-server-mu.vercel.app/home")
@@ -53,7 +57,7 @@ function Home() {
       <div className={styless.bodybac}>
       
       {/* <img src={Imagehome} alt="" className='Imagehome'/> */}
-      <div className="homei">
+      <div className="homei" data-aos="fade-right">
        
        
       <Discount/>
@@ -64,7 +68,7 @@ function Home() {
     <div className={styless.imageName}>
       {/* men */}
       <div className={styless.imageHome}>
-        <NavLink className={styless.NavLink} to='/productMen'>
+        <NavLink className={styless.NavLink} to='/productMen' data-aos="fade-left">
         <img src={imgmen}/>
         <h3 className={styless.textimg}>Men</h3>
         </NavLink>
@@ -72,20 +76,20 @@ function Home() {
       
       {/* women */}
       <div className={styless.imageHome}>
-      <NavLink className={styless.NavLink} to='/productWomen'>
+      <NavLink className={styless.NavLink} to='/productWomen' data-aos="fade-left">
         <img src={imgwomen}/>
         <h3 className={styless.textimg}>Women</h3>
         </NavLink>
       </div>
       {/* kids & baby */}
       <div className={styless.imageHome}>
-      <NavLink className={styless.NavLink} to='/productKids'>
+      <NavLink className={styless.NavLink} to='/productKids' data-aos="fade-right">
         <img src={imgchild}/>
         <h3 className={styless.textimg}>Kids</h3>
         </NavLink>
       </div>
     </div>
-    <Row xs={2}  md={2} lg={2} className="cardhome g-2">
+    <Row xs={2}  md={2} lg={2} className="cardhome g-2" data-aos="zoom-in-up">
           {DataHome && DataHome.map((item) => (
  
     <Col key={item.id}>
