@@ -10,7 +10,7 @@ import axios from "axios";
 
 const  Cards =({item,handleClick})=>{
 
-  const [sendData,setsendData ] = useState({
+  const [sendData,setSendData ] = useState({
     id:item.id,
     img: item.img,
     title: item.title,
@@ -23,32 +23,52 @@ const  Cards =({item,handleClick})=>{
 
 const navigate = useNavigate()
 
-  const handleChange =(e)=>{
-    setsendData(prev =>({...prev,[e.target.name]:[e.target.value]}))
-  };
-  const handleSubmit = async(e)=>{
-    e.preventDefault();
+const handleChange = (e) => {
+  setSendData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+};
+  // const handleSubmit = async(e)=>{
+  //   e.preventDefault();
 
-    axios.post('https://fashion-server-mu.vercel.app/addtocart',sendData)
-    .then(res=>
-      {
+  //   axios.post('http://localhost:8083/addtocart',sendData)
+  //   .then(res=>
+  //     {
+  //       console.log(res);
+  //       if (res.data && res.data.Message === "Item is already added to cart") {
+  //         alert("Product already exists in the cart");
+  //     }else{
+  //       // navigate('/home')
+  //     }
+  //     })
+  //   .catch(err => console.log(err))
+
+
+  // }
+
+  const handleAddToCart = () => {
+    handleClick(item); // Trigger the handleClick function to add the item to the cart
+
+    // Uncomment and adjust the following code for Axios request to add the product to the cart
+    /*
+    axios.post('http://localhost:8083/addtocart', sendData)
+      .then((res) => {
         console.log(res);
-        if (res.data && res.data.Message === "Item is already added to cart") {
-          alert("Product already exists in the cart");
-      }else{
-        // navigate('/home')
-      }
+        if (res.data && res.data.Message === 'Item is already added to cart') {
+          alert('Product already exists in the cart');
+        } else {
+          // Use navigate if needed
+          // navigate('/home');
+        }
       })
-    .catch(err => console.log(err))
+      .catch((err) => console.log(err));
+    */
+  };
 
-
-  }
   const {id,title,discountCard,img,discount,price,description,button,number} =item;
 
   return (
     <div className="bodycar">
 
-      <form onSubmit={handleSubmit}>
+      <div >
               <span>{discountCard}</span>
               <img src={img} className="card-img-top imagecard" onChange={handleChange}/>
               <div className="card-body">
@@ -64,7 +84,7 @@ const navigate = useNavigate()
              <div className="btnbuy"></div>
               {button}
           </div>
-              </form>
+              </div>
              
             </div>
     

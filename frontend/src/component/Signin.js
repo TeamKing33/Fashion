@@ -59,6 +59,7 @@ function Signin() {
       setLogin(true);
     }
   }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -67,8 +68,14 @@ function Signin() {
   
       if (responseData && responseData.Message === "Logged in successfully") {
         alert("Data is correct");
-        setLogin(true);
+  
+        // Set login cookie
         Cookies.set('login', true, { expires: 1 / 24 });
+  
+        // Set email cookie
+        Cookies.set('email', formData.email, { expires: 1 / 24 });
+  
+        setLogin(true);
         navigate("/home");
       } else {
         alert("Wrong password or email");

@@ -15,6 +15,7 @@ const port = 8083 || process.env.PORT;
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 const db = mysql.createPool({
     host:process.env.DB_HOST,
@@ -142,32 +143,30 @@ app.post("/product",(req,res)=>{
 
 // add to cart post
 
-app.post("/addtocart", (req, res) => {
-    const sql = "INSERT INTO productscart(`idProduct`,`img`,`title`,`number`,`discount`,`price`) VALUES (?)";
-    const values = [
-        req.body.id,
-        req.body.img,
-        req.body.title,
-        req.body.number,
-        req.body.discount,
-        req.body.price,
-    ];
-    const checkIfExistsQuery = "SELECT * FROM productscart WHERE idProduct = ?";
-    db.query(checkIfExistsQuery, [req.body.id], (err, result) => {
-        if (err) {
-            return res.json({ Message: "Error in Node" });
-        }
-        if (result.length > 0) {
-            return res.json({ Message: "Item is already added to cart" });
-        }
-        db.query(sql, [values], (err, result) => {
-            if (err) {
-                return res.json({ Message: "Error in Node" });
-            }
-            return res.json(result);
-        });
-    });
-});
+app.post('/addtocart', (req, res) => {
+  const userEmail = req.body.email;
+  const sql = 'INSERT INTO productscart (email, img, title, number, discount, price) VALUES (?, ?, ?, ?, ?, ?)';
+
+  const values = req.body.data.map(item => [
+      userEmail,
+      item.img,
+      item.title,
+      item.number,
+      item.discount,
+      item.price,
+  ]);
+
+  db.query(sql, values.flat(), (err, result) => {
+      if (err) {
+          console.error('Error inserting into database:', err);
+          return res.status(500).json({ error: 'Internal Server Error', message: err.message });
+      }
+
+      // Retrieve the last inserted ID and send it as a response
+      const lastInsertedId = result.insertId;
+      return res.status(200).json({ message: 'Data Inserted Successfully', lastInsertedId });
+  });
+  }); 
 
 
 // remove id 

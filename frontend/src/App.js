@@ -26,6 +26,8 @@ import NotFound from './component/NotFound.js'
 import './component/css/Cards.css'
 import './App.css';
 
+// Cookies
+// import { useCookies } from 'react-cookie';
 // lazy
 
 const Home = lazy(()=> import('./component/Home.js'))
@@ -64,39 +66,45 @@ const App = ()=>{
 
   // const [cart, setCart] = useState([]);
 
+  // const [cart , setcart] =useState([]);
+
+
   const [warning , setWarning] = useState(false); 
-
-  const [data , setData] =useState([]);
-
-  useEffect(()=>{
-    fetch('https://fashion-server-mu.vercel.app/addtocart')
-    .then(res => res.json())
-    .then(data => setData(data))
-    .catch(err => console.log(err));
-  })
-
+  const [cart, setCart] = useState([]);
   
-  const handleClick = () => {
-    axios.post('https://fashion-server-mu.vercel.app/addtocart')
-    let isPresnt =false;
-    data.forEach((product)=>{
-      if(data.id == product.id)
-      isPresnt= true;
-    })
-    if(isPresnt){
-      setWarning(true); 
-      setTimeout(()=>{
+
+  const removeFromCart = (productIndex) => {
+    const updatedCart = cart.filter((_, index) => index !== productIndex);
+    setCart(updatedCart);
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
+  };
+
+  const handleClick = (product) => {
+    // عند الإضافة إلى السلة
+    const updatedCart = [...cart, product];
+    const isPresent = cart.some((item) => item.id === product.id);
+
+    if (isPresent) {
+      setWarning(true);
+      setTimeout(() => {
         setWarning(false);
-      },2000);
+      }, 2000);
       return;
     }
-  setData([...data]);
+
+    setCart(updatedCart);
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
   };
+
+  useEffect(() => {
+    const storedCart = localStorage.getItem('cart');
+    setCart(storedCart ? JSON.parse(storedCart) : []);
+  }, []);
 
   // const handleChange = (item,d)=>{
   //   let ind = -1;
-  //   cart.forEach((data,index)=>{
-  //     if(data.id === item.id)
+  //   cart.forEach((cart,index)=>{
+  //     if(cart.id === item.id)
   //     ind = index ;
   //   });
   //   const tempArr = cart;
@@ -122,20 +130,22 @@ const App = ()=>{
         <Route path="/employyee" element={<Employyee/>}/>
          <Route path="*" element={
           <div>
-          <Navbars size={data.length}  />
+          <Navbars size={cart.length}  />
          <NotFound/>
          </div>
          }/>
           
-          <Route path="/cartitem" element={<CartItem data={data} setData={setData}  />} />
-          
+          <Route path="/cartitem" element={<CartItem data={cart} removeFromCart={removeFromCart} setData={setCart} handleClick={handleClick} />} />
+          {
+            warning && alert("Item is already added to cart")
+          }
           {/*  lazy clothes*/}
           
           {/* Men */}
           <Route path="/T-shirt" element={
            <React.Suspense fallback={<Loading/>}>
           <div>
-          <Navbars size={data.length}  />
+          <Navbars size={cart.length}  />
               <Micro/>
           <Tshirt/>
           </div>
@@ -145,7 +155,7 @@ const App = ()=>{
      <Route path="/T-shirt2" element={
            <React.Suspense fallback={<Loading/>}>
           <div>
-          <Navbars size={data.length}  />
+          <Navbars size={cart.length}  />
               <Micro/>
           <Tshirt2/>
           </div>
@@ -156,7 +166,7 @@ const App = ()=>{
           <Route path="/T-shirt3" element={
            <React.Suspense fallback={<Loading/>}>
           <div>
-          <Navbars size={data.length}  />
+          <Navbars size={cart.length}  />
               <Micro/>
           <Tshirt3/>
           </div>
@@ -166,7 +176,7 @@ const App = ()=>{
         <Route path="/T-shirt4" element={
            <React.Suspense fallback={<Loading/>}>
           <div>
-          <Navbars size={data.length}  />
+          <Navbars size={cart.length}  />
               <Micro/>
           <Tshirt4/>
           </div>
@@ -179,7 +189,7 @@ const App = ()=>{
           <React.Suspense fallback={<Loading/>}>
 
           <div>
-             <Navbars size={data.length}  />
+             <Navbars size={cart.length}  />
               <Micro/>
              < WomenCl/> 
              
@@ -193,7 +203,7 @@ const App = ()=>{
           <React.Suspense fallback={<Loading/>}>
 
           <div>
-             <Navbars size={data.length}  />
+             <Navbars size={cart.length}  />
               <Micro/>
              < WomenCl2/> 
              
@@ -208,7 +218,7 @@ const App = ()=>{
           <React.Suspense fallback={<Loading/>}>
 
           <div>
-             <Navbars size={data.length}  />
+             <Navbars size={cart.length}  />
               <Micro/>
              < WomenCl3/> 
            </div>
@@ -224,7 +234,7 @@ const App = ()=>{
           <React.Suspense fallback={<Loading/>}>
 
           <div>
-             <Navbars size={data.length}  />
+             <Navbars size={cart.length}  />
               <Micro/>
              < KidsCl/> 
           </div>
@@ -236,7 +246,7 @@ const App = ()=>{
           <React.Suspense fallback={<Loading/>}>
 
           <div>
-             <Navbars size={data.length}  />
+             <Navbars size={cart.length}  />
               <Micro/>
              < KidsCl2/> 
              
@@ -251,7 +261,7 @@ const App = ()=>{
           <React.Suspense fallback={<Loading/>}>
 
           <div>
-             <Navbars size={data.length}  />
+             <Navbars size={cart.length}  />
               <Micro/>
              < KidsCl3/> 
            </div>
@@ -262,7 +272,7 @@ const App = ()=>{
           <React.Suspense fallback={<Loading/>}>
 
           <div>
-             <Navbars size={data.length}  />
+             <Navbars size={cart.length}  />
               <Micro/>
              < KidsCl4/> 
            </div>
@@ -280,7 +290,7 @@ const App = ()=>{
           <Route path="/home" element={
             <React.Suspense fallback={<Loading/>}>
             <div>
-          <Navbars size={data.length}  />
+          <Navbars size={cart.length}  />
           {/* <Home/> */}
           <Micro/>
           
@@ -296,7 +306,7 @@ const App = ()=>{
         <Route path="/support" element={
           <React.Suspense fallback={<Loading/>}>
         <div>
-         <Navbars size={data.length}  />
+         <Navbars size={cart.length}  />
          <Micro/>
         <Support />
       
@@ -312,7 +322,7 @@ const App = ()=>{
           <React.Suspense fallback={<Loading/>}>
 
           <div>
-             <Navbars size={data.length}  />
+             <Navbars size={cart.length}  />
               <Micro/>
              < AllCard handleClick={handleClick}/> 
              
@@ -330,7 +340,7 @@ const App = ()=>{
           <React.Suspense fallback={<Loading/>}>
 
           <div>
-             <Navbars size={data.length}  />
+             <Navbars size={cart.length}  />
               <Micro/>
              < AllMen handleClick={handleClick}/> 
              
@@ -348,7 +358,7 @@ const App = ()=>{
           <React.Suspense fallback={<Loading/>}>
 
           <div>
-             <Navbars size={data.length}  />
+             <Navbars size={cart.length}  />
               <Micro/>
              < Allwomen handleClick={handleClick}/> 
              
@@ -365,7 +375,7 @@ const App = ()=>{
           <React.Suspense fallback={<Loading/>}>
 
           <div>
-             <Navbars size={data.length}  />
+             <Navbars size={cart.length}  />
               <Micro/>
              < AllKids handleClick={handleClick}/> 
              
