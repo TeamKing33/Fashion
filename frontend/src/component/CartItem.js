@@ -100,6 +100,7 @@ const CartItem = ({ data, setData, removeFromCart, handleClick }) => {
     
             alert("Data Inserted Successfully");
             localStorage.removeItem('cart');
+            location.reload();
         } catch (error) {
             console.error('Error sending data:', error.response || error.message || error);
         }
