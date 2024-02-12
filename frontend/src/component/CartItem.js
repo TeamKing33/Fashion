@@ -104,6 +104,7 @@ const CartItem = ({ data, setData, removeFromCart, handleClick }) => {
             console.error('Error sending data:', error.response || error.message || error);
         }
     };
+    
       
     
     

@@ -145,8 +145,8 @@ app.post("/product",(req,res)=>{
 
 app.post('/addtocart', (req, res) => {
   const userEmail = req.body.email;
-  const sql = 'INSERT INTO productscart (email, img, title, number, discount, price) VALUES (?, ?, ?, ?, ?, ?)';
 
+  // Using parameterized query to prevent SQL injection
   const values = req.body.data.map(item => [
       userEmail,
       item.img,
@@ -156,17 +156,24 @@ app.post('/addtocart', (req, res) => {
       item.price,
   ]);
 
-  db.query(sql, values.flat(), (err, result) => {
+  const sql = 'INSERT INTO productscart (email, img, title, number, discount, price) VALUES ?';
+
+  // Ensure database connection is established
+  if (!db) {
+      return res.status(500).json({ error: 'Internal Server Error', message: 'Database connection not established' });
+  }
+
+  db.query(sql, [values], (err, result) => {
       if (err) {
           console.error('Error inserting into database:', err);
-          return res.status(500).json({ error: 'Internal Server Error', message: err.message });
+          return res.status(500).json({ success: false, error: 'Internal Server Error', message: 'Error inserting into database', details: err.message });
       }
 
       // Retrieve the last inserted ID and send it as a response
       const lastInsertedId = result.insertId;
-      return res.status(200).json({ message: 'Data Inserted Successfully', lastInsertedId });
+      return res.status(200).json({ success: true, message: 'Data Inserted Successfully', lastInsertedId });
   });
-  }); 
+});
 
 
 // remove id 
