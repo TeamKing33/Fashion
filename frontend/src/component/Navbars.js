@@ -2,6 +2,7 @@ import React,{useEffect, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, NavDropdown, Container, Nav, Form, Button } from 'react-bootstrap';
 import {NavLink,useNavigate } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 import Cookies from 'js-cookie';
 import './css/Navbars.css';
 import Img from './image/icon.png'
@@ -12,6 +13,15 @@ const  Navbars = ({size}) => {
   const change = (event) =>{
     setFilter(event.target.value);
   } 
+
+  // useTranslation
+  const { t, i18n } = useTranslation();
+  const changeEn = () =>{
+    i18n.changeLanguage('en')
+}
+const changeFr = () =>{
+    i18n.changeLanguage('ar')
+}
 
   const handleClick = (e) =>{
     e.preventDefault();
@@ -68,23 +78,25 @@ const  Navbars = ({size}) => {
         <Navbar.Toggle aria-controls="navbarScroll " className="Toggle"  />
         <Navbar.Collapse id="navbarScroll ">
           <Nav className="mr-auto  mx-auto my-lg-0 " style={{ maxHeight: '100px'}} navbarScroll>
-            <NavLink to="/home" className="NavLink"  >Home</NavLink>
-            <NavLink to="/product" className="NavLink"  >Product</NavLink>
+            <NavLink to="/home" className="NavLink"  >{t("Home")}</NavLink>
+            <NavLink to="/product" className="NavLink"  >{t("products")}</NavLink>
             <NavLink to="/support" className="NavLink">
-              Support
+            {t("Support")}
             </NavLink>
-            <NavLink  className="NavLink" onClick={handleRemove}>Log out</NavLink>
+            <NavLink  className="NavLink" onClick={handleRemove}>{t("Log out")}</NavLink>
+            <NavLink className="NavLink" onClick={changeFr}>{t("Arabic")}</NavLink>
+            <NavLink className="NavLink" onClick={changeEn}>{t("English")}</NavLink>
             <NavLink to="/cartitem"className="NavLink" ><i class="fa-solid fa-cart-shopping"></i> <span className="numbercart">{size}</span></NavLink>
           </Nav>
           <Form className="d-flex" onSubmit={handleClick}>
             <Form.Control
               type="search"
-              placeholder="Search"
+              placeholder={t("Search")}
               className="me-2 search"
               aria-label="Search"
               onChange={change}
             />
-            <Button variant="outline-light" type='submit'>Search</Button>
+            <Button variant="outline-light" type='submit'>{t("Search")}</Button>
           </Form>
         </Navbar.Collapse>
       </Container>
