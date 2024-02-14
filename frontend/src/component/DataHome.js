@@ -1,30 +1,36 @@
+import { useTranslation } from 'react-i18next';
 
+const translateData = (t) => {
+  // const { t, i18n } = useTranslation();
 
-const DataHome=[
+  return [
     {
-        cardHover:"Fashion wave Classic!",
-        cardfigure:"Classic",
-        cardocupation:"We offer the timeless T-shirt classic for sale, embodying comfort and style. Elevate your wardrobe with our premium selection.",
-
+      cardHover: t('Fashion wave Classic!'),
+      cardfigure: t('Classic'),
+      cardocupation:t("WE OFFER THE TIMELESS T-SHIRT"),
     },
     {
-        cardHover:"Fashion wave Polo!",
-        cardfigure:"Polo",
-        cardocupation:"A Polo Neck T-shirt,  features a distinctive folded collar and a short buttoned placket. Originally associated with sports, it has evolved into a versatile and timeless garment, blending casual comfort with a polished aesthetic.",
-        
+      cardHover: t('Fashion wave Polo!'),
+      cardfigure: t('Polo'),
+      cardocupation: t(
+        'A POLO NECK T-SHIRT'
+      ),
     },
     {
-        cardHover:"Fashion wave  Classic V Neck!",
-        cardfigure:"Classic V Neck",
-        cardocupation:"The Classic V Neck T-shirt is a wardrobe essential, offering a timeless blend of comfort and style. With its simple yet elegant design and versatile appeal, it effortlessly elevates both casual and more polished looks.",
-        
+      cardHover: t('Fashion wave Classic V Neck'),
+      cardfigure: t('Classic V Neck'),
+      cardocupation: t(
+        'THE CLASSIC V'
+      ),
     },
     {
-        cardHover:"Fashion wave Crew neck!",
-        cardfigure:"Crew neck",
-        cardocupation:"The crew neck T-shirt is a timeless and versatile wardrobe essential, known for its classic rounded neckline and comfortable fit. Its simplicity makes it suitable for various occasions, and it can be easily styled for both casual and more polished looks.",
-        
-    }
-]
+      cardHover: t('Fashion wave Crew neck!'),
+      cardfigure: t('Crew neck'),
+      cardocupation: t(
+        "THE CREW NECK"
+      ),
+    },
+  ];
+};
 
-export default DataHome;
+export default translateData;
