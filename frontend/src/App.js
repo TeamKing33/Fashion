@@ -1,7 +1,7 @@
 import React,{useState,useEffect, lazy, Suspense} from 'react';
 
 import { Routes,Route,BrowserRouter} from "react-router-dom";
-import axios from 'axios';
+
 
 import Cards from './component/Cards';
 // import Home from './component/Home';
@@ -11,10 +11,7 @@ import Cards from './component/Cards';
 import Navbars from './component/Navbars';
 import Footer from './component/footer';
 
-// import Tshirt from './component/Tshitr/Tshirt';
-// import Tshirt2 from './component/Tshitr/Tshirt2';
-// import Tshirt3 from './component/Tshitr/Tshirt3';
-// import Tshirt4 from './component/Tshitr/Tshirt4';
+
 import Signup from './component/Signup';
 import Signin from './component/Signin'
 import SigninEmp from './component/employee/SigninEmp';
@@ -80,7 +77,7 @@ const App = ()=>{
   };
 
   const handleClick = (product) => {
-    // عند الإضافة إلى السلة
+   
     const updatedCart = [...cart, product];
     const isPresent = cart.some((item) => item.id === product.id);
 
@@ -135,7 +132,13 @@ const App = ()=>{
          </div>
          }/>
           
-          <Route path="/cartitem" element={<CartItem data={cart} removeFromCart={removeFromCart} setData={setCart} handleClick={handleClick} />} />
+          <Route path="/cartitem" element={
+            <div>
+             {/* <Navbars size={cart.length}  /> */}
+
+          <CartItem data={cart} removeFromCart={removeFromCart} setData={setCart} handleClick={handleClick} />
+          </div>
+          } />
           {
             warning && alert("Item is already added to cart")
           }

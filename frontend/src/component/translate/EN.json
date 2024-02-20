@@ -9,7 +9,7 @@
 
     "TAKE 10% OFF":"TAKE 10% OFF",
     "Welcome Fashion":"Welcome! Enjoy 10% Off Your First Order at Fashion Wave.",
-    "Get it!": "احصل عليه!",
+    "Get it!": "Get it!",
     "Men": "Men",
   "Women": "Women",
   "Kids": "Kids",
@@ -24,5 +24,17 @@
   "THE CLASSIC V":"THE CLASSIC V NECK T-SHIRT IS A WARDROBE ESSENTIAL OFFERING A TIMELESS BLEND OF COMFORT AND STYLE. WITH ITS SIMPLE YET ELEGANT DESIGN AND VERSATILE APPEAL, IT EFFORTLESSLY ELEVATES BOTH CASUAL AND MORE POLISHED LOOKS",
   "THE CREW NECK":"THE CREW NECK T-SHIRT IS A TIMELESS AND VERSATILE WARDROBE ESSENTIAL, KNOWN FOR ITS CLASSIC ROUNDED NECKLINE AND COMFORTABLE FIT. ITS SIMPLICITY MAKES IT SUITABLE FOR VARIOUS OCCASIONS, AND IT CAN BE EASILY STYLED FOR BOTH CASUAL AND MORE POLISHED LOOKS",
   "Fashion wave Crew neck!":"Fashion wave Crew neck!",
-  "Crew neck":"Crew neck"
+  "Crew neck":"Crew neck",
+
+
+
+  "What is Fashion wave ?":"What is Fashion wave ?",
+  "Fashion Wave is a specialized":"Fashion Wave is a specialized brand in selling T-shirts, known for offering a diverse range of contemporary clothing with a unique character and high quality. The brand focuses on innovative designs and 2 staying abreast of the latest fashion trends to meet the needs of various tastes",
+  "How can I contact?":"How can I contact?",
+  "contact":"You can contact through Instagram, Facebook, WhatsApp.",
+  "Are there offers?":"Are there offers?",
+  "discount upon registration":"Yes, indeed. There are many offers and a discount upon registration.",
+  "How can I make the payment?":"How can I make the payment?",
+  "You can make the payment":"You can make the payment using a credit card or upon receipt."
+
 }
