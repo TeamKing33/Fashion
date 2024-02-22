@@ -46,6 +46,7 @@ const Tshirt = lazy(()=> import('./component/Tshitr/Tshirt'))
 const Tshirt2 = lazy(()=> import('./component/Tshitr/Tshirt2'))
 const Tshirt3 = lazy(()=> import('./component/Tshitr/Tshirt3'))
 const Tshirt4 = lazy(()=> import('./component/Tshitr/Tshirt4'))
+const Dwon = lazy(()=> import('./component/download.js'))
 
 
 // lazy clothes kids
@@ -301,6 +302,20 @@ const App = ()=>{
           
           
           <Footer/>
+          </div>
+          </React.Suspense>
+        }/>
+          <Route path="/download" element={
+            <React.Suspense fallback={<Loading/>}>
+            <div>
+          <Navbars size={cart.length}  />
+          {/* <Home/> */}
+          <Micro/>
+          
+           < Dwon />
+          
+          
+          {/* <Footer/> */}
           </div>
           </React.Suspense>
         }/>
