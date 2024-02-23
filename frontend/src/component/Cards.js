@@ -1,6 +1,6 @@
-import React,{useState} from "react";
-// import { NavLink} from "react-router-dom";
-import { NavLink, useNavigate } from 'react-router-dom'
+import React,{useState,useEffect} from "react";
+import { useNavigate } from 'react-router-dom'
+import Cookies from 'js-cookie';
 // import data from "./Data";
 // import { Button} from "react-bootstrap";
 // import Navbars from './Navbars'
@@ -24,6 +24,15 @@ const  Cards =({item,handleClick})=>{
   
 
 const navigate = useNavigate()
+
+useEffect(() => {
+  
+  const login = Cookies.get('login');
+  if (login !== 'true') {
+    
+    navigate('/signin');
+  }
+}, [navigate]);
 
 const handleChange = (e) => {
   setSendData((prev) => ({ ...prev, [e.target.name]: e.target.value }));

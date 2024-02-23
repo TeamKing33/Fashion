@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React,{useEffect} from "react";
+import { useNavigate } from 'react-router-dom'
+import Cookies from 'js-cookie';
 import data from './Data';
 import Cards from './Cards';
 import "./css/AllCards.css";
@@ -7,6 +9,17 @@ import CartItem from './CartItem';
 import { useTranslation } from 'react-i18next';
 
 const AllCard = ({handleClick}) => {
+  
+const navigate = useNavigate()
+
+useEffect(() => {
+  
+  const login = Cookies.get('login');
+  if (login !== 'true') {
+    
+    navigate('/signin');
+  }
+}, [navigate]);
 
   const { t, i18n } = useTranslation();
   const dataCard = data(t);

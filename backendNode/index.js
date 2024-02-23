@@ -33,20 +33,32 @@ app.get('/',(re,res)=> {
 });
 
 // login employee
+app.post("/loginemp", (req, res) => {
+  const email =req.body.email;
+  const password = req.body.password;
 
-app.post("/loginemp",(req,res)=>{
-    const sql = "SELECT * FROM employees WHERE `username` = ? and password = ?"
-    db.query(sql,[req.body.name,req.body.password],(err,result)=>{
-        if(err) return res.json({Message:"error inside server"})
-        if(result.length > 0){
-            req.session.name = result[0].name;
-            console.log(req.session.name);
-            return res.json({Login:true});
-        }else{
-            return res.json({Login:false})
+  const sql = "SELECT * FROM employees WHERE `username` = ? and password = ?";
+  db.query(sql, [email], (err, result) => {
+    if (err) return res.json({ Message: "Error inside server" });
+
+    if (result.length > 0) {
+      bcrypt.compare(password, result[0].password, (err, response) => {
+        if (err) {
+          return res.json({ Message: "Error comparing passwords" });
         }
-    })
-})
+        if (response) {
+          return res.json({ Message: "Logged in successfully" });
+        } else {
+          return res.json({ Message: "Wrong password" });
+        }
+      });
+    } else {
+      return res.json({ Message: "User not found" });
+    }
+  });
+});
+
+
 
 
 // employee
@@ -180,7 +192,7 @@ app.post('/addtocart', (req, res) => {
 
 app.delete("/remove/:id",(req,res)=>{
     const id  = req.params.id;
-    const sql = "DELETE FROM productscart WHERE id = ?"
+    const sql = "DELETE FROM clothes WHERE id = ?"
    
     db.query(sql,[id],(err,data)=>{
         if(err) return res.json({Message :"error in Node"})

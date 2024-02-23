@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState ,useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import back from "./back.mp4"
 import PersonIcon from '@mui/icons-material/Person';
 import LockIcon from '@mui/icons-material/Lock';
+import Cookies from 'js-cookie';
 import stylesemp from "./cssemp/signinemp.module.css"
 function SigninEmp() {
   const [fordata , setData] = useState({
@@ -11,30 +12,47 @@ function SigninEmp() {
     password:"",
   })
   const navigate = useNavigate();
+  
+
+  const [login, setLogin] = useState(false);
+
+
+
+  useEffect(() => {
+    const loggedIn = Cookies.get('loginemp');
+    if (loggedIn === 'true') {
+      setLogin(true);
+    }
+  }, []);
   const handleChange = (e) => {
     setData({
       ...fordata,
       [e.target.name]: e.target.value,
     });
   };
-  axios.defaults.withCredentials =true;
-
-  const handleSubmit = async (e)=>{
+  
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    axios.post('https://fashion-server-mu.vercel.app/loginemp',fordata)
-    .then(res=>{
-      if(res.data.Login){
-        alert("Data is correct")
-        navigate("/employyee")
-      }else{
-        alert("Email or Password is incorrect");
+    try {
+      const response = await axios.post('https://fashion-server-mu.vercel.app/loginemp', fordata);
+      const responseData = response.data;
+  
+      if (responseData && responseData.Message === "Logged in successfully") {
+        alert("Data is correct");
+        Cookies.set('loginemp', true, { expires: 7 * 24 });
+        setLogin(true);
+        navigate("/employyee");
+      } else {
+        alert("Wrong password or email");
       }
-      console.log(res);
-    })
-    .catch(err => console.log(err))
-    
+      console.log(response);
+    } catch (error) {
+      console.error('Error during login:', error);
+      alert('An error occurred during login');
+    }
   };
+  
+
   
   return (
     // <div className=""></div>

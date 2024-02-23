@@ -1,4 +1,5 @@
 import React,{useEffect, useState}from 'react'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import Cards from './Cards';
 
@@ -6,6 +7,19 @@ import stylesitem from "./css/Cartitem.css"
 import Cookies from 'js-cookie';
 
 const CartItem = ({ data, setData, removeFromCart, handleClick }) => {
+
+    
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+  
+    const login = Cookies.get('login');
+    if (login !== 'true') {
+      
+      navigate('/signin');
+    }
+  }, [navigate]);
+  
     const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
 
     useEffect(() => {

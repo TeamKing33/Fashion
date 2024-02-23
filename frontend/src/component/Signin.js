@@ -14,41 +14,6 @@ function Signin() {
     });
     const navigate = useNavigate();
 
-  // const handleChange =(e)=>{
-  //   setData({
-  //     ...formData,
-  //     [e.target.name]:e.target.value,
-  //   });
-  // };
-  // axios.defaults.withCredentials =true;
-  
-  // useEffect(()=>{
-  //   axios.get("https://fashion-server-mu.vercel.app/home")
-  //   .then((res)=>{
-  //     if(res.data.valid){
-  //       navigate("/home");
-  //     }else{
-  //       navigate("/Signin")
-  //     }
-  //   })
-  //   .catch(err => console.log(err))
-  // },[])
-  // const handleSubmit = async (e)=>{
-  //   e.preventDefault();
-
-  //   axios.post('https://fashion-server-mu.vercel.app/login',formData)
-  //   .then(res=>{
-  //     if(res.data && res.data.Message === "Logged is successfully"){
-  //       alert("Data is correct")
-  //     navigate("/home")
-  //     }else{
-  //       alert("wrong password or email");
-  //     }
-  //     console.log(res);
-  //   })
-  //   .catch(err => console.log(err))
-    
-  // };
 
 
 
@@ -70,10 +35,10 @@ function Signin() {
         alert("Data is correct");
   
         // Set login cookie
-        Cookies.set('login', true, { expires: 1 / 24 });
+        Cookies.set('login', true, { expires: 7 * 24 });
   
         // Set email cookie
-        Cookies.set('email', formData.email, { expires: 1 / 24 });
+        Cookies.set('email', formData.email, { expires: 7 * 24 });
   
         setLogin(true);
         navigate("/home");

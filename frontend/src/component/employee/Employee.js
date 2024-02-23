@@ -1,4 +1,7 @@
 import React,{useEffect, useState} from 'react'
+import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import styleess from './cssemp/employee.module.css'
 function Employee() {
   const [data , setData] =useState([]);
@@ -8,6 +11,29 @@ function Employee() {
     .then(data => setData(data))
     .catch(err => console.log(err));
   })
+
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+  
+    const login = Cookies.get('loginemp');
+    if (login !== 'true') {
+      
+      navigate('/signinEmp');
+    }
+  }, [navigate]);
+
+
+  const handleRemove = async (id) => {
+    try {
+      await axios.delete(`https://fashion-server-mu.vercel.app/remove/${id}`);
+      window.location.reload();
+    } catch (err) {
+      console.error("Error deleting record:", err);
+    }
+  };
+  
  
   return (
     <div className={styleess.bodyenplo}>
@@ -24,6 +50,7 @@ function Employee() {
             <th>quantity</th>
             <th>size</th>
             <th>number</th>
+            <th>Delete</th>
           </tr>
         </thead>
         <tbody>
@@ -36,6 +63,7 @@ function Employee() {
               <td>{d.quantity}</td>
               <td>{d.size}</td>
               <td>{d.number}</td>
+              <button onClick={() => handleRemove(d.id)}>Delete</button>
             </tr>
           ))}
      

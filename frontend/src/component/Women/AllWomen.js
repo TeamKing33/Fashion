@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React,{useState,useEffect} from "react";
+import { useNavigate } from 'react-router-dom'
+import Cookies from 'js-cookie';
 import data from './DataWomen';
 import Women from './Women'
 import { useTranslation } from 'react-i18next';
@@ -11,6 +13,16 @@ const AllWomen = ({handleClick}) => {
   const { t, i18n } = useTranslation();
   const dataCardWomen = data(t);
 
+  const navigate = useNavigate()
+
+useEffect(() => {
+  
+  const login = Cookies.get('login');
+  if (login !== 'true') {
+    
+    navigate('/signin');
+  }
+}, [navigate]);
 
   return (
     <div className="bodycar">

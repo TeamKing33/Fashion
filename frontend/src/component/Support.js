@@ -1,4 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useNavigate ,NavLink} from 'react-router-dom'
+import Cookies from 'js-cookie';
+
 import Accordion from 'react-bootstrap/Accordion';
 // import Navbars from './Navbars';
 // import Footer from './footer';
@@ -6,6 +9,16 @@ import { useTranslation } from 'react-i18next';
 import stylessu from"./css/support.module.css"
 function Support() {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+  
+    const login = Cookies.get('login');
+    if (login !== 'true') {
+      
+      navigate('/signin');
+    }
+  }, [navigate]);
   return (
     <div className={stylessu.bodyback}>
         {/* <Navbars/> */}
