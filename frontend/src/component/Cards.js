@@ -7,9 +7,11 @@ import { NavLink, useNavigate } from 'react-router-dom'
 // import Footer from './footer'
 import "./css/Cards.css"
 import axios from "axios";
+import { useTranslation } from 'react-i18next';
 
 const  Cards =({item,handleClick})=>{
-
+  const { t, i18n } = useTranslation();
+  
   const [sendData,setSendData ] = useState({
     id:item.id,
     img: item.img,
@@ -74,13 +76,13 @@ const handleChange = (e) => {
               <div className="card-body">
                 <h5 className="card-title title" onChange={handleChange}>{title}</h5>
                 <div className="flex">
-                <p className="card-textt" onChange={handleChange}>EGP{discount}</p>
-                <p className="card-textt colorsdis" onChange={handleChange}><s>{price}</s></p>
+                <p className="card-textt" onChange={handleChange}>{t("EGP")}{discount}</p>
+                <p className="card-textt colorsdis" onChange={handleChange}><s>{t("EGP")}{price}</s></p>
                 </div>
                 <span className="card-text description">{description}</span>
               </div>
               <div className="btnaddtocart">
-              <button onClick={()=>handleClick(item)} className="CartBtn">Add to Cart</button>
+              <button onClick={()=>handleClick(item)} className="CartBtn">{t("Add to Cart")}</button>
              <div className="btnbuy"></div>
               {button}
           </div>

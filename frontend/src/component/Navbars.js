@@ -80,7 +80,7 @@ const changeFr = () =>{
           <Nav className="mr-auto  mx-auto my-lg-0 " style={{ maxHeight: '100px'}} navbarScroll>
             <NavLink to="/home" className="NavLink"  >{t("Home")}</NavLink>
             <NavLink to="/product" className="NavLink"  >{t("products")}</NavLink>
-            <NavLink to="/download" className="NavLink"  >{t("download")}</NavLink>
+            <NavLink to="/download" className="NavLink"  >{t("Download App")}</NavLink>
             <NavLink to="/support" className="NavLink">
             {t("Support")}
             </NavLink>

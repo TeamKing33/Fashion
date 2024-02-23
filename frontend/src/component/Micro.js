@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import stylemic from './css/micro.module.css';
 
 function HelloTest() {
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const [recognition, setRecognition] = useState(null);
   const [transcript, setTranscript] = useState("");
@@ -11,14 +13,18 @@ function HelloTest() {
   useEffect(() => {
     if (!recognition) {
       const newRecognition = new window.webkitSpeechRecognition();
-
-      newRecognition.lang = "en-US" ;
       newRecognition.interimResults = false;
       newRecognition.maxAlternatives = 1;
 
       setRecognition(newRecognition);
     }
   }, [recognition]);
+
+  useEffect(() => {
+    if (recognition) {
+      recognition.lang = i18n.language || "en-US";
+    }
+  }, [i18n.language, recognition]);
 
   const list = [
     '/T-shirt',
@@ -28,64 +34,73 @@ function HelloTest() {
   ];
 
   const handleStart = () => {
-    if (!recognition.isRecording) {
-      recognition.start();
-      setIsRecognizing(true);
-    }
+    const greetingUtterance = new SpeechSynthesisUtterance(t("hello sir"));
+    const helpUtterance = new SpeechSynthesisUtterance(t("how can I help you"));
+    greetingUtterance.lang = i18n.language || "en-US";
+    helpUtterance.lang = i18n.language || "en-US";
+    greetingUtterance.onend = () => {
+      helpUtterance.onend = () => {
+        if (!recognition.isRecording) {
+          recognition.start();
+          setIsRecognizing(true);
+        }
+      };
+  
+      window.speechSynthesis.speak(helpUtterance);
+    };
+  
+    window.speechSynthesis.speak(greetingUtterance);
   };
 
   const handleResult = (event) => {
+    
     const newTranscript = event.results[0][0].transcript.toLowerCase();
     setTranscript(newTranscript);
 
-    if (newTranscript.includes("hello") || newTranscript.includes("welcome")) {
-      speak("hello sir");
-      speak("how can I help you");
-
-     
-
-    } else if (newTranscript.includes("open product")||newTranscript.includes("product")) {
-      speak("ok sir");
+    if (newTranscript.includes(t("hello")) || newTranscript.includes(t("welcome"))) {
+      speak(t("hello sir"));
+      speak(t("how can I help you"));
+    } else if (newTranscript.includes(t("open product")) || newTranscript.includes("product") || newTranscript.includes("the product")) {
+      speak(t("ok sir"));
       setIsRecognizing(false);
       navigate("/product");
-    }else if (newTranscript.includes("open support")||newTranscript.includes("support")) {
-      speak("ok sir");
+    } else if (newTranscript.includes(t("open support")) || newTranscript.includes("support")) {
+      speak(t("ok sir"));
       setIsRecognizing(false);
       navigate("/support");
-    }else if (newTranscript.includes("open home")||newTranscript.includes("home")) {
-      speak("ok sir");
+    } else if (newTranscript.includes(t("home")) || newTranscript.includes("open home")) {
+      speak(t("ok sir"));
       setIsRecognizing(false);
       navigate("/home");
-    }else if (newTranscript.includes("open logout")||newTranscript.includes("log out")) {
+    } else if (newTranscript.includes("open logout") || newTranscript.includes("log out")) {
       speak("ok sir");
       setIsRecognizing(false);
       navigate("/signin");
-    }
-    else if (newTranscript.includes("open women")||newTranscript.includes("women") ||newTranscript.includes("women clothes")||newTranscript.includes("product women")) {
-      speak("ok sir");
+    } else if (newTranscript.includes(t("open women")) || newTranscript.includes("women") || newTranscript.includes("women clothes") || newTranscript.includes("product women")) {
+      speak(t("ok sir"));
       setIsRecognizing(false);
       navigate("/productWomen");
-    }
-     else if (newTranscript.includes("open man")||newTranscript.includes("man")||newTranscript.includes("man clothes")||newTranscript.includes("product man")) {
-      speak("ok sir");
+    } else if (newTranscript.includes(t("open man")) || newTranscript.includes("man") || newTranscript.includes("man clothes") || newTranscript.includes("product man")) {
+      speak(t("ok sir"));
       setIsRecognizing(false);
       navigate("/productMen");
-    }
-    else if (newTranscript.includes("open kids")||newTranscript.includes("kids")||newTranscript.includes("kids clothes")||newTranscript.includes("product kids")) {
-      speak("ok sir");
+    } else if (newTranscript.includes(t("open kids")) || newTranscript.includes("kids") || newTranscript.includes("kids clothes") || newTranscript.includes("product kids")) {
+      speak(t("ok sir"));
       setIsRecognizing(false);
       navigate("/productKids");
-    }
-    else if (newTranscript.includes("wave man")) {
+    } else if (newTranscript.includes(t("wave man"))) {
+    } else if (newTranscript.includes(t("download app")) || newTranscript.includes(t("download application"))){
+      speak(t("ok sir"));
+      setIsRecognizing(false);
+      navigate("/download");
+    } else if (newTranscript.includes(t("wave man"))) {
       speak("ok sir");
       setIsRecognizing(false);
       const randomIndex = Math.floor(Math.random() * list.length);
       const randomProduct = list[randomIndex];
-      
       navigate(randomProduct);
-    }
-     else {
-      speak("sorry, I don't understand");
+    } else {
+      speak(t("sorry, I don't understand"));
       setTimeout(() => {
         recognition.start();
       }, 3000);
@@ -107,7 +122,7 @@ function HelloTest() {
   const speak = (text) => {
     if ('speechSynthesis' in window) {
       const newUtterance = new SpeechSynthesisUtterance(text);
-      newUtterance.lang = "en-US";
+      newUtterance.lang = i18n.language || "en-US";
       window.speechSynthesis.speak(newUtterance);
     }
   };
@@ -119,7 +134,7 @@ function HelloTest() {
         className={`${stylemic.btn} ${isRecognizing ? stylemic.recognizing : ""}`}
         disabled={isRecognizing}
       >
-        <i class="fa-solid fa-microphone"></i>
+        <i className="fa-solid fa-microphone"></i>
       </button>
       {transcript && <p>Transcript: {transcript}</p>}
     </div>
@@ -127,5 +142,3 @@ function HelloTest() {
 }
 
 export default HelloTest;
-
-

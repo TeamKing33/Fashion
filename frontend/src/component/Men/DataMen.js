@@ -7,15 +7,15 @@ import { NavLink} from "react-router-dom";
 import Btn from "../Btn";
 import "../css/Cards.css"
 import DicountCard from "../design/DicountCard";
-const data =[
-    // cardData:[
+const data =(t)=>{
+    return[
         {
             id:1,
             img:img1,
-            title:" Crew Neck Short",
-            price:"$30",
+            title:t("Crew Neck Short"),
+            price:30,
             discount:25,
-            description:` Crew Neck Short Sleeve Striped Combed Cotton Men's T-shirt`,
+            description:t("Crew Neck Short Sleeve Striped Combed Cotton Men's T-shirt"),
             button:(
                 <NavLink className="NavLink" to="/T-shirt"><div className="btncard"><Btn/></div></NavLink>
             ),
@@ -25,10 +25,10 @@ const data =[
             id:2,
             img:img2,
             discountCard:<DicountCard/>,
-            title:"Classic Crew Neck Long",
-            price:"$70",
+            title:t("Classic Crew Neck Long"),
+            price:70,
             discount:50,
-            description:`Classic Crew Neck Long Sleeve Men's Sweatshirt`,
+            description:t(`Classic Crew Neck Long Sleeve Men's Sweatshirt`),
             button:(
                 <NavLink to="/T-shirt2" className="NavLink"><div className="btncard"><Btn/></div></NavLink>
             ),
@@ -37,25 +37,22 @@ const data =[
         {
             id:3,
             img:img3,
-            title:"Wave Classic Polo Neck",
-            price:"$45",
+            title:t("Wave Classic Polo Neck"),
+            price:45,
             discount:30,
-            description:`Crew Neck Short Sleeve Combed Cotton Men's T-shirt`,
+            description:t(`Crew Neck Short Sleeve Combed Cotton Men's T-shirt`),
             button:(
                 <NavLink to="/T-shirt3" className="NavLink"><div className="btncard"><Btn/></div></NavLink>
             ),
             number:1,
         }
         ,{
-            id:4,
+            id:5,
             img:img4,
-            title:"Crew Neck Long ",
-            price:"$55",
+            title:t("Crew Neck Long"),
+            price:55,
             discount:40,
-            description:`Crew Neck Long Sleeve Men's Tricot Sweater with Color Block`,
-            // addtocart:(
-               
-            // ),
+            description:t(`Crew Neck Long Sleeve Men's Tricot Sweater with Color Block`),
             button:(
                 <NavLink to="/T-shirt4" className="NavLink"><div className="btncard"><Btn/></div></NavLink>
             ),
@@ -64,7 +61,7 @@ const data =[
         
         
 
-    // ]
+    ]
 
-]
+}
 export default data;

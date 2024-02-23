@@ -34,6 +34,12 @@ function Support() {
         {t("You can make the payment")}
       </Accordion.Body>
     </Accordion.Item>
+    <Accordion.Item eventKey="4" style={{padding:20 , marginBottom:50}} className="accordion">
+      <Accordion.Header>{t("use the voice assistance function:")}</Accordion.Header>
+      <Accordion.Body>
+        {t("voice search: allows you to give commands. you can talk to the microphone using your voice To execute commands. To start using the microphone. press the microphone button.then say any of these commands: Home, products, support, kids, women, men.")}
+      </Accordion.Body>
+    </Accordion.Item>
     
   </Accordion>
   {/* <Footer/> */}
