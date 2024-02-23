@@ -34,29 +34,27 @@ app.get('/',(re,res)=> {
 
 // login employee
 app.post("/loginemp", (req, res) => {
-  const email =req.body.email;
-  const password = req.body.password;
-
   const sql = "SELECT * FROM employees WHERE `username` = ? and password = ?";
-  db.query(sql, [email], (err, result) => {
-    if (err) return res.json({ Message: "Error inside server" });
+  const values = [req.body.name, req.body.password];
+
+  db.query(sql, values, (err, result) => {
+    if (err) {
+      console.error('Error during database query:', err);
+      return res.json({ Message: "Error inside server" });
+    }
 
     if (result.length > 0) {
-      bcrypt.compare(password, result[0].password, (err, response) => {
-        if (err) {
-          return res.json({ Message: "Error comparing passwords" });
-        }
-        if (response) {
-          return res.json({ Message: "Logged in successfully" });
-        } else {
-          return res.json({ Message: "Wrong password" });
-        }
-      });
+      if (result[0].password === req.body.password) {
+        return res.json({ Message: "Logged in successfully" });
+      } else {
+        return res.json({ Message: "Wrong password" });
+      }
     } else {
       return res.json({ Message: "User not found" });
     }
   });
 });
+
 
 
 
