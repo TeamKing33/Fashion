@@ -1,10 +1,11 @@
 import React,{useEffect, useState} from 'react'
 import Cookies from 'js-cookie';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate ,NavLink} from 'react-router-dom';
 import axios from 'axios';
 import styleess from './cssemp/employee.module.css'
 function Employee() {
   const [data , setData] =useState([]);
+  const [dataCart , setDataCart]=useState([])
   useEffect(()=>{
     fetch('https://fashion-server-mu.vercel.app/clothes')
     .then(res => res.json())
@@ -12,17 +13,19 @@ function Employee() {
     .catch(err => console.log(err));
   })
 
+  
+
 
   const navigate = useNavigate();
 
-  useEffect(() => {
+  // useEffect(() => {
   
-    const login = Cookies.get('loginemp');
-    if (login !== 'true') {
+  //   const login = Cookies.get('loginemp');
+  //   if (login !== 'true') {
       
-      navigate('/signinEmp');
-    }
-  }, [navigate]);
+  //     navigate('/signinEmp');
+  //   }
+  // }, [navigate]);
 
 
   const handleRemove = async (id) => {
@@ -39,7 +42,11 @@ function Employee() {
     <div className={styleess.bodyenplo}>
       
       <div className={styleess.tablee}>
-      <h1 className={styleess.h1}>Fashion Wave</h1>
+      <h1 className={styleess.h1}>
+        Fashion Wave
+      <NavLink to="/Employyee2"> add to cart</NavLink>
+
+      </h1>
       <table>
         <thead>
           <tr>
@@ -63,7 +70,7 @@ function Employee() {
               <td>{d.quantity}</td>
               <td>{d.size}</td>
               <td>{d.number}</td>
-              <button onClick={() => handleRemove(d.id)}>Delete</button>
+              <button onClick={() => handleRemove(d.id)}>Delete</button>            
             </tr>
           ))}
      

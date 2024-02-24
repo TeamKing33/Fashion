@@ -32,11 +32,23 @@
     width: 100%;
     background: #fff4;
     color: #500c7f;
+    display: flex;
+    justify-content: space-around;
+}
+a{
+    text-decoration: none;
+    color: #500c7f;
+    transition: 0.3s;
+}
+a:hover{
+  
+    color: #2f034e;
 }
 
 thead{
     background: #500c7f;
     color: #fff;
+   
 }
 table{
     width: 100%;
@@ -46,6 +58,19 @@ table{
 } */
 td{
     font-size: 15px;
-    border-bottom: 1px solid #500c7f;
     
+}
+tr{
+    border-bottom: 1px solid #500c7f;
+
+}
+button{
+    background: #500c7f;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    margin: 10px;
+}
+.image img{
+    width: 100px;
 }

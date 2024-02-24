@@ -54,7 +54,7 @@ app.post("/loginemp", (req, res) => {
     }
   });
 });
-
+ 
 
 
 
@@ -66,6 +66,15 @@ app.get('/clothes',(req,res)=>{
         if(err) return res.json(err);
         return res.json(data);
     })
+})
+
+
+app.get('/cartitem',(req,res)=>{
+  const sql = 'SELECT * FROM productscart'
+  sql.query(sql,(err,data)=>{
+    if(err) return res.json(err);
+    return res.json(data);
+  })
 })
 
 // home
@@ -186,7 +195,7 @@ app.post('/addtocart', (req, res) => {
 });
 
 
-// remove id 
+// remove id product clothes
 
 app.delete("/remove/:id",(req,res)=>{
     const id  = req.params.id;
@@ -196,6 +205,19 @@ app.delete("/remove/:id",(req,res)=>{
         if(err) return res.json({Message :"error in Node"})
         return res.json(data );
     })
+})
+
+
+// remove id product add to cart
+
+app.delete("/removeCart/:id",(req,res)=>{
+  const id  = req.params.id;
+  const sql = "DELETE FROM productscart WHERE id = ?"
+ 
+  db.query(sql,[id],(err,data)=>{
+      if(err) return res.json({Message :"error in Node"})
+      return res.json(data );
+  })
 })
 
 

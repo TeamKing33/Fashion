@@ -16,6 +16,7 @@ import Signup from './component/Signup';
 import Signin from './component/Signin'
 import SigninEmp from './component/employee/SigninEmp';
 import Employyee from './component/employee/Employee.js'
+import Empcart from './component/employee/Empcart.js'
 import CartItem from './component/CartItem.js';
 import Micro from './component/Micro.js';
 import Loading from './component/Loading.js';
@@ -126,6 +127,7 @@ const App = ()=>{
         <Route path="/Signin" element={<Signin/>}/>
         <Route path="/signinEmp" element={<SigninEmp/>}/>
         <Route path="/employyee" element={<Employyee/>}/>
+        <Route path="/Employyee2" element={<Empcart/>}/>
          <Route path="*" element={
           <div>
           <Navbars size={cart.length}  />
