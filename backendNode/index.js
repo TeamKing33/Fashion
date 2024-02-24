@@ -69,13 +69,13 @@ app.get('/clothes',(req,res)=>{
 })
 
 
-app.get('/cartitem',(req,res)=>{
-  const sql = 'SELECT * FROM productscart'
-  sql.query(sql,(err,data)=>{
-    if(err) return res.json(err);
-    return res.json(data);
-  })
-})
+// app.get('/cartitem',(req,res)=>{
+//   const sql = 'SELECT * FROM productscart'
+//   sql.query(sql,(err,data)=>{
+//     if(err) return res.json(err);
+//     return res.json(data);
+//   })
+// })
 
 // home
 app.get("/home",(req,res)=>{

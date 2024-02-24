@@ -7,23 +7,38 @@ import styleess from './cssemp/employee.module.css'
 function Empcart() {
     const [dataCart , setDataCart]=useState([])
     useEffect(()=>{
-        fetch('https://fashion-server-mu.vercel.app/productscart')
+        fetch('https://fashion-server-mu.vercel.app/addtocart')
         .then(res=> res.json())
         .then(cart => setDataCart(cart))
         .catch(err => console.log(err))
       })
 
+
+      const groupDataByEmail = (data) => {
+        const groupedData = {};
+        data.forEach(item => {
+          if (!groupedData[item.email]) {
+            groupedData[item.email] = [item];
+          } else {
+            groupedData[item.email].push(item);
+          }
+        });
+        return groupedData;
+      };
+      
+      const groupedData = groupDataByEmail(dataCart);
+      
       
   const navigate = useNavigate();
 
-  // useEffect(() => {
+  useEffect(() => {
   
-  //   const login = Cookies.get('loginemp');
-  //   if (login !== 'true') {
+    const login = Cookies.get('loginemp');
+    if (login !== 'true') {
       
-  //     navigate('/signinEmp');
-  //   }
-  // }, [navigate]);
+      navigate('/signinEmp');
+    }
+  }, [navigate]);
   const handleRemove = async (id) => {
     try {
       await axios.delete(`https://fashion-server-mu.vercel.app/removeCart/${id}`);
@@ -39,14 +54,14 @@ function Empcart() {
     <div className={styleess.tablee}>
     <h1 className={styleess.h1}>
       Fashion Wave
-    <NavLink to="/Employyee2"> add to cart</NavLink>
+    <NavLink to="/employyee"> Products</NavLink>
 
     </h1>
     <table>
       <thead>
         <tr>
+          <th>Email</th>
           <th>id</th>
-          <th>email</th>
           <th>image</th>
           <th>title</th>
           <th>number</th>
@@ -56,19 +71,26 @@ function Empcart() {
         </tr>
       </thead>
       <tbody>
-        {dataCart.map((d,i) => (
-          <tr key={i}>
-            <td>{d.id}</td>
-            <td>{d.email}</td>
-            <td><img src={d.img} alt=""  className={styleess.image}/></td>
-            <td>{d.title} LE</td>
-            <td>{d.number}</td>
-            <td>{d.discount}</td>
-            <td>{d.price}</td>
-            <button onClick={() => handleRemove(d.id)}>Delete</button>            
-          </tr>
+        {Object.keys(groupedData).map(email => (
+          <React.Fragment key={email}>
+            <tr>
+              <td className={styleess.email}><h6>{email}</h6></td>
+              <td colSpan="7"></td> 
+            </tr>
+            {groupedData[email].map((item, i) => (
+              <tr key={i}>
+                <td></td> 
+                <td>{item.id}</td>
+                <td><img src={item.img} alt="" className={styleess.image}/></td>
+                <td>{item.title} LE</td>
+                <td>{item.number}</td>
+                <td>{item.discount}</td>
+                <td>{item.price}</td>
+                <td><button onClick={() => handleRemove(item.id)}>Delete</button></td>
+              </tr>
+            ))}
+          </React.Fragment>
         ))}
-   
       </tbody>
     </table>
   </div>

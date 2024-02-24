@@ -5,7 +5,6 @@ import axios from 'axios';
 import styleess from './cssemp/employee.module.css'
 function Employee() {
   const [data , setData] =useState([]);
-  const [dataCart , setDataCart]=useState([])
   useEffect(()=>{
     fetch('https://fashion-server-mu.vercel.app/clothes')
     .then(res => res.json())
@@ -18,14 +17,14 @@ function Employee() {
 
   const navigate = useNavigate();
 
-  // useEffect(() => {
+  useEffect(() => {
   
-  //   const login = Cookies.get('loginemp');
-  //   if (login !== 'true') {
+    const login = Cookies.get('loginemp');
+    if (login !== 'true') {
       
-  //     navigate('/signinEmp');
-  //   }
-  // }, [navigate]);
+      navigate('/signinEmp');
+    }
+  }, [navigate]);
 
 
   const handleRemove = async (id) => {
