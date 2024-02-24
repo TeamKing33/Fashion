@@ -20,13 +20,11 @@ const CartItem = ({ data, setData, removeFromCart, handleClick }) => {
     }
   }, [navigate]);
   
-    const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
+   
 
     useEffect(() => {
         const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
         setData(storedCart);
-
-        // Calculate total price
         const total = storedCart.reduce((acc, item) => acc + parseFloat(item.price), 0);
         setPrice(total);
     }, [setData]);
@@ -51,22 +49,6 @@ const CartItem = ({ data, setData, removeFromCart, handleClick }) => {
 
 
       
-//   const handleChange =(e)=>{
-//     setFormData(prev=>({...prev,[e.target.name]:[e.target.value]}))
-  
-//   };
-//   const handleSubmit = async (e) =>{
-//     e.preventDefault();
-//       axios.post('http://localhost:8083/sendorder',formData)
-//       .then(res=>
-//         {
-//           console.log(res);
-//         //   navigate('/home')
-//         })
-//       .catch(err => console.log(err))
-
-//   };
-      
 
     const [price , setPrice] = useState(0);
     const handlePrice = () =>{
@@ -76,14 +58,7 @@ const CartItem = ({ data, setData, removeFromCart, handleClick }) => {
         ))
         setPrice(ans)
     }
-    // const handleRemove = async(id) => {
-    //     try{
-    //         await axios.delete(`http://localhost:8083/remove/${id}`)
-    //         window.location.reload()
-    //        }catch(err){
-    //         console.log(err);
-    //        }
-    // };
+   
     useEffect(()=>{
         handlePrice();
     },[data])
@@ -92,9 +67,9 @@ const CartItem = ({ data, setData, removeFromCart, handleClick }) => {
     const handleSubmit = async () => {
         try {
             const cartData = JSON.parse(localStorage.getItem('cart')) || [];
-            const userEmail = Cookies.get('email'); // Replace 'email' with the actual name of the cookie storing the email
+            const userEmail = Cookies.get('email'); 
     
-            // Group items by their ID
+          
             const groupedCartData = {};
             cartData.forEach(item => {
                 const id = item.id;
@@ -104,10 +79,9 @@ const CartItem = ({ data, setData, removeFromCart, handleClick }) => {
                 groupedCartData[id].push(item);
             });
     
-            // Convert grouped data into an array
+          
             const groupedItems = Object.values(groupedCartData);
     
-            // Send a separate request for each group
             for (const group of groupedItems) {
                 await axios.post('https://fashion-server-mu.vercel.app/addtocart', { data: group, email: userEmail });
             }
@@ -121,6 +95,35 @@ const CartItem = ({ data, setData, removeFromCart, handleClick }) => {
     };
     
     
+    
+    
+    const decrease = (id) => {
+        setData(prevData => {
+            const updatedData = prevData.map(item => (
+                item.id === id ? { ...item, number: item.number - 1 } : item
+            ));
+            updateLocalStorage(updatedData);
+            return updatedData;
+        });
+    };
+    
+    const increase = (id) => {
+        setData(prevData => {
+            const updatedData = prevData.map(item => (
+                item.id === id ? { ...item, number: item.number + 1 } : item
+            ));
+            updateLocalStorage(updatedData);
+            return updatedData;
+        });
+    };
+    
+    const updateLocalStorage = (updatedData) => {
+        try {
+            localStorage.setItem('cart', JSON.stringify(updatedData));
+        } catch (error) {
+            console.error('Error updating localStorage:', error.message || error);
+        }
+    };
       
     
     
@@ -148,7 +151,9 @@ const CartItem = ({ data, setData, removeFromCart, handleClick }) => {
                         <p name={`title[${i}]`}>{item.title}</p>
                     </div>
                     <div className="incdec">
-                        <button hidden>{item.number}</button>
+                    <button onClick={() => increase(item.id)}>+</button>
+                    <button>{item.number}</button>
+                    <button onClick={() => decrease(item.id)}>-</button>
                     </div>
                     <div className="remoprice">
                         <span name={`discount[${i}]`}>${item.discount}</span>
