@@ -110,7 +110,7 @@ app.post('/signup', (req, res) => {
             req.body.email,
             hash,
             req.body.number,
-            req.body.country,
+            req.body.AlexandriaGovernorate,
           ];
   
           db.query(sql, values, (insertErr, result) => {

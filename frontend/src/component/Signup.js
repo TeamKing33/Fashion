@@ -12,7 +12,7 @@ function Signup() {
     email:"",
     password:"",
     number:"",
-    country:"",
+    AlexandriaGovernorate:"",
   });
   const navigate = useNavigate();
 
@@ -68,7 +68,7 @@ function Signup() {
   
  <div className={styles.option}>
    <div className={styles.selectbox}>
- <select className="option" name="country" required onChange={handleChange} defaultValue="Alexandria Governorate">
+ <select className="option" name="AlexandriaGovernorate" required onChange={handleChange} defaultValue="Alexandria Governorate">
  <option hidden   > Alexandria Governorate</option>
        <option value="Smouha" >Smouha</option>
        
