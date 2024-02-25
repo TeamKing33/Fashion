@@ -143,21 +143,24 @@ app.post('/signup', (req, res) => {
 
 // product
 
-app.post("/product",(req,res)=>{
-    const sql = "INSERT INTO clothes (`name`,`image`,`result`,`quantity`,`size`,`number`) VALUES (?)"
-    const values =[
-        req.body.name,
-        req.body.image,
-        req.body.result,
-        req.body.quantity,
-        req.body.size,
-        req.body.number,
-    ]
-    db.query(sql,[values],(err,result)=>{
-        if(err) return res.json({Message :"error in Node"})
-        return res.json(result);
-    })
-})
+app.post("/product", (req, res) => {
+  const userEmail = req.body.email;
+  const sql = "INSERT INTO clothes (`name`,`email`,`image`,`result`,`quantity`,`size`,`number`) VALUES (?)";
+  const values = [
+    req.body.name,
+    userEmail,
+    req.body.image,
+    req.body.result,
+    req.body.quantity,
+    req.body.size,
+    req.body.number,
+  ];
+
+  db.query(sql, [values], (err, result) => {
+    if (err) return res.json({ Message: "error in Node" });
+    return res.json(result);
+  });
+});
 
 
 // add to cart post

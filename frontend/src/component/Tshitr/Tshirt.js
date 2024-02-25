@@ -8,6 +8,7 @@ import FooterTs from './FooterTs';
 // import Footer from '../footer';
 import Employee from '../employee/Employee';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import axios from 'axios';
 import '../css/Tshirt.css'
 
@@ -19,6 +20,7 @@ function Tshirt() {
   }, []);
 
   const [formData,setData] = useState({
+    email:"",
     name:"",
     image: Img1,
     result:"",
@@ -41,18 +43,20 @@ function Tshirt() {
     setData(prev=>({...prev,[e.target.name]:e.target.value}))
   
   };
-  const handleSubmit = async (e) =>{
+  
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const userEmail = Cookies.get('email');
     console.log(formData);
-      axios.post('https://fashion-server-mu.vercel.app/product',formData)
-      .then(res=>
-        {
-          console.log(res);
-          alert("Data Insertd  Successfully")
-          // navigate('/home')
-        })
-      .catch(err => console.log(err))
-
+    const updatedFormData = { ...formData, email: userEmail };
+  
+    axios.post('https://fashion-server-mu.vercel.app/product', updatedFormData)
+      .then(res => {
+        console.log(res);
+        alert("Data Inserted Successfully");
+        // navigate('/home')
+      })
+      .catch(err => console.log(err));
   };
 
   
