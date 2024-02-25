@@ -5,6 +5,8 @@ import Img1 from '../image/imagests2/1.png';
 import Img2 from '../image/imagests2/2.png';
 import Img3 from '../image/imagests2/3.png';
 import Img4 from '../image/imagests2/4.png';
+import Cookies from 'js-cookie';
+
 // import Navbars from '../Navbars';
 import FooterTs from './FooterTs';
 import '../css/Tshirt.css'
@@ -18,6 +20,7 @@ function Tshirt2() {
 
   
   const [formData,setData] = useState({
+    email:"",
     name:"",
     image: Img1,
     result:"",
@@ -25,7 +28,6 @@ function Tshirt2() {
     size:"",
     number:"",
   });
-
   const handleSizeChange = (selectedSize) => {
     setData((prev) => ({ ...prev, size: selectedSize }));
     
@@ -37,20 +39,21 @@ function Tshirt2() {
     setData(prev=>({...prev,[e.target.name]:e.target.value}))
   
   };
-  const handleSubmit = async (e) =>{
+  
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const userEmail = Cookies.get('email');
     console.log(formData);
-      axios.post('https://fashion-server-mu.vercel.app/product',formData)
-      .then(res=>
-        {
-          console.log(res);
-          alert("Data Insertd  Successfully")
-          // navigate('/home')
-        })
-      .catch(err => console.log(err))
-
+    const updatedFormData = { ...formData, email: userEmail };
+  
+    axios.post('https://fashion-server-mu.vercel.app/product', updatedFormData)
+      .then(res => {
+        console.log(res);
+        alert("Data Inserted Successfully");
+        // navigate('/home')
+      })
+      .catch(err => console.log(err));
   };
-
 
   
    const [conimg ,setimg]= useState(Img1)

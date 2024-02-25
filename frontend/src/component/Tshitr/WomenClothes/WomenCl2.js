@@ -5,6 +5,8 @@ import Img3 from '../../image/imageHome/imageWomen2/3.png';
 import Img4 from '../../image/imageHome/imageWomen2/4.png';
 // import Navbars from '../Navbars';
 import FooterTs from '../FooterTs';
+import Cookies from 'js-cookie';
+
 // import Footer from '../footer';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -17,6 +19,7 @@ function Tshirt() {
     $('#number').mask('000 0000 0000');
   }, []);
   const [formData,setData] = useState({
+    email:"",
     name:"",
     image: Img1,
     result:"",
@@ -24,7 +27,6 @@ function Tshirt() {
     size:"",
     number:"",
   });
-
   const handleSizeChange = (selectedSize) => {
     setData((prev) => ({ ...prev, size: selectedSize }));
     
@@ -37,20 +39,20 @@ function Tshirt() {
     setData(prev=>({...prev,[e.target.name]:e.target.value}))
   
   };
-  const handleSubmit = async (e) =>{
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const userEmail = Cookies.get('email');
     console.log(formData);
-      axios.post('https://fashion-server-mu.vercel.app/product',formData)
-      .then(res=>
-        {
-          console.log(res);
-          alert("Data Insertd  Successfully")
-          // navigate('/home')
-        })
-      .catch(err => console.log(err))
-
+    const updatedFormData = { ...formData, email: userEmail };
+  
+    axios.post('https://fashion-server-mu.vercel.app/product', updatedFormData)
+      .then(res => {
+        console.log(res);
+        alert("Data Inserted Successfully");
+        // navigate('/home')
+      })
+      .catch(err => console.log(err));
   };
-
   
 
    const [conimg ,setimg]= useState(Img1)

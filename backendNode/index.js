@@ -145,7 +145,7 @@ app.post('/signup', (req, res) => {
 
 app.post("/product", (req, res) => {
   const userEmail = req.body.email;
-  const sql = "INSERT INTO clothes (`name`,`email`,`image`,`result`,`quantity`,`size`,`number`) VALUES (?)";
+  const sql = "INSERT INTO clothes (`name`,`email`,`image`,`result`,`quantity`,`size`,`number`) VALUES (?,?,?,?,?,?,?)";
   const values = [
     req.body.name,
     userEmail,
@@ -167,8 +167,6 @@ app.post("/product", (req, res) => {
 
 app.post('/addtocart', (req, res) => {
   const userEmail = req.body.email;
-
-  // Using parameterized query to prevent SQL injection
   const values = req.body.data.map(item => [
       userEmail,
       item.img,
@@ -180,7 +178,7 @@ app.post('/addtocart', (req, res) => {
 
   const sql = 'INSERT INTO productscart (email, img, title, number, discount, price) VALUES ?';
 
-  // Ensure database connection is established
+
   if (!db) {
       return res.status(500).json({ error: 'Internal Server Error', message: 'Database connection not established' });
   }
