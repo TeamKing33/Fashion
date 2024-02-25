@@ -19,7 +19,7 @@ function Tshirt4() {
   
   const [formData,setData] = useState({
     name:"",
-    image: white1,
+    image: Img1,
     result:"",
     quantity:"",
     size:"",

@@ -64,7 +64,7 @@ function Employee() {
             <tr key={i}>
               <td>{d.id}</td>
               <td>{d.name}</td>
-              <td>{d.image}</td>
+              <td><img src={d.image} alt="" /></td>
               <td>{d.result} LE</td>
               <td>{d.quantity}</td>
               <td>{d.size}</td>

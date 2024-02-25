@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../../css/Tshirt.css'
 
-let white1 = "KidsClothes4";
+
 function KidsCl4() {
 
   useEffect(() => {
@@ -19,7 +19,7 @@ function KidsCl4() {
 
   const [formData,setData] = useState({
     name:"",
-    image: white1,
+    image: Img1,
     result:"",
     quantity:"",
     size:"",

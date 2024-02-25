@@ -9,7 +9,7 @@ import Img4 from '../image/imagests2/4.png';
 import FooterTs from './FooterTs';
 import '../css/Tshirt.css'
 
-let white1 = "Tshirt2";
+
 function Tshirt2() {
   useEffect(() => {
     $('#number').mask('000 0000 0000');
@@ -19,7 +19,7 @@ function Tshirt2() {
   
   const [formData,setData] = useState({
     name:"",
-    image: white1,
+    image: Img1,
     result:"",
     quantity:"",
     size:"",
