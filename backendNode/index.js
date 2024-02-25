@@ -104,13 +104,13 @@ app.post('/signup', (req, res) => {
             return res.json({ Message: "Error hashing password" });
           }
   
-          const sql = "INSERT INTO signup (`username`,`email`,`password`,`number`,`	AlexandriaGovernorate`) VALUES (?, ?, ?, ? , ?)";
+          const sql = "INSERT INTO signup (`username`,`email`,`password`,`number`,`country`) VALUES (?, ?, ?, ? , ?)";
           const values = [
             req.body.username,
             req.body.email,
             hash,
             req.body.number,
-            req.body.AlexandriaGovernorate,
+            req.body.country,
           ];
   
           db.query(sql, values, (insertErr, result) => {
