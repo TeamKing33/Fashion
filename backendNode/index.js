@@ -145,7 +145,7 @@ app.post('/signup', (req, res) => {
 
 app.post("/product", (req, res) => {
   const userEmail = req.body.email;
-  const sql = "INSERT INTO clothes (`name`,`email`,`image`,`result`,`quantity`,`size`,`number`) VALUES (?,?,?,?,?,?,?)";
+  const sql = "INSERT INTO clothes (`name`,`email`,`image`,`result`,`quantity`,`size`,`number`) VALUES (?)";
   const values = [
     req.body.name,
     userEmail,
