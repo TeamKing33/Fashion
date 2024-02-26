@@ -104,7 +104,7 @@ function Signin() {
   
   {/* <!-------------btn--------------> */}
   <div className={styles.btn} > 
- <button type="submit"name="submit" onClick={handleSubmit}>Register</button>
+ <button type="submit"name="submit" onClick={handleSubmit}>Login</button>
   </div>
   <div className={styles.texts}>
  <span> Already have an account? </span>
