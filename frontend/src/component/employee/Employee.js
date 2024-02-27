@@ -14,6 +14,20 @@ function Employee() {
 
   
 
+  const groupDataByEmail = (data) => {
+    const groupedData = {};
+    data.forEach(item => {
+      if (!groupedData[item.email]) {
+        groupedData[item.email] = [item];
+      } else {
+        groupedData[item.email].push(item);
+      }
+    });
+    return groupedData;
+  };
+  
+  const groupedData = groupDataByEmail(data);
+
 
   const navigate = useNavigate();
 
@@ -49,6 +63,7 @@ function Employee() {
       <table>
         <thead>
           <tr>
+          <th>Email</th>
             <th>id</th>
             <th>name</th>
             <th>image</th>
@@ -60,19 +75,27 @@ function Employee() {
           </tr>
         </thead>
         <tbody>
-          {data.map((d,i) => (
-            <tr key={i}>
-              <td>{d.id}</td>
-              <td>{d.name}</td>
-              <td><img src={d.image} alt="" /></td>
-              <td>{d.result} EGP</td>
-              <td>{d.quantity}</td>
-              <td>{d.size}</td>
-              <td>{d.number}</td>
-              <button onClick={() => handleRemove(d.id)}>Delete</button>            
+        {Object.keys(groupedData).map(email => (
+          <React.Fragment key={email}>
+            <tr>
+              <td>{email}</td>
+              <td colSpan="7"></td> 
             </tr>
-          ))}
-     
+            {groupedData[email].map((item, i) => (
+              <tr key={i}>
+                <td></td> 
+                <td>{item.id}</td>
+                <td>{item.name}</td>
+                <td><img src={item.image} alt="" className={styleess.image}/></td>
+                <td>{item.result}</td>
+                <td>{item.quantity} EGP</td>
+                <td>{item.size}</td>
+                <td>{item.number}</td>
+                <td><button onClick={() => handleRemove(item.id)}>Delete</button></td>
+              </tr>
+            ))}
+          </React.Fragment>
+        ))}
         </tbody>
       </table>
     </div>
