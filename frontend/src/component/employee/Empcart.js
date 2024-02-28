@@ -64,7 +64,7 @@ function Empcart() {
           <th>id</th>
           <th>image</th>
           <th>title</th>
-          <th>number</th>
+          <th>quantity</th>
           <th>discount</th>
           <th>price</th>
           <th>Delete</th>
@@ -82,10 +82,10 @@ function Empcart() {
                 <td></td> 
                 <td>{item.id}</td>
                 <td><img src={item.img} alt="" className={styleess.image}/></td>
-                <td>{item.title} LE</td>
+                <td>{item.title}</td>
                 <td>{item.number}</td>
-                <td>{item.discount}</td>
-                <td>{item.price}</td>
+                <td>{item.discount}EGP</td>
+                <td>{item.price}EGP</td>
                 <td><button onClick={() => handleRemove(item.id)}>Delete</button></td>
               </tr>
             ))}

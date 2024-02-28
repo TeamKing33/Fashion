@@ -87,7 +87,7 @@ function Employee() {
                 <td>{item.id}</td>
                 <td>{item.name}</td>
                 <td><img src={item.image} alt="" className={styleess.image}/></td>
-                <td>{item.result}</td>
+                <td>{item.result} EGP</td>
                 <td>{item.quantity} EGP</td>
                 <td>{item.size}</td>
                 <td>{item.number}</td>
