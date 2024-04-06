@@ -34,10 +34,10 @@ function Signin() {
       if (responseData && responseData.Message === "Logged in successfully") {
         alert("Data is correct");
   
-        // Set login cookie
+        
         Cookies.set('login', true, { expires: 7 * 24 });
   
-        // Set email cookie
+        
         Cookies.set('email', formData.email, { expires: 7 * 24 });
   
         setLogin(true);

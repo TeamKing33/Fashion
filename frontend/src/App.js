@@ -58,6 +58,10 @@ const  KidsCl3 = lazy(()=> import('./component/Tshitr/KidsClothes/KidsCl3.js'))
 const  KidsCl4 = lazy(()=> import('./component/Tshitr/KidsClothes/KidsCl4.js'))
 
 
+// chatbot
+const  Chatbot = lazy(()=> import('./component/chatbot/chat.js'))
+
+
 
 
 const App = ()=>{
@@ -331,6 +335,18 @@ const App = ()=>{
         <Support />
       
         <Footer/>
+        </div>
+        </React.Suspense>
+        } />
+        {/* chatbot */}
+        <Route path="/chatbot" element={
+          <React.Suspense fallback={<Loading/>}>
+        <div>
+         <Navbars size={cart.length}  />
+         <Micro/>
+        <Chatbot />
+      
+        {/* <Footer/> */}
         </div>
         </React.Suspense>
         } />

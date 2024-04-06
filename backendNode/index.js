@@ -189,7 +189,6 @@ app.post('/addtocart', (req, res) => {
           return res.status(500).json({ success: false, error: 'Internal Server Error', message: 'Error inserting into database', details: err.message });
       }
 
-      // Retrieve the last inserted ID and send it as a response
       const lastInsertedId = result.insertId;
       return res.status(200).json({ success: true, message: 'Data Inserted Successfully', lastInsertedId });
   });
@@ -240,8 +239,6 @@ app.delete("/removeCart/:id",(req,res)=>{
   
 
 //add to cart get
-
-
 app.get('/addtocart',(req,res)=>{
     const sql = "SELECT *  FROM productscart";
     db.query(sql,(err,data)=>{

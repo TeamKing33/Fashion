@@ -84,6 +84,9 @@ const changeFr = () =>{
             <NavLink to="/support" className="NavLink">
             {t("Support")}
             </NavLink>
+            <NavLink to="/chatbot" className="NavLink">
+            {t("Support Bot")}
+            </NavLink>
             <NavLink  className="NavLink" onClick={handleRemove}>{t("Log out")}</NavLink>
             <NavLink className="NavLink" onClick={changeFr}>{t("Arabic")}</NavLink>
             <NavLink className="NavLink" onClick={changeEn}>{t("English")}</NavLink>

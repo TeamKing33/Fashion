@@ -55,7 +55,9 @@ const Kids = ({item,handleClick}) => {
                     <p className="card-textt" onChange={handleChange}>{t("EGP")}{discount}</p>
                     <p className="card-textt colorsdis" onChange={handleChange}><s>{price}</s></p>
                     </div>
+                    <div className="alltext">
                     <span className="card-text description">{description}</span>
+                    </div>
                   </div>
                   <div className="btnaddtocart">
                   <button onClick={()=>handleClick(item)} className="CartBtn">{t("Add to Cart")}</button>

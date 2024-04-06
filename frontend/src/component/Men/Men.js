@@ -47,12 +47,16 @@ const Men = ({item,handleClick}) => {
                   <span>{discountCard}</span>
                   <img src={img} className="card-img-top imagecard" onChange={handleChange}/>
                   <div className="card-body">
+                    <div className="alltitle">
                     <h5 className="card-title title" onChange={handleChange}>{title}</h5>
+                    </div>
                     <div className="flex">
                     <p className="card-textt" onChange={handleChange}>{t("EGP")}{discount}</p>
                     <p className="card-textt colorsdis" onChange={handleChange}><s>{price}</s></p>
                     </div>
+                    <div className="alltext">
                     <span className="card-text description">{description}</span>
+                    </div>
                   </div>
                   <div className="btnaddtocart">
                   <button onClick={()=>handleClick(item)} className="CartBtn">{t("Add to Cart")}</button>

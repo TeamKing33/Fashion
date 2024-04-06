@@ -14,7 +14,18 @@
     display: flex;
     justify-content: center;
 }
+.alltext{
+    width: 100%;
+    height: 100px;
+
+}
+.alltitle{
+    width: 100%;
+    height: 50px;
+}
+
 .flex .card-textt{
+    
     margin-left: 6px;
 }
 .flex .colorsdis{

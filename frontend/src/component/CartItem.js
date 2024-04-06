@@ -100,7 +100,7 @@ const CartItem = ({ data, setData, removeFromCart, handleClick }) => {
     const decrease = (id) => {
         setData(prevData => {
             const updatedData = prevData.map(item => (
-                item.id === id ? { ...item, number: item.number - 1 } : item
+                item.id === id ? { ...item, number: Math.max(item.number - 1 ,0)} : item
             ));
             updateLocalStorage(updatedData);
             return updatedData;
