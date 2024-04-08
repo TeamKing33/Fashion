@@ -167,6 +167,18 @@
     border-radius: 4px;
     border: none;
    }
+   .moved {
+    animation: moveImage 0.5s forwards;
+  }
+  
+  @keyframes moveImage {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-40px); 
+    }
+  }
      @media(max-width:601px){
        .container{
          width:350px;

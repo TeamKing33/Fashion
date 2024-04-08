@@ -1,6 +1,9 @@
 import React,{useState,useEffect} from 'react'
 import { useNavigate,NavLink } from 'react-router-dom';
-import Img from "./css/w.png"
+// import Img from "./css/w.png"
+import img2 from './image/model.png';
+import img3 from './image/left.png';
+import img4 from './image/left2.png';
 import axios from 'axios';
 import SigninEmp from './employee/SigninEmp';
 import Cookies from 'js-cookie';
@@ -66,6 +69,14 @@ function Signin() {
       document.body.classList.remove(styles.signinBody);
     };
   }, []);
+  const [imageMoved, setImageMoved] = useState(false);
+
+  const handleInputFocus = () => {
+    setImageMoved(true);
+  };
+  const handleInputFocus2 = () => {
+    setImageMoved(false);
+  };
   return (
   
    
@@ -74,7 +85,10 @@ function Signin() {
    
     <div className={styles.signbox}>
     <span className={styles.iconimage}>
-    <img src={Img} alt="" />
+    <img src={img3} alt="" className={imageMoved ? styles.moved : ''} style={{boxShadow: "none",width:"20px",height:"20px",position:"relative",left:"60px",top:"60px"}}/>
+    <img src={img2} alt="" />
+    <img src={img4} alt="" className={imageMoved ? styles.moved : ''} style={{boxShadow: "none",width:"20px",height:"20px",position:"relative",right:"60px",top:"60px"}}/>
+
     </span>
     <h1>Sign in </h1>
     <div>
@@ -86,7 +100,10 @@ function Signin() {
   
      <div className={styles.inp}>
         <input type="Email" placeholder="Email"name="email" required value={formData.email} onChange={(e) => setData({ ...formData, email: e.target.value })}/>
-        <input type="password" placeholder="Password"name="password" required value={formData.password} onChange={(e) => setData({ ...formData, password: e.target.value })}/>
+        <input type="password" placeholder="Password"name="password" required value={formData.password} onChange={(e) => setData({ ...formData, password: e.target.value })}
+                onFocus={handleInputFocus}
+                onBlur={handleInputFocus2}
+        />
       
       
      </div>

@@ -346,7 +346,7 @@ const App = ()=>{
          <Micro/>
         <Chatbot />
       
-        {/* <Footer/> */}
+        {/* <Footer/fu */}
         </div>
         </React.Suspense>
         } />
