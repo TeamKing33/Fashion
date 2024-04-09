@@ -127,7 +127,7 @@ function Signin() {
  <span> Already have an account? </span>
 
  
-  <strong> <NavLink to ="/">Sign up </NavLink> Here</strong>
+  <strong> <NavLink to ="/SignupUser">Sign up </NavLink> Here</strong>
 
   </div>
    
@@ -136,7 +136,7 @@ function Signin() {
    </div>
    
     </div>
-    <NavLink to="/signinEmp"><button className={styles.btnemp}>employee</button></NavLink>
+    {/* <NavLink to="/signinEmp"><button className={styles.btnemp}>employee</button></NavLink> */}
     </div>
     
   )

@@ -12,7 +12,8 @@ import Navbars from './component/Navbars';
 import Footer from './component/footer';
 
 
-import Signup from './component/Signup';
+import Allhome from './component/AllHome.js';
+import Signup from './component/Signup'
 import Signin from './component/Signin'
 import SigninEmp from './component/employee/SigninEmp';
 import Employyee from './component/employee/Employee.js'
@@ -127,7 +128,8 @@ const App = ()=>{
         <Routes>
         {/* <Suspense fallback={<Loading/>}> */}
 
-        <Route path="/" element={<Signup/>}/>
+        <Route path="/" element={<Allhome/>}/>
+        <Route path="/SignupUser" element={<Signup/>}/>
         <Route path="/Signin" element={<Signin/>}/>
         <Route path="/signinEmp" element={<SigninEmp/>}/>
         <Route path="/employyee" element={<Employyee/>}/>
