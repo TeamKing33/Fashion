@@ -13,7 +13,7 @@ function ProductsCompany({handleClick}) {
 
   // Function to fetch images from the server
   const fetchImages = () => {
-    axios.get('http://localhost:8083/image')
+    axios.get('https://fashion-server-mu.vercel.app/image')
       .then(response => {
         setImages(response.data);
       })
@@ -32,7 +32,7 @@ function ProductsCompany({handleClick}) {
         <div className="card p-0 overflow-hidden shadow cards">
           <img
             key={image.id}
-            src={`http://localhost:8083/${image.path}`} 
+            src={`https://fashion-server-mu.vercel.app/${image.path}`} 
             alt={`Image ${image.id}`}
             className="card-img-top imagecard"
           />

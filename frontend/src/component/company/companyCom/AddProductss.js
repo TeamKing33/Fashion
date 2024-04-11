@@ -31,7 +31,7 @@ function Addproducts() {
     formDataToSend.append('price', formData.price);
     formDataToSend.append('description', formData.description);
 
-    axios.post('http://localhost:8083/upload', formDataToSend)
+    axios.post('https://fashion-server-mu.vercel.app/upload', formDataToSend)
       .then(res => {
         console.log(res.data);
         // Reset form data after successful upload if needed
