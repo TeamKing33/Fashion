@@ -31,8 +31,7 @@ const db = mysql.createPool({
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-
-
+// Multer configuration for file upload
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'uploads/');
@@ -43,22 +42,30 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-// ...
-
+// Route to handle file upload
 app.post('/upload', upload.single('image'), (req, res) => {
   const { filename, path } = req.file;
-  const { title, price, description } = req.body; // Destructure the body object
-  
-  const sql = 'INSERT INTO images (filename, path, title, price, description) VALUES (?, ?, ?, ?, ?)';
-  const values = [filename, path, title, price, description]; // Include all values in the array
-  
-  db.query(sql, values, (err, result) => {
+  const { title, price, description } = req.body;
+
+  // Ensure database connection is established before querying
+  db.connect(err => {
     if (err) {
-      console.error("Error inserting into database:", err);
+      console.error("Error connecting to database:", err);
       res.status(500).send('Internal server error');
       return;
     }
-    res.send('Image uploaded successfully.');
+
+    const sql = 'INSERT INTO images (filename, path, title, price, description) VALUES (?, ?, ?, ?, ?)';
+    const values = [filename, path, title, price, description];
+
+    db.query(sql, values, (err, result) => {
+      if (err) {
+        console.error("Error inserting into database:", err);
+        res.status(500).send('Internal server error');
+        return;
+      }
+      res.send('Image uploaded successfully.');
+    });
   });
 });
 
