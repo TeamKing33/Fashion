@@ -31,6 +31,7 @@ import './App.css';
 
 const Home = lazy(()=> import('./component/Home.js'))
 const Support = lazy(()=> import('./component/Support'))
+const ProductCompany = lazy(()=> import('./component/productCompanyU.js'))
 const AllCard = lazy(()=> import('./component/AllCard.js'))
 const AllMen = lazy(()=> import('./component/Men/AllMen'))
 const Allwomen = lazy(()=> import('./component/Women/AllWomen'))
@@ -61,6 +62,18 @@ const  KidsCl4 = lazy(()=> import('./component/Tshitr/KidsClothes/KidsCl4.js'))
 
 // chatbot
 const  Chatbot = lazy(()=> import('./component/chatbot/chat.js'))
+
+
+// company
+const  RegisterCompany = lazy(()=> import('./component/company/RegisterCompany'))
+// HomeCompany
+const  HomeCompany = lazy(()=> import('./component/company/HomeCompany.js'))
+// NavbarCompany
+const  NavbarCompany = lazy(()=> import('./component/company/companyCom/NavbarCompany.js'))
+// AddProducts
+const  AddProducts = lazy(()=> import('./component/company/companyCom/AddProductss.js'))
+// Products
+const  ProductsCompany = lazy(()=> import('./component/company/companyCom/productsCompany.js'))
 
 
 
@@ -313,6 +326,17 @@ const App = ()=>{
           </div>
           </React.Suspense>
         }/>
+        {/* ProductCompanyUser */}
+          <Route path="/ProductCompany" element={
+            <React.Suspense fallback={<Loading/>}>
+            <div>
+          <Navbars size={cart.length}  />
+          <ProductCompany handleClick={handleClick}/>
+          <Micro/>
+          {/* <Footer/> */}
+          </div>
+          </React.Suspense>
+        }/>
           <Route path="/download" element={
             <React.Suspense fallback={<Loading/>}>
             <div>
@@ -419,6 +443,55 @@ const App = ()=>{
              
              
           <Footer/>
+          </div>
+          </React.Suspense>
+          } />
+
+
+
+          {/* company */}
+   <Route path="/RegisterCompany" element={
+          <React.Suspense fallback={<Loading/>}>
+
+          <div>
+             < RegisterCompany /> 
+          </div>
+          </React.Suspense>
+          } />
+
+          {/* HomeCompany */}
+   <Route path="/HomeCompany" element={
+          <React.Suspense fallback={<Loading/>}>
+
+          <div>
+          <NavbarCompany   />
+
+             < HomeCompany /> 
+          {/* <Footer/> */}
+          </div>
+          </React.Suspense>
+          } />
+          {/* AddProducts */}
+   <Route path="/AddProducts" element={
+          <React.Suspense fallback={<Loading/>}>
+
+          <div>
+          <NavbarCompany   />
+
+             < AddProducts /> 
+          {/* <Footer/> */}
+          </div>
+          </React.Suspense>
+          } />
+          {/* ProductsCompany */}
+   <Route path="/ProductsCompany" element={
+          <React.Suspense fallback={<Loading/>}>
+
+          <div>
+          <NavbarCompany   />
+
+             < ProductsCompany /> 
+          {/* <Footer/> */}
           </div>
           </React.Suspense>
           } />

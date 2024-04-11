@@ -21,7 +21,7 @@ function Home() {
         {/* company */}
        <div className={style.Company} data-aos="zoom-in">
         <div className={style.btn} >
-        <NavLink to="#" className={style.navLink}>Company</NavLink>
+        <NavLink to="/RegisterCompany" className={style.navLink}>Company</NavLink>
         </div>
         
        </div>

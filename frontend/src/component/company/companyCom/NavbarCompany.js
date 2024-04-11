@@ -4,8 +4,8 @@ import { Navbar, NavDropdown, Container, Nav, Form, Button } from 'react-bootstr
 import {NavLink,useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import Cookies from 'js-cookie';
-import './css/Navbars.css';
-import Img from './image/icon.png'
+// import '../cssCompany/Navbar.css';
+import Img from '../image/icon.png'
 const  Navbars = ({size}) => {
   const [login, setLogin] = useState(false);
   const [filter ,setFilter] = useState('');
@@ -62,7 +62,7 @@ const changeFr = () =>{
 
   return (
     
-    <Navbar expand="lg" className=" navbar navbar-dark ">
+    <Navbar expand="lg" className=" navbar2  ">
       <Container fluid>
         <NavLink to="/home">
         <Navbar.Brand  className='icon' >
@@ -78,20 +78,18 @@ const changeFr = () =>{
         <Navbar.Toggle aria-controls="navbarScroll " className="Toggle"  />
         <Navbar.Collapse id="navbarScroll ">
           <Nav className="mr-auto  mx-auto my-lg-0 " style={{ maxHeight: '100px'}} navbarScroll>
-            <NavLink to="/home" className="NavLink"  >{t("Home")}</NavLink>
+            <NavLink to="/HomeCompany" className="NavLink"  >{t("Home")}</NavLink>
+            <NavLink to="/AddProducts" className="NavLink"  >{t("add products")}</NavLink>
+            <NavLink to="/ProductsCompany" className="NavLink"  >{t("ProductsCompany")}</NavLink>
             <NavLink to="/product" className="NavLink"  >{t("products")}</NavLink>
             <NavLink to="/download" className="NavLink"  >{t("Download App")}</NavLink>
-            <NavLink to="/ProductCompany" className="NavLink"  >{t("Product Company")}</NavLink>
             <NavLink to="/support" className="NavLink">
             {t("Support")}
             </NavLink>
-            <NavLink to="/chatbot" className="NavLink">
-            {t("Support Bot")}
-            </NavLink>
+           
             <NavLink  className="NavLink" onClick={handleRemove}>{t("Log out")}</NavLink>
             <NavLink className="NavLink" onClick={changeFr}>{t("Arabic")}</NavLink>
             <NavLink className="NavLink" onClick={changeEn}>{t("English")}</NavLink>
-            <NavLink to="/cartitem"className="NavLink" ><i class="fa-solid fa-cart-shopping"></i> <span className="numbercart">{size}</span></NavLink>
           </Nav>
           <Form className="d-flex" onSubmit={handleClick}>
             <Form.Control
