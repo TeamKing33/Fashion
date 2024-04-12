@@ -49,8 +49,8 @@ app.post('/upload', upload.single('image'), (req, res) => {
   const { filename, path } = req.file;
   const { title, price, description } = req.body; // Destructure the body object
   
-  const sql = 'INSERT INTO images (filename, path, title, price, description) VALUES (?)';
-  const values = [filename, path, title, price, description]; 
+  const sql = 'INSERT INTO images (filename, path, title, price, description) VALUES (?, ?, ?, ?, ?)';
+  const values = [filename, path, title, price, description]; // Include all values in the array
   
   db.query(sql, values, (err, result) => {
     if (err) {
