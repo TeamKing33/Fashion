@@ -45,7 +45,7 @@ const upload = multer({ storage: storage });
 
 // ...
 
-app.post('/upload', upload.single('image'), (req, res) => {
+app.post('/upload', (req, res) => {
   const { filename, path } = req.file;
   const { title, price, description } = req.body; // Destructure the body object
   
