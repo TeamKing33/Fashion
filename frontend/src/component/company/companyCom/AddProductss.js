@@ -48,7 +48,7 @@ function Addproducts() {
 
   return (
     <div>
-      <form onSubmit={handleUpload} className={style.addproducts}>
+      <div className={style.addproducts}>
         <div className={style.cardproduct}>
           <div className={style.image2} style={{ color: "#fff", width: "90", height: "100px" }}>
             <input type="file" onChange={handleFileChange} />
@@ -76,10 +76,10 @@ function Addproducts() {
               value={formData.description}
               onChange={handleInputChange}
             />
-            <button type='submit'>Add Product</button>
+            <button type='submit' onClick={ handleUpload}>Add Product</button>
           </div>
         </div>
-      </form>
+      </div>
     </div>
   )
 }
