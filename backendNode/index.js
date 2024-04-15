@@ -19,48 +19,51 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const db = mysql.createPool({
-    host:process.env.DB_HOST,
-    user:process.env.DB_USERNAME,
-    password:process.env.DB_PASSWORD,
-    database:process.env.DB_DBNAME,
-    waitForConnections:true,
-    connectionLimit:10,
-    queueLimit:0
-})
+// const db = mysql.createPool({
+//     host:process.env.DB_HOST,
+//     user:process.env.DB_USERNAME,
+//     password:process.env.DB_PASSWORD,
+//     database:process.env.DB_DBNAME,
+//     waitForConnections:true,
+//     connectionLimit:10,
+//     queueLimit:0
+// })
 
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-
-
+const db = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'projectking',
+});
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-      cb(null, 'uploads/');
+    cb(null, 'uploads/');
   },
   filename: function (req, file, cb) {
-      cb(null, file.originalname);
-  },
+    cb(null, file.originalname);
+  }
 });
+
 const upload = multer({ storage: storage });
 
-// ...
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.post('/upload', upload.single('image'), (req, res) => {
   const { filename, path } = req.file;
-  const { title, price, description } = req.body; // Destructure the body object
+  const { title, price, description } = req.body;
 
-  // Prepare SQL query to insert data into the images table
   const sql = 'INSERT INTO images (filename, path, title, price, description) VALUES (?, ?, ?, ?, ?)';
-  const values = [filename, path, title, price, description]; // Include all values in the array
+  const values = [filename, path, title, price, description];
 
   // Execute the SQL query
   db.query(sql, values, (err, result) => {
-      if (err) {
-          console.error("Error inserting into database:", err);
-          res.status(500).send('Internal server error');
-          return;
-      }
-      res.send('Image uploaded successfully.');
+    if (err) {
+      console.error("Error inserting into database:", err);
+      res.status(500).send('Internal server error');
+      return;
+    }
+    res.send('Image uploaded successfully.');
   });
 });
 
