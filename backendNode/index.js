@@ -10,7 +10,6 @@ const moment = require('moment');
 const app = express();
 app.use(cors());
 
-app.options('*', cors());
 
 
 const port = 8083 || process.env.PORT;
@@ -20,7 +19,7 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const db = mysql.createConnection({
+const db = mysql.createPool({
     host:process.env.DB_HOST,
     user:process.env.DB_USERNAME,
     password:process.env.DB_PASSWORD,
