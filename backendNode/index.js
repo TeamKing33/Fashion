@@ -324,7 +324,7 @@ app.post("/loginUser", (req, res) => {
 
 
 
-  // Multer and moment configuration
+ // Multer and moment configuration
 const imgconfig = multer.diskStorage({
   destination: (req, file, callback) => {
       callback(null, "./uploads");
@@ -347,7 +347,6 @@ const upload = multer({
   fileFilter: isImage
 });
 
-
 // register
 app.post("/register", upload.single("photo"), (req, res) => {
   const { fname } = req.body;
@@ -364,11 +363,11 @@ app.post("/register", upload.single("photo"), (req, res) => {
       db.query("INSERT INTO usersdata3 (username, userimg, date) VALUES (?, ?, ?)", [fname, filename, date], (err, result) => {
         if (err) {
           console.log(err);
-              return res.status(500).json({ status: 500, message: "Internal server error" });
-          } else {
-              console.log("data added");
-              return res.status(201).json({ status: 201, data: req.body });
-          }
+          return res.status(500).json({ status: 500, message: "Internal server error" });
+        } else {
+          console.log("data added");
+          return res.status(201).json({ status: 201, data: req.body });
+        }
       });
   } catch (error) {
       return res.status(422).json({ status: 422, error });
