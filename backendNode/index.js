@@ -10,10 +10,14 @@ const moment = require('moment');
 const app = express();
 app.use(cors());
 
+app.options('*', cors());
 
 
 const port = 8083 || process.env.PORT;
-
+app.use(cors({
+  credentials: true,
+   origin: 'https://fashion-mu-three.vercel.app' 
+ }));
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.json());
