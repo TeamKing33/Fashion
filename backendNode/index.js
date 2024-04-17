@@ -2,21 +2,15 @@ const express = require('express');
 const mysql = require('mysql');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
-const bodyParser= require('body-parser');
+const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
-// const path = require('path');
-// const multer = require('multer');
-require("dotenv").config();
-require("./db/conn");
-const router = require("./routes/router")
-
+const path = require('path');
+const multer = require('multer');
+const moment = require('moment');
 const app = express();
 app.use(cors());
 
 app.options('*', cors());
-app.use(cors({
-  origin: 'https://fashion-mu-three.vercel.app'
-}));
 
 
 const port = 8083 || process.env.PORT;
@@ -36,13 +30,6 @@ const db = mysql.createPool({
     queueLimit:0
 })
 
-
-app.use("/uploads",express.static("./uploads"))
-app.use(router)
-
-
-
-
 // app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 
@@ -57,7 +44,7 @@ app.use(router)
 // });
 // const upload = multer({ storage: storage });
 
-// ...
+// // ...
 
 // app.post('/upload', upload.single('image'), (req, res) => {
 //   const { filename, path } = req.file;
@@ -333,6 +320,92 @@ app.post("/loginUser", (req, res) => {
       }
     });
   });
+
+
+
+
+  // Multer and moment configuration
+const imgconfig = multer.diskStorage({
+  destination: (req, file, callback) => {
+      callback(null, "./uploads");
+  },
+  filename: (req, file, callback) => {
+      callback(null, `image-${Date.now()}.${file.originalname}`);
+  }
+});
+
+const isImage = (req, file, callback) => {
+  if (file.mimetype.startsWith("image")) {
+      callback(null, true);
+  } else {
+      callback(null, Error("only image is allowed"));
+  }
+};
+
+const upload = multer({
+  storage: imgconfig,
+  fileFilter: isImage
+});
+
+
+// register
+app.post("/register", upload.single("photo"), (req, res) => {
+  const { fname } = req.body;
+
+  // Check if req.file exists
+  if (!req.file || !fname) {
+      return res.status(422).json({ status: 422, message: "Fill all the details" });
+  }
+
+  try {
+      const { filename } = req.file;
+      const date = moment(new Date()).format("YYYY-MM-DD hh:mm:ss");
+
+      db.query("INSERT INTO usersdata3 SET ?", { username: fname, userimg: filename, date: date }, (err, result) => {
+          if (err) {
+              console.log("error");
+              return res.status(500).json({ status: 500, message: "Internal server error" });
+          } else {
+              console.log("data added");
+              return res.status(201).json({ status: 201, data: req.body });
+          }
+      });
+  } catch (error) {
+      return res.status(422).json({ status: 422, error });
+  }
+});
+
+// Get user data route
+app.get("/getdata", (req, res) => {
+  try {
+    db.query("SELECT * FROM usersdata3",(err,result)=>{
+        if(err){
+            console.log("error")
+        }else{
+            console.log("data get")
+            res.status(201).json({status:201,data:result})
+        }
+    })
+} catch (error) {
+    res.status(422).json({status:422,error})
+}
+});
+// delete
+app.delete("/:id", (req, res) => {
+  const {id} = req.params;
+   try {
+    db.query(`DELETE FROM usersdata3 WHERE id ='${id}'`,(err,result)=>{
+        if(err){
+            console.log("error")
+        }else{
+            console.log("data delete")
+            res.status(201).json({status:201,data:result})
+        }
+    })
+   } catch (error) {
+    res.status(422).json({status:422,error})
+   }
+});
   
 
 app.listen(port,()=>{
