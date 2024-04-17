@@ -324,56 +324,56 @@ app.post("/loginUser", (req, res) => {
 
 
 
- // Multer and moment configuration
-const imgconfig = multer.diskStorage({
-  destination: (req, file, callback) => {
-      callback(null, "./uploads");
-  },
-  filename: (req, file, callback) => {
-      callback(null, `image-${Date.now()}.${file.originalname}`);
-  }
-});
-
-const isImage = (req, file, callback) => {
-  if (file.mimetype.startsWith("image")) {
-      callback(null, true);
-  } else {
-      callback(null, Error("only image is allowed"));
-  }
-};
-
-const upload = multer({
-  storage: imgconfig,
-  fileFilter: isImage
-});
-
-// register
-app.post("/register", upload.single("photo"), (req, res) => {
-  const { fname } = req.body;
-
-  // Check if req.file exists
-  if (!req.file || !fname) {
-      return res.status(422).json({ status: 422, message: "Fill all the details" });
-  }
-
-  try {
-      const { filename } = req.file;
-      const date = moment(new Date()).format("YYYY-MM-DD hh:mm:ss");
-
-      db.query("INSERT INTO usersdata3 (username, userimg, date) VALUES (?, ?, ?)", [fname, filename, date], (err, result) => {
-        if (err) {
-          console.log(err);
-          return res.status(500).json({ status: 500, message: "Internal server error" });
-        } else {
-          console.log("data added");
-          return res.status(201).json({ status: 201, data: req.body });
-        }
-      });
-  } catch (error) {
-      return res.status(422).json({ status: 422, error });
-  }
-});
-
+  const imgconfig = multer.diskStorage({
+    destination: (req, file, callback) => {
+        callback(null, "./uploads");
+    },
+    filename: (req, file, callback) => {
+        callback(null, `image-${Date.now()}.${file.originalname}`);
+    }
+  });
+  
+  const isImage = (req, file, callback) => {
+    if (file.mimetype.startsWith("image")) {
+        callback(null, true);
+    } else {
+        callback(new Error("Only image files are allowed"));
+    }
+  };
+  
+  const upload = multer({
+    storage: imgconfig,
+    fileFilter: isImage
+  });
+  
+  // register
+  app.post("/register", upload.single("photo"), (req, res) => {
+    const { fname } = req.body;
+  
+    // Check if req.file exists
+    if (!req.file || !fname) {
+        return res.status(422).json({ status: 422, message: "Fill all the details" });
+    }
+  
+    try {
+        const { filename } = req.file;
+        const date = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
+  
+        db.query("INSERT INTO usersdata3 SET ?", { username: fname, userimg: filename, date: date }, (err, result) => {
+            if (err) {
+                console.error("Error inserting into database:", err);
+                return res.status(500).json({ status: 500, message: "Internal server error" });
+            } else {
+                console.log("Data added successfully");
+                return res.status(201).json({ status: 201, data: req.body });
+            }
+        });
+    } catch (error) {
+        console.error("Error:", error);
+        return res.status(422).json({ status: 422, message: "Error processing request" });
+    }
+  });
+  
 // Get user data route
 app.get("/getdata", (req, res) => {
   try {
