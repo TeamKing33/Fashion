@@ -1,6 +1,6 @@
 const express = require("express");
 const router = new express.Router();
-const conn = require("../db/conn");
+const pool = require("../db/conn");
 const multer = require("multer");
 const moment = require("moment")
 
@@ -44,7 +44,7 @@ router.post("/register", upload.single("photo"), (req, res) => {
         const { filename } = req.file;
         const date = moment(new Date()).format("YYYY-MM-DD hh:mm:ss");
 
-        conn.query("INSERT INTO usersdata3 SET ?", { username: fname, userimg: filename, date: date }, (err, result) => {
+        pool.query("INSERT INTO usersdata3 SET ?", { username: fname, userimg: filename, date: date }, (err, result) => {
             if (err) {
                 console.log("error");
                 return res.status(500).json({ status: 500, message: "Internal server error" });
@@ -63,7 +63,7 @@ router.post("/register", upload.single("photo"), (req, res) => {
 // get user data
 router.get("/getdata",(req,res)=>{
     try {
-        conn.query("SELECT * FROM usersdata3",(err,result)=>{
+        pool.query("SELECT * FROM usersdata3",(err,result)=>{
             if(err){
                 console.log("error")
             }else{
@@ -81,7 +81,7 @@ router.get("/getdata",(req,res)=>{
 router.delete("/:id",(req,res)=>{
     const {id} = req.params;
    try {
-    conn.query(`DELETE FROM usersdata3 WHERE id ='${id}'`,(err,result)=>{
+    pool.query(`DELETE FROM usersdata3 WHERE id ='${id}'`,(err,result)=>{
         if(err){
             console.log("error")
         }else{

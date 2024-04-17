@@ -13,7 +13,10 @@ const router = require("./routes/router")
 const app = express();
 app.use(cors());
 
-// app.options('*', cors());
+app.options('*', cors());
+app.use(cors({
+  origin: 'https://fashion-mu-three.vercel.app'
+}));
 
 
 const port = 8083 || process.env.PORT;
