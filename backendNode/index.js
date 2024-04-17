@@ -20,15 +20,12 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const db = mysql.createPool({
-    host:process.env.DB_HOST,
-    user:process.env.DB_USERNAME,
-    password:process.env.DB_PASSWORD,
-    database:process.env.DB_DBNAME,
-    waitForConnections:true,
-    connectionLimit:10,
-    queueLimit:0
-})
+const db = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'work',
+});
 
 // app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
@@ -208,6 +205,21 @@ app.post("/product", (req, res) => {
   });
 });
 
+app.post("/test", (req, res) => {
+  const sql = "INSERT INTO usersdata3 (`username`,`userimg`,`date`) VALUES (?,?,?)";
+  const values = [
+    req.body.username,
+    req.body.userimg,
+    req.body.date,
+  ];
+
+  db.query(sql, values, (err, result) => {
+    if (err) return res.json({ Message: "error in Node" });
+    return res.json(result);
+  });
+});
+
+
 
 // add to cart post
 
@@ -347,7 +359,7 @@ app.post("/loginUser", (req, res) => {
   });
   
   // register
-  app.post("/register", (req, res) => {
+  app.post("/register", upload.single("photo"), (req, res) => {
     const { fname } = req.body;
   
     // Check if req.file exists
