@@ -20,7 +20,7 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const db = mysql.createPool({
+const db = mysql.createConnection({
     host:process.env.DB_HOST,
     user:process.env.DB_USERNAME,
     password:process.env.DB_PASSWORD,
