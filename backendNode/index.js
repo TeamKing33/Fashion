@@ -20,12 +20,15 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'work',
-});
+const db = mysql.createPool({
+    host:process.env.DB_HOST,
+    user:process.env.DB_USERNAME,
+    password:process.env.DB_PASSWORD,
+    database:process.env.DB_DBNAME,
+    waitForConnections:true,
+    connectionLimit:10,
+    queueLimit:0
+})
 
 // app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
@@ -218,7 +221,6 @@ app.post("/test", (req, res) => {
     return res.json(result);
   });
 });
-
 
 
 // add to cart post
