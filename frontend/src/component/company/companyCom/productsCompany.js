@@ -1,62 +1,94 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react'
+import Button from 'react-bootstrap/Button';
+import { NavLink } from "react-router-dom"
+import Card from 'react-bootstrap/Card';
 import axios from 'axios';
-import style from '../cssCompany/addproducts.module.css'
+import moment from "moment"
+import Alert from 'react-bootstrap/Alert';
 
-function ProductsCompany() {
-    
+const Home = () => {
 
-  const [images, setImages] = useState([]);
+    const [data, setData] = useState([]);
 
-  // Fetch images from server when component mounts
-  useEffect(() => {
-    fetchImages();
-  }, []);
+    const [show, setShow] = useState(false);
 
-  // Function to fetch images from the server
-  const fetchImages = () => {
-    axios.get('https://fashion-server-mu.vercel.app/image')
-      .then(response => {
-        setImages(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching images:', error);
-      });
-  };
-  return (
-    <div>
-          <div className="bodycar">
-      <div className="cards">
-        <section className="py-4 container ">
-          <div className="row justify-content-center">
-    {images.map(image => (
-       < div className="col-6 col-md-6 col-lg-3 mx-0 mb-4" >
-        <div className="card p-0 overflow-hidden shadow cards">
-          <img
-            key={image.id}
-            src={`https://fashion-server-mu.vercel.app/${image.path}`} 
-            alt={`Image ${image.id}`}
-            className="card-img-top imagecard"
-          />
-           <div className="card-body">
-                <div className="alltitle">
-                <h5 className="card-title title" >{image.title}</h5>
+    const getUserData = async () => {
+        const res = await axios.get("https://fashion-server-mu.vercel.app/getdata", {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+
+        if (res.data.status == 201) {
+            console.log("data get");
+            setData(res.data.data)
+
+        } else {
+            console.log("error")
+        }
+    }
+
+
+    const dltUser = async (id) => {
+        console.log(id)
+        const res = await axios.delete(`https://fashion-server-mu.vercel.app/${id}`, {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+
+        if (res.data.status == 201) {
+            getUserData()
+            setShow(true)
+        } else {
+            console.log("error")
+        }
+    }
+
+    useEffect(() => {
+        getUserData()
+    }, [])
+
+    return (
+        <>
+            {
+                show ? <Alert variant="danger" onClose={() => setShow(false)} dismissible>
+                    User Delete
+                </Alert> : ""
+            }
+            <div className="container mt-2">
+                <h1 className='text-center mt-2'>Image Upload Projects With Mysql database</h1>
+
+                <div className='text-end'>
+                    <Button variant="primary"><NavLink to="/register" className="text-decoration-none text-light"> Add User</NavLink></Button>
                 </div>
-                <div className="flex">
-                <p className="card-textt">EGP{image.price}</p>
+
+                <div className='d-flex justify-content-between align-iteams-center mt-5'>
+                    {
+                        data.length > 0 ? data.map((el, i) => {
+                            return (
+                                <>
+                                    <Card style={{ width: '22rem', height: "18rem" }} className="mb-3">
+                                        <Card.Img variant="top" src={`https://fashion-server-mu.vercel.app/uploads/${el.userimg}`} style={{ width: '100px', textAlign: "center", margin: "auto" }} className="mt-2" />
+                                        <Card.Body className='text-center'>
+                                            <Card.Title>UserName : {el.username}</Card.Title>
+                                            <Card.Text>
+                                                Date Added : {moment(el.date).format("DD-MM-YYYY")}
+                                            </Card.Text>
+                                            <Button variant="danger" onClick={() => dltUser(el.id)} className='col-lg-6 text-center'>Delete</Button>
+                                        </Card.Body>
+                                    </Card>
+                                </>
+                            )
+                        }) : ""
+                    }
+
                 </div>
-                <div className="alltext">
-                <span className="card-text description">{image.description}</span>
-                </div>
-              </div>
-           </div>
-         </div>
-        ))}
-         </div>
-        </section>
-      </div>
-      </div>
-    </div>
-  )
+            </div>
+        </>
+    )
 }
 
-export default ProductsCompany
+export default Home
+
+

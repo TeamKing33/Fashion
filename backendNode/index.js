@@ -4,8 +4,12 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const bodyParser= require('body-parser');
 const bcrypt = require('bcrypt');
-const path = require('path');
-const multer = require('multer');
+// const path = require('path');
+// const multer = require('multer');
+require("dotenv").config();
+require("./db/conn");
+const router = require("./routes/router")
+
 const app = express();
 app.use(cors());
 
@@ -29,45 +33,56 @@ const db = mysql.createPool({
     queueLimit:0
 })
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads/');
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.originalname);
-  }
-});
 
-const upload = multer({ storage: storage });
-
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-
-app.post('/upload', upload.single('image'), (req, res) => {
-  const { filename, path } = req.file;
-  const { title, price, description } = req.body;
-
-  const sql = 'INSERT INTO images (filename, path, title, price, description) VALUES (?, ?, ?, ?, ?)';
-  const values = [filename, path, title, price, description];
-
-  // Execute the SQL query
-  db.query(sql, values, (err, result) => {
-    if (err) {
-      console.error("Error inserting into database:", err);
-      res.status(500).send('Internal server error');
-      return;
-    }
-    res.send('Image uploaded successfully.');
-  });
-});
+app.use("/uploads",express.static("./uploads"))
+app.use(router)
 
 
-app.get('/image', (req, res) => {
-  const sql = "SELECT *  FROM images";
-  db.query(sql, (err, data) => {
-    if (err) return res.json(err);
-    return res.json(data);
-  });
-});
+
+
+// app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+
+
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//       cb(null, 'uploads/');
+//   },
+//   filename: function (req, file, cb) {
+//       cb(null, file.originalname);
+//   },
+// });
+// const upload = multer({ storage: storage });
+
+// ...
+
+// app.post('/upload', upload.single('image'), (req, res) => {
+//   const { filename, path } = req.file;
+//   const { title, price, description } = req.body; // Destructure the body object
+
+//   // Prepare SQL query to insert data into the images table
+//   const sql = 'INSERT INTO images (filename, path, title, price, description) VALUES (?, ?, ?, ?, ?)';
+//   const values = [filename, path, title, price, description]; // Include all values in the array
+
+//   // Execute the SQL query
+//   db.query(sql, values, (err, result) => {
+//       if (err) {
+//           console.error("Error inserting into database:", err);
+//           res.status(500).send('Internal server error');
+//           return;
+//       }
+//       res.send('Image uploaded successfully.');
+//   });
+// });
+
+
+// app.get('/image', (req, res) => {
+//   const sql = "SELECT *  FROM images";
+//   db.query(sql, (err, data) => {
+//     if (err) return res.json(err);
+//     return res.json(data);
+//   });
+// });
 
 app.get('/',(re,res)=> {
     return res.json("From BAckend Side");

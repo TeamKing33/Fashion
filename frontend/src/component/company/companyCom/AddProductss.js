@@ -1,88 +1,68 @@
-import React,{useState,useEffect} from 'react'
-import axios from 'axios'
-import style from '../cssCompany/addproducts.module.css'
-// ...
-function Addproducts() {
-  useEffect(()=>{
-    $('#price').mask('0000');
-  }, []);
-  const [file, setFile] = useState(null);
-  const [formData, setFormData] = useState({
-    title: '',
-    price: '',
-    description: ''
-  });
+import React, { useState } from 'react'
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import axios from "axios"
+import {useNavigate} from "react-router-dom"
 
-  const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
-  };
+const Register = () => {
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-  
-  const handleUpload = (e) => {
-    e.preventDefault();
-    
-    const formDataToSend = new FormData();
-    formDataToSend.append('image', file);
-    formDataToSend.append('title', formData.title);
-    formDataToSend.append('price', formData.price);
-    formDataToSend.append('description', formData.description);
+    const [fname,setFName] = useState("");
+    const [file,setFile] = useState("");
 
-    axios.post('https://fashion-server-mu.vercel.app/upload', formDataToSend)
-      .then(res => {
-        console.log(res.data);
-        // Reset form data after successful upload if needed
-        setFormData({
-          title: '',
-          price: '',
-          description: ''
-        });
-      })
-      .catch(err => {
-        console.error(err);
-      });
-  };
+    const history = useNavigate();
 
-  return (
-    <div>
-      <form onSubmit={handleUpload} className={style.addproducts}>
-        <div className={style.cardproduct}>
-          <div className={style.image2} style={{ color: "#fff", width: "90", height: "100px" }}>
-            <input type="file" onChange={handleFileChange} />
-          </div>
-          <div className={style.allinput}>
-            <input
-              type="text"
-              name='title'
-              placeholder='title'
-              value={formData.title}
-              onChange={handleInputChange}
-            />
-            <input
-              type="text"
-              name='price'
-              id='price'
-              placeholder='price'
-              value={formData.price}
-              onChange={handleInputChange}
-            />
-            <input
-              type="text"
-              name='description'
-              placeholder='description'
-              value={formData.description}
-              onChange={handleInputChange}
-            />
-            <button type='submit'>Add Product</button>
-          </div>
-        </div>
-      </form>
-    </div>
-  )
+    const setdata = (e)=>{
+        setFName(e.target.value)
+    }
+
+    const setimgfile = (e)=>{
+        setFile(e.target.files[0])
+    }
+
+    const addUserData = async(e)=>{
+        e.preventDefault();
+
+        var formData = new FormData();
+        formData.append("photo",file)
+        formData.append("fname",fname);
+
+        const config = {
+            headers:{
+                "Content-Type":"multipart/form-data"
+            }
+        }
+
+        const res = await axios.post("https://fashion-server-mu.vercel.app/register",formData,config);
+       
+        if(res.data.status == 201){
+            history("/")
+        }else{
+            console.log("error")
+        }
+    }
+
+    return (
+        <>
+            <div className='container mt-3'>
+                <h1>Upload Your Img Here</h1>
+
+                <Form>
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <Form.Label>UserName</Form.Label>
+                        <Form.Control type="text" name='fname' onChange={setdata} />
+                    </Form.Group>
+
+                    <Form.Group className="mb-3" controlId="formBasicPassword">
+                        <Form.Label>Select Your Image</Form.Label>
+                        <Form.Control type="file" name='photo' onChange={setimgfile} />
+                    </Form.Group>
+                    <Button variant="primary" type="submit" onClick={addUserData}>
+                        Submit
+                    </Button>
+                </Form>
+            </div>
+        </>
+    )
 }
 
-
-export default Addproducts
+export default Register
