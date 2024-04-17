@@ -361,9 +361,9 @@ app.post("/register", upload.single("photo"), (req, res) => {
       const { filename } = req.file;
       const date = moment(new Date()).format("YYYY-MM-DD hh:mm:ss");
 
-      db.query("INSERT INTO usersdata3 SET ?", { username: fname, userimg: filename, date: date }, (err, result) => {
-          if (err) {
-              console.log("error");
+      db.query("INSERT INTO usersdata3 (username, userimg, date) VALUES (?, ?, ?)", [fname, filename, date], (err, result) => {
+        if (err) {
+          console.log(err);
               return res.status(500).json({ status: 500, message: "Internal server error" });
           } else {
               console.log("data added");
