@@ -347,7 +347,7 @@ app.post("/loginUser", (req, res) => {
   });
   
   // register
-  app.post("/register", upload.single("photo"), (req, res) => {
+  app.post("/register", (req, res) => {
     const { fname } = req.body;
   
     // Check if req.file exists
