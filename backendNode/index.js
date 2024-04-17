@@ -7,31 +7,37 @@ const bcrypt = require('bcrypt');
 const path = require('path');
 const multer = require('multer');
 const moment = require('moment');
+
 const app = express();
+const port = process.env.PORT || 8083;
+
+// Middleware
 app.use(cors());
-
-app.options('*', cors());
-
-
-const port = 8083 || process.env.PORT;
-app.use(cors({
-  credentials: true,
-   origin: 'https://fashion-server-mu.vercel.app' 
- }));
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// CORS configuration
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'https://fashion-mu-three.vercel.app');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  next();
+});
+
+// Database configuration
 const db = mysql.createPool({
-    host:process.env.DB_HOST,
-    user:process.env.DB_USERNAME,
-    password:process.env.DB_PASSWORD,
-    database:process.env.DB_DBNAME,
-    waitForConnections:true,
-    connectionLimit:10,
-    queueLimit:0
-})
+  host: process.env.DB_HOST,
+  user: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DBNAME,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
+});
+
+
 
 // app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
