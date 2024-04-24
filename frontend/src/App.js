@@ -75,6 +75,8 @@ const  AddProducts = lazy(()=> import('./component/company/companyCom/AddProduct
 // Products
 const  ProductsCompany = lazy(()=> import('./component/company/companyCom/productsCompany.js'))
 
+const  TestVR = lazy(()=> import('./component/testVR.js'))
+
 
 
 
@@ -147,6 +149,8 @@ const App = ()=>{
         <Route path="/signinEmp" element={<SigninEmp/>}/>
         <Route path="/employyee" element={<Employyee/>}/>
         <Route path="/Employyee2" element={<Empcart/>}/>
+
+        <Route path="/testVR" element={<TestVR/>}/>
          <Route path="*" element={
           <div>
           <Navbars size={cart.length}  />

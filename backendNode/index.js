@@ -2,86 +2,76 @@ const express = require('express');
 const mysql = require('mysql');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
+const bodyParser= require('body-parser');
 const bcrypt = require('bcrypt');
 const path = require('path');
 const multer = require('multer');
-const moment = require('moment');
-
 const app = express();
-const port = process.env.PORT || 8083;
-
-// Middleware
 app.use(cors());
+
+app.options('*', cors());
+
+
+const port = 8083 || process.env.PORT;
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// CORS configuration
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'https://fashion-mu-three.vercel.app');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  next();
-});
-
-// Database configuration
 const db = mysql.createPool({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USERNAME,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_DBNAME,
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0
+    host:process.env.DB_HOST,
+    user:process.env.DB_USERNAME,
+    password:process.env.DB_PASSWORD,
+    database:process.env.DB_DBNAME,
+    waitForConnections:true,
+    connectionLimit:10,
+    queueLimit:0
+})
+
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+      cb(null, 'uploads/');
+  },
+  filename: function (req, file, cb) {
+      cb(null, file.originalname);
+  },
+});
+const upload = multer({ storage: storage });
+
+// ...
+
+app.post('/upload', upload.single('image'), (req, res) => {
+  const { filename, path } = req.file;
+  const { title, price, description } = req.body; // Destructure the body object
+
+  // Prepare SQL query to insert data into the images table
+  const sql = 'INSERT INTO images (filename, path, title, price, description) VALUES (?, ?, ?, ?, ?)';
+  const values = [filename, path, title, price, description]; // Include all values in the array
+
+  // Execute the SQL query
+  db.query(sql, values, (err, result) => {
+      if (err) {
+          console.error("Error inserting into database:", err);
+          res.status(500).send('Internal server error');
+          return;
+      }
+      res.send('Image uploaded successfully.');
+  });
 });
 
 
-
-// app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-
-
-
-// const storage = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//       cb(null, 'uploads/');
-//   },
-//   filename: function (req, file, cb) {
-//       cb(null, file.originalname);
-//   },
-// });
-// const upload = multer({ storage: storage });
-
-// // ...
-
-// app.post('/upload', upload.single('image'), (req, res) => {
-//   const { filename, path } = req.file;
-//   const { title, price, description } = req.body; // Destructure the body object
-
-//   // Prepare SQL query to insert data into the images table
-//   const sql = 'INSERT INTO images (filename, path, title, price, description) VALUES (?, ?, ?, ?, ?)';
-//   const values = [filename, path, title, price, description]; // Include all values in the array
-
-//   // Execute the SQL query
-//   db.query(sql, values, (err, result) => {
-//       if (err) {
-//           console.error("Error inserting into database:", err);
-//           res.status(500).send('Internal server error');
-//           return;
-//       }
-//       res.send('Image uploaded successfully.');
-//   });
-// });
-
-
-// app.get('/image', (req, res) => {
-//   const sql = "SELECT *  FROM images";
-//   db.query(sql, (err, data) => {
-//     if (err) return res.json(err);
-//     return res.json(data);
-//   });
-// });
+app.get('/image', (req, res) => {
+  const sql = "SELECT *  FROM images";
+  db.query(sql, (err, data) => {
+    if (err) return res.json(err);
+    return res.json(data);
+  });
+});
 
 app.get('/',(re,res)=> {
     return res.json("From BAckend Side");
@@ -217,20 +207,6 @@ app.post("/product", (req, res) => {
   });
 });
 
-app.post("/test", (req, res) => {
-  const sql = "INSERT INTO usersdata3 (`username`,`userimg`,`date`) VALUES (?,?,?)";
-  const values = [
-    req.body.username,
-    req.body.userimg,
-    req.body.date,
-  ];
-
-  db.query(sql, values, (err, result) => {
-    if (err) return res.json({ Message: "error in Node" });
-    return res.json(result);
-  });
-});
-
 
 // add to cart post
 
@@ -343,91 +319,6 @@ app.post("/loginUser", (req, res) => {
       }
     });
   });
-
-
-
-
-  const imgconfig = multer.diskStorage({
-    destination: (req, file, callback) => {
-        callback(null, "./uploads");
-    },
-    filename: (req, file, callback) => {
-        callback(null, `image-${Date.now()}.${file.originalname}`);
-    }
-  });
-  
-  const isImage = (req, file, callback) => {
-    if (file.mimetype.startsWith("image")) {
-        callback(null, true);
-    } else {
-        callback(new Error("Only image files are allowed"));
-    }
-  };
-  
-  const upload = multer({
-    storage: imgconfig,
-    fileFilter: isImage
-  });
-  
-  // register
-  app.post("/register", upload.single("photo"), (req, res) => {
-    const { fname } = req.body;
-  
-    // Check if req.file exists
-    if (!req.file || !fname) {
-        return res.status(422).json({ status: 422, message: "Fill all the details" });
-    }
-  
-    try {
-        const { filename } = req.file;
-        const date = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
-  
-        db.query("INSERT INTO usersdata3 SET ?", { username: fname, userimg: filename, date: date }, (err, result) => {
-            if (err) {
-                console.error("Error inserting into database:", err);
-                return res.status(500).json({ status: 500, message: "Internal server error" });
-            } else {
-                console.log("Data added successfully");
-                return res.status(201).json({ status: 201, data: req.body });
-            }
-        });
-    } catch (error) {
-        console.error("Error:", error);
-        return res.status(422).json({ status: 422, message: "Error processing request" });
-    }
-  });
-  
-// Get user data route
-app.get("/getdata", (req, res) => {
-  try {
-    db.query("SELECT * FROM usersdata3",(err,result)=>{
-        if(err){
-            console.log("error")
-        }else{
-            console.log("data get")
-            res.status(201).json({status:201,data:result})
-        }
-    })
-} catch (error) {
-    res.status(422).json({status:422,error})
-}
-});
-// delete
-app.delete("/:id", (req, res) => {
-  const {id} = req.params;
-   try {
-    db.query(`DELETE FROM usersdata3 WHERE id ='${id}'`,(err,result)=>{
-        if(err){
-            console.log("error")
-        }else{
-            console.log("data delete")
-            res.status(201).json({status:201,data:result})
-        }
-    })
-   } catch (error) {
-    res.status(422).json({status:422,error})
-   }
-});
   
 
 app.listen(port,()=>{

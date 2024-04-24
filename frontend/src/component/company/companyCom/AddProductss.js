@@ -43,7 +43,7 @@ const Register = () => {
 
     return (
         <>
-            <div className='container mt-3' style={{position:"relative",top:"200px",background:"#f1f1f1"}}>
+            <div className='container mt-3' style={{position:"relative",top:"200px"}}>
                 <h1>Upload Your Img Here</h1>
 
                 <Form>
