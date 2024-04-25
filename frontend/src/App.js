@@ -1,4 +1,4 @@
-import React,{useState,useEffect, lazy, Suspense} from 'react';
+import React,{useState,useEffect, lazy, Suspense,startTransition } from 'react';
 
 import { Routes,Route,BrowserRouter} from "react-router-dom";
 
@@ -150,7 +150,15 @@ const App = ()=>{
         <Route path="/employyee" element={<Employyee/>}/>
         <Route path="/Employyee2" element={<Empcart/>}/>
 
-        <Route path="/testVR" element={<TestVR/>}/>
+        <Route
+          path="/TestVR"
+          element={(
+            <Suspense fallback={<Loading />}>
+              
+               <TestVR />
+            </Suspense>
+          )}
+        />
          <Route path="*" element={
           <div>
           <Navbars size={cart.length}  />
