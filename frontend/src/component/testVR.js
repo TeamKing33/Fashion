@@ -54,23 +54,25 @@ class TestVR extends Component {
         <a-box position="5 1.6 -2" width="0.1" height="3.2" depth="8" color="#CCCCCC"></a-box>
         {/* Floor */}
         <a-plane position="0 0 -2" rotation="-90 0 0" width="10" height="10" color="#777"></a-plane>
-        {/* TV Screen */}
-        <a-plane
-          id="tv-screen"
-          position="0 1.5 -3.9"
-          rotation="0 0 0"
-          width="2.4"
-          height="1.8"
-          color="#000"
-          onMouseEnter={() => this.setState({ showVideo: true })}
-          onMouseLeave={() => this.setState({ showVideo: false })}
-        >
+        {/* Left Screen */}
+        <a-plane position="-1.5 0 -3.5" rotation="0 -30 0" width="2.4" height="1" color="#000">
           {this.state.showVideo && (
             <a-video
               src={mp}
               width="2.3"
               height="1.4"
-              position="0 0 1.4"
+              position="0 1.6 0"
+            ></a-video>
+          )}
+        </a-plane>
+        {/* Right Screen */}
+        <a-plane position="1.5 0 -3.5" rotation="0 30 0" width="2.4" height="1" color="#000">
+          {this.state.showVideo && (
+            <a-video
+              src={mp}
+              width="2.3"
+              height="1.4"
+              position="0 1.6 0"
             ></a-video>
           )}
         </a-plane>
