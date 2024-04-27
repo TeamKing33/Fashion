@@ -53,3 +53,37 @@
 .card{
   margin-left: 10px;
 }
+.AlltestVR{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.left, .right {
+  /* Set the width and height of the elements */
+  width: 90%;
+  height: 200px;
+
+  /* Add a border to the elements */
+  border: 2px solid #000;
+
+  /* Round the corners of the elements */
+  border-radius: 50px;
+
+  /* Position the elements side-by-side */
+  display: inline-block;
+  margin: 0 20px;
+}
+
+.a-enter-vr-button { /* استخدم الاسم الصحيح للعنصر */
+  display: none !important; /* قم بإخفاء العلامة */
+}
+
+/* @media (max-width:601px){
+  .left, .right {
+    margin: 0 50px;
+
+  
+  }
+} */
