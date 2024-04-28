@@ -87,3 +87,15 @@
   
   }
 } */
+/* .iconVR{
+  cursor: pointer;
+  transition: 0.3s;
+} */
+.image-container {
+  position: fixed;
+  bottom: 20px; /* تعديل حسب الموضع الذي ترغب في وضع الصورة فيه */
+  right: 20px; /* تعديل حسب الموضع الذي ترغب في وضع الصورة فيه */
+}
+/* .colorsWall{
+  color: #8f00ff;
+} */

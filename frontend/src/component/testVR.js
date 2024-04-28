@@ -11,8 +11,6 @@ function TestVR() {
     <div className='AlltestVR'>
      <div className="left">
      <Right/>
-
-
 </div>
 
 

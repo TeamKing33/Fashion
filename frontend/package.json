@@ -19,6 +19,8 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/react-mic": "^12.4.6",
     "aframe": "^1.5.0",
+    "aframe-gif-component": "^0.2.0",
+    "aframe-gif-shader": "^0.9.1",
     "aframe-react": "^4.4.0",
     "alexa-sdk": "^1.0.25",
     "annyang": "^2.6.1",

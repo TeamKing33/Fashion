@@ -3,6 +3,7 @@ import 'aframe';
 import mp from './image/2.mp4';
 import img1 from './image/20.jpg';
 import img2 from './image/19.png';
+import webm from './image/5.webm';
 
 function TestVR() {
   const [showVideo, setShowVideo] = useState(false);
@@ -45,10 +46,10 @@ function TestVR() {
 
   <a-entity id="house" gltf-model="" position="0 0 -5"></a-entity>
 
-  <a-box position="0 1.6 -5" width="10" height="3.2" depth="0.1" color="#ffff"></a-box>
-      <a-box position="0 1.6 3" width="10" height="3.2" depth="0.1" color="#ffff"></a-box>
-      <a-box position="-5 1.6 -2" width="0.1" height="3.2" depth="8" color="#ffff"></a-box>
-      <a-box position="5 1.6 -2" width="0.1" height="3.2" depth="8" color="#ffff"></a-box>
+  <a-box position="0 1.6 -7" width="10" height="3.2" depth="0.1" color="#8f00ff"></a-box>
+      <a-box position="0 1.6 3" width="10" height="3.2" depth="0.1" color="#8f00ff"></a-box>
+      <a-box position="-5 1.6 -2" width="0.5" height="3.2" depth="10" color="#8f00ff"></a-box>
+      <a-box position="5 1.6 -2" width="0.1" height="3.2" depth="10" color="#8f00ff"></a-box>
       {/* Floor */}
       <a-plane position="0 0 -2" rotation="-90 0 0" width="10" height="10" color="#777"></a-plane>
       {/* VR Sky */}
@@ -58,22 +59,22 @@ function TestVR() {
       {/* TV Screen */}
       <a-plane
         id="tv-screen"
-        position="0 1.5 -3.9"
+        position="0 1.5 -4.9"
         rotation="0 0 0"
         width="2.4"
         height="1.8"
-        color="#000"
+        color="#8f00ff"
         onMouseEnter={() => startTransition(() => setShowVideo(true))}
         onMouseLeave={() => startTransition(() => setShowVideo(false))}
       >
         {showVideo && (
-          <a-video
-            src={mp}
+          <a-image
+          src={webm}
             width="2.3"
             height="1.4"
             position="0 0.1 1.6"
             autoplay 
-          ></a-video>
+          ></a-image>
         )}
       </a-plane>
       {/* Image Frame */}
@@ -83,7 +84,7 @@ function TestVR() {
         rotation="0 90 0"
         width="1.6"
         height="1.2"
-        color="#ffff"
+        color="#8f00ff"
       >
         <a-image
           src={img1}
@@ -98,13 +99,19 @@ function TestVR() {
         rotation="0 -90 0" 
         width="1.6"
         height="1.2"
-        color="#ffff"
+        color="#8f00ff"
       >
         <a-image
-          src={img2}
+          src={webm}
           width="1.5"
           height="1.1"
-          position="3 0 0.01"
+          position="3 0 2"
+        ></a-image>
+        <a-image
+          src={webm}
+          width="1.5"
+          height="1.1"
+          position="2 0 2"
         ></a-image>
       </a-plane>
 </a-scene>
