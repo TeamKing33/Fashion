@@ -64,23 +64,23 @@ function TestVR() {
       <a-light type="ambient" color="#FFFFFF" intensity="1"></a-light>
       {/* TV Screen */}
       <a-plane
-        id="tv-screen"
-        position="0 1.5 -4.9"
-        rotation="0 0 0"
-        width="2.4"
-        height="1.8"
-        color="#8f00ff"
+         id="tv-screen"
+         position="0 1.5 -4.9"
+         rotation="0 0 0"
+         width="2.4"
+         height="1.8"
+         color="#8f00ff"
         onMouseEnter={() => startTransition(() => setShowVideo(true))}
         onMouseLeave={() => startTransition(() => setShowVideo(false))}
       >
         {showVideo && (
-          <a-image
-          src={webm}
+          <a-video
+            src={webm}
             width="2.3"
             height="1.4"
             position="0 0.1 1.6"
             autoplay 
-          ></a-image>
+          ></a-video>
         )}
       </a-plane>
       {/* Image Frame */}
