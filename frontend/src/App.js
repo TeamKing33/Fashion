@@ -144,8 +144,8 @@ const App = ()=>{
    
         <Routes>
         {/* <Suspense fallback={<Loading/>}> */}
-
-        <Route path="/" element={<Allhome/>}/>
+        {/* Allhome */}
+        <Route path="/" element={<Signup/>}/>
         <Route path="/SignupUser" element={<Signup/>}/>
         <Route path="/Signin" element={<Signin/>}/>
         <Route path="/signinEmp" element={<SigninEmp/>}/>

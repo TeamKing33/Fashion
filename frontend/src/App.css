@@ -63,7 +63,7 @@
 .left, .right {
   /* Set the width and height of the elements */
   width: 90%;
-  height: 200px;
+  height: 250px;
 
   /* Add a border to the elements */
   border: 2px solid #000;

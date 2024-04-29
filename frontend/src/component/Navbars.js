@@ -82,7 +82,7 @@ const changeFr = () =>{
             <NavLink to="/product" className="NavLink"  >{t("products")}</NavLink>
             <NavLink to="/download" className="NavLink"  >{t("Download App")}</NavLink>
             <NavLink to="/360" className="NavLink"  >360</NavLink>
-            <NavLink to="/ProductCompany" className="NavLink"  >{t("Product Company")}</NavLink>
+            {/* <NavLink to="/ProductCompany" className="NavLink"  >{t("Product Company")}</NavLink> */}
             <NavLink to="/support" className="NavLink">
             {t("Support")}
             </NavLink>
