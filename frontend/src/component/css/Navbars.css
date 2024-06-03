@@ -58,3 +58,12 @@
     margin-bottom: 5px;
   }
 }
+
+@media(max-width:1160px){
+  .NavLink{
+    font-size: 14px;
+  }
+  .search{
+    width: 110px;
+  }
+}

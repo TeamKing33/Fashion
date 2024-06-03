@@ -99,6 +99,14 @@ function HelloTest() {
       const randomIndex = Math.floor(Math.random() * list.length);
       const randomProduct = list[randomIndex];
       navigate(randomProduct);
+    }else if (newTranscript.includes(t("360"))){
+      speak(t("ok sir"));
+      setIsRecognizing(false);
+      navigate("/360");
+    }else if (newTranscript.includes(t("VR"))){
+      speak(t("ok sir"));
+      setIsRecognizing(false);
+      navigate("/VR");
     } else {
       speak(t("sorry, I don't understand"));
       setTimeout(() => {
