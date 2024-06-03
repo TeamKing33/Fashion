@@ -59,7 +59,7 @@
   }
 }
 
-@media(max-width:1160px){
+@media(min-width:991px){
   .NavLink{
     font-size: 14px;
   }

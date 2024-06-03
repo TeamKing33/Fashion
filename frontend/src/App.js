@@ -49,6 +49,7 @@ const Tshirt = lazy(()=> import('./component/Tshitr/Tshirt'))
 const Tshirt2 = lazy(()=> import('./component/Tshitr/Tshirt2'))
 const Tshirt3 = lazy(()=> import('./component/Tshitr/Tshirt3'))
 const Tshirt4 = lazy(()=> import('./component/Tshitr/Tshirt4'))
+const Tshirt6 = lazy(()=> import('./component/Tshitr/Tshirt6'))
 const Dwon = lazy(()=> import('./component/download.js'))
 
 
@@ -231,6 +232,15 @@ const App = ()=>{
           <Navbars size={cart.length}  />
               <Micro/>
           <Tshirt4/>
+          </div>
+          </React.Suspense>
+          }/>
+        <Route path="/T-shirt6" element={
+           <React.Suspense fallback={<Loading/>}>
+          <div>
+          <Navbars size={cart.length}  />
+              <Micro/>
+          <Tshirt6/>
           </div>
           </React.Suspense>
           }/>

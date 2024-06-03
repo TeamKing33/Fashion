@@ -114,7 +114,7 @@ function TestVR() {
       <a-plane
         id="photo-frame"
         position="4.5 1.5 -3.5" 
-        rotation="0 -90 0" 
+        rotation="0 -80 0" 
         width="1.6"
         height="1.2"
         material="shader: flat; transparent: true; opacity: 0;"
@@ -124,7 +124,7 @@ function TestVR() {
           src={webm}
           width="1.5"
           height="1.1"
-          position="3 0 2"
+          position="3 0 3.8"
         ></a-image>
         {/* <a-image
           src={webm}

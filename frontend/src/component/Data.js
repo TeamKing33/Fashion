@@ -9,6 +9,7 @@ import img8 from "./image/imageHome/imagekids/1.png"
 import img9 from "./image/imageHome/imagekids2/1.png"
 import img10 from "./image/imageHome/imagekids3/1.png"
 import img11 from "./image/imageHome/imagekids4/1.png"
+import img12 from "./image/imagests5/1.png"
 import { NavLink} from "react-router-dom";
 // import { Button} from "react-bootstrap";
 import Btn from "./Btn";
@@ -149,6 +150,18 @@ const data =(t)=>{
             description:t(`Dark blue dinosaur-themed hoodie Stylish, versatile, playful self-expression for casual comfort.`),
             button:(
                 <NavLink to="/KidsClothes4" className="NavLink"><div className="btncard"><Btn/></div></NavLink>
+            ),
+            number:1,
+        },
+        ,{
+            id:12,
+            img:img12,
+            title:t("Classic Brown and Black Outfit"),
+            price:150,
+            discount:130,
+            description:t(`Featuring a sophisticated brown jacket paired with stylish black trousers and a crisp white shirt, this outfit creates a timeless and versatile look suitable for different occasions.`),
+            button:(
+                <NavLink to="/T-shirt6" className="NavLink"><div className="btncard"><Btn/></div></NavLink>
             ),
             number:1,
         },

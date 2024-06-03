@@ -2,6 +2,7 @@ import img1  from "../image/1.png"
 import img2 from "../image/2.png"
 import img3 from "../image/3.png"
 import img4 from "../image/4.png"
+import img12 from "../image/imagests5/1.png"
 import { NavLink} from "react-router-dom";
 // import { Button} from "react-bootstrap";
 import Btn from "../Btn";
@@ -55,6 +56,18 @@ const data =(t)=>{
             description:t(`Crew Neck Long Sleeve Men's Tricot Sweater with Color Block`),
             button:(
                 <NavLink to="/T-shirt4" className="NavLink"><div className="btncard"><Btn/></div></NavLink>
+            ),
+            number:1,
+        },
+        ,{
+            id:6,
+            img:img12,
+            title:t("Classic Brown and Black Outfit"),
+            price:150,
+            discount:130,
+            description:t(`Featuring a sophisticated brown jacket paired with stylish black trousers and a crisp white shirt, this outfit creates a timeless and versatile look suitable for different occasions.`),
+            button:(
+                <NavLink to="/T-shirt6" className="NavLink"><div className="btncard"><Btn/></div></NavLink>
             ),
             number:1,
         },
