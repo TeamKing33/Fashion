@@ -14,6 +14,9 @@ const  Navbars = ({size}) => {
     setFilter(event.target.value);
   } 
 
+
+
+  
   // useTranslation
   const { t, i18n } = useTranslation();
   const changeEn = () =>{
