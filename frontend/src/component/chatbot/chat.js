@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { useTranslation } from 'react-i18next';
 import img1 from './1.png';
 import img2 from './2.png';
@@ -8,6 +10,7 @@ import style from './chatbot.module.css';
 
 function Chat() {
   const { t } = useTranslation(); 
+  const navigate = useNavigate();
 
   const [conversation, setConversation] = useState([]);
 
