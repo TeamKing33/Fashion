@@ -124,7 +124,6 @@ function Signin() {
  <button type="submit"name="submit" onClick={handleSubmit}>Login</button>
   </div>
   <div className={styles.texts}>
- <span> Already have an account? </span>
 
  
   <strong> <NavLink to ="/SignupUser">Sign up </NavLink> Here</strong>

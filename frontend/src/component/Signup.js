@@ -30,6 +30,7 @@ function Signup() {
         console.log(res.data);
         if (res.data && res.data.Message === "User already exists") {
           alert("User already exists");
+         
           navigate('/signin');
         } else {
           navigate('/signin');
