@@ -130,7 +130,11 @@
    font-size: 14px;
     transition: 0.3s;
    }
-   
+   .container .signbox .btn button:hover{
+    transform: scale(1.1);
+
+  
+    }
   .container .signbox.btn button:hover {
  transform: scale(1.1);
  width: 88%;

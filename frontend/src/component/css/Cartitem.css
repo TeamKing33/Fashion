@@ -172,6 +172,15 @@ article{
   animation: move-up-alternate 0.3s ease forwards;
 }
 
+
+@media (max-width:601px){
+  .imagescartadd{
+    width:100%;
+
+  }
+}
+
+
 @-webkit-keyframes move-up-alternate {
   0% {
     transform: translateY(0);

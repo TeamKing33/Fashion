@@ -48,63 +48,46 @@ function Signup() {
  },[])
   return (
     <div className={styles.container}>
-   
     <div className={styles.signbox}>
-    <span className={styles.iconimage}>
-    <img src={Img} alt="" />
-    </span>
-    <h1>Sign up </h1>
-    <div>
-   {/* <!-----inp--------------> */}
-  
-     <div className={styles.inp}>
-       <input type="text" placeholder="Name"name="username" spellCheck="false" required onChange={handleChange}/>
-        <input type="Email" placeholder="Email"name="email" required onChange={handleChange}/>
-        <input type="password" placeholder="Password"name="password" required onChange={handleChange}/>
-       <input type="text" placeholder="Mobile number" id="numberma" name="number" required onChange={handleChange}/>
-        
-      
-     </div>
-     
- {/* <!-----Alexandria Governorate--------------> */}
-  
- <div className={styles.option}>
-   <div className={styles.selectbox}>
- <select className="option" name="country" required onChange={handleChange} defaultValue="Alexandria Governorate">
- <option hidden   > Alexandria Governorate</option>
-       <option value="Smouha" >Smouha</option>
-       
-       <option value="Muharram Bey" >Muharram Bey</option>
-       <option value="Sidi Bishr" >Sidi Bishr</option>
-       <option value="Ibrahimiyyah" >Ibrahimiyyah</option>
-      
-   <option value="Victoria" >Victoria</option>
-      <option value="Sporting" >Sporting</option>
-         <option value="Sidi Gaber" >Sidi Gaber</option>
-   <option value="Al-Mansheya" >Al-Mansheya</option>
-  </select>
-   </div>
-  </div>
-  
+      <span className={styles.iconimage}>
+        <img src={Img} alt="" />
+      </span>
+      <h1>Sign up</h1>
+      <form onSubmit={handleSubmit}>
+        <div className={styles.inp}>
+          <input type="text" placeholder="Name" name="username" spellCheck="false" required onChange={handleChange} />
+          <input type="email" placeholder="Email" name="email" required onChange={handleChange} />
+          <input type="password" placeholder="Password" name="password" required onChange={handleChange} />
+          <input type="text" placeholder="Mobile number" id="numberma" name="number" required onChange={handleChange} />
+        </div>
 
-  
-  {/* <!-------------btn--------------> */}
-  <div className={styles.btn} > 
- <button type="submit" onClick={handleSubmit} >Register</button>
-  </div>
-  <div className={styles.texts}>
- <span> Already have an account? </span>
+        <div className={styles.option}>
+          <div className={styles.selectbox}>
+            <select className="option" name="country" required onChange={handleChange} defaultValue="">
+              <option value="" disabled hidden>Select your governorate</option>
+              <option value="Smouha">Smouha</option>
+              <option value="Muharram Bey">Muharram Bey</option>
+              <option value="Sidi Bishr">Sidi Bishr</option>
+              <option value="Ibrahimiyyah">Ibrahimiyyah</option>
+              <option value="Victoria">Victoria</option>
+              <option value="Sporting">Sporting</option>
+              <option value="Sidi Gaber">Sidi Gaber</option>
+              <option value="Al-Mansheya">Al-Mansheya</option>
+            </select>
+          </div>
+        </div>
 
- 
-  <strong> <NavLink to ="/Signin">Sign in </NavLink>Here</strong>
-
-  </div>
-   
-  
-   </div>
+        <div className={styles.btn}>
+          <button type="submit">Register</button>
+        </div>
+        <div className={styles.texts}>
+          <span> Already have an account? </span>
+          <strong><NavLink to="/Signin">Sign in</NavLink> Here</strong>
+        </div>
+      </form>
     </div>
-    </div>
-  )
+  </div>
+);
 }
 
 export default Signup;

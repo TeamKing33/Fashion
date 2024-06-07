@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,NavLink } from 'react-router-dom';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import img from './image/cart.png'
-import stylesitem from "./css/Cartitem.css";
+import img from './image/cart33.png'
+import  "./css/Cartitem.css";
 
 const CartItem = ({ data, setData, removeFromCart, handleClick }) => {
   const navigate = useNavigate();
@@ -96,7 +96,13 @@ const CartItem = ({ data, setData, removeFromCart, handleClick }) => {
     <div className="bodyItem">
       <article>
         {data.length === 0 ? (
-          <img src={img} alt="" />
+            <div style={{width:"100%",height:"100vh",display:"flex",alignItems:"center",justifyContent:"center",flexDirection:"column"}}>
+            
+          <img src={img} alt="" className='imagescartadd'/>
+          <button className="button" style={{background:"rgb(139, 113, 255)",color:"#fff",width:"150px",border:"none",borderRadius:"20px"}}>
+    <NavLink to="/product" style={{color:"#fff"}}> Shop by Category</NavLink>
+      </button>
+          </div>
         ) : (
           <>
             {data.map((item, i) => (
