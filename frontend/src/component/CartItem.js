@@ -50,7 +50,7 @@ const CartItem = ({ data, setData, removeFromCart, handleClick }) => {
 
       
 
-    const [price , setPrice] = useState(0);
+    const [price , setPrice] = useState(1);
     const handlePrice = () =>{
         let ans = 0;
         data.map((item)=>(
