@@ -2,12 +2,21 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import img1 from './1.png';
 import img2 from './2.png';
+import Cookies from 'js-cookie';
+
 import style from './chatbot.module.css';
 
 function Chat() {
   const { t } = useTranslation(); 
 
   const [conversation, setConversation] = useState([]);
+
+  useEffect(() => {
+    const login = Cookies.get('login');
+    if (login !== 'true') {
+      navigate('/signin');
+    }
+  }, [navigate]);
 
   const handleUserInput = (choice) => {
     switch (choice) {
